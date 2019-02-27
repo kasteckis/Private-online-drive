@@ -48,47 +48,10 @@ foreach(glob("backend/*.php") as $back)
 	echo '</form>';
 
 	//Kodas vykdomas po LOGIN paspaudimo
+
 	if(isset($_POST['submit']))
 	{
-		$username = mysqli_real_escape_string($conn, $_POST['username']); //Nuo sql injection
-		$password = mysqli_real_escape_string($conn, $_POST['password']); //Nuo sql injection
-		$sqlGetUserInformation = "SELECT * FROM Users WHERE nick='$username'"; 
-		$getUserInformationResults = mysqli_query($conn, $sqlGetUserInformation);
-
-		if (mysqli_num_rows($getUserInformationResults) > 0)
-		{
-	  		// output data of each row
-		    while($row = mysqli_fetch_assoc($getUserInformationResults))
-		    {
-				if(password_verify($password, $row['password']))
-				{
-					echo "Sveiki atvykę, ".$row['nick']."!<br>";
-					$_SESSION['id'] = $row['id'];
-					$_SESSION['nick'] = $row['nick'];
-					$_SESSION['status'] = $row['status'];
-					$_SESSION['password'] = $row['password'];
-					$_SESSION['suspended'] = $row['suspended'];
-					$_SESSION['lastLogged'] = $row['lastLogged'];
-
-					//Atnaujina kada paskutini kartą buvo jungtasi.
-					$tempId = $row['id'];
-					$currentDate = date('Y-m-d H:i:s');
-
-					$sqlUpdateUserLastLoggedDate = "UPDATE Users SET lastLogged='$currentDate' WHERE id='$tempId'";
-					mysqli_query($conn, $sqlUpdateUserLastLoggedDate);
-				}
-				else
-				{
-					echo "Blogas slaptažodis<br>";
-				}
-		    }
-		}
-		else
-		{
-			//Tas pats lyg įvestas blogas slaptažodis.
-			echo "Nerastas vartotojas<br>";
-		}
-
+		echo LoginMe($_POST['username'], $_POST['password']);
 	}
 
 
