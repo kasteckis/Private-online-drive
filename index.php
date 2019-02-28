@@ -29,7 +29,7 @@ foreach(glob("backend/*.php") as $back)
 
 
 	//Root slaptažodis duomenų bazėje (hashed): $2y$10$/XqDBv6/I.4o.0slXEKskO1wu/JOiKII8qBNNlgYb76yHXBE7p4/q
-	
+
 	//$hashedPassword = password_hash("devbridge321", PASSWORD_DEFAULT); //veliau man reiks
 
 
@@ -82,7 +82,7 @@ foreach(glob("backend/*.php") as $back)
 
 	echo '<input type="password" name="password" placeholder="Password"></input>';
 	echo '  </div>';
-	echo '<button id="btn" name="submit">Sign In</button><br>';
+	echo '<button class="btn" name="submit">Sign In</button><br>';
 	echo '</div>';
 	echo '</form>';
 
