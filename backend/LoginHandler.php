@@ -16,7 +16,6 @@
 		    {
 				if(password_verify($password, $row['password']))
 				{
-					echo "Sveiki atvykę, ".$row['nick']."!<br>";
 					$_SESSION['id'] = $row['id'];
 					$_SESSION['nick'] = $row['nick'];
 					$_SESSION['status'] = $row['status'];
@@ -30,6 +29,8 @@
 
 					$sqlUpdateUserLastLoggedDate = "UPDATE Users SET lastLogged='$currentDate' WHERE id='$tempId'";
 					mysqli_query($conn, $sqlUpdateUserLastLoggedDate);
+					header('Location: /manager');
+					return "Sveiki atvykę, ".$row['nick']."!<br>";
 				}
 				else
 				{
