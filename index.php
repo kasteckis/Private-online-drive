@@ -88,7 +88,6 @@ foreach(glob("backend/*.php") as $back)
 
 	if(isset($_POST['submit']))
 	{
-		echo "test";
 		echo LoginMe($_POST['username'], $_POST['password']);
 	}
 
