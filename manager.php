@@ -16,7 +16,7 @@ foreach(glob("backend/*.php") as $back)
 <meta charset="UTF-8">
 <title><?php echo $WebsiteTitle; ?></title>
 <link rel="icon" href="favicon.png" type="image/png" sizes="16x16"> 
-<link rel="stylesheet" href="css/style.css">
+<!--<link rel="stylesheet" href="css/style.css"> -->
 
 </head>
 
@@ -25,14 +25,30 @@ foreach(glob("backend/*.php") as $back)
 
 	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
 	{
-		echo "Sveiki prisijungę, ".$_SESSION['nick']."!<br><br>";
+		echo "Sveiki prisijungę, <b>".$_SESSION['nick']."</b>!<br><br>";
+
+		echo "<b>Failų sąrašas:</b><br>";
+
+		//Perskaitome katalogo turinį
+		$usersDirectory = "./files/".$_SESSION['nick'];
+		$fileList = scandir($usersDirectory);
+
+		//Spausdiname katalogo turinį kaip href
+		//TODO: Reiks nekvailai padaryt, kad sortintu pagal įkėlimo datą!
+		foreach ($fileList as $key => $value)
+		{
+			if($value == "." || $value == "..")
+				continue;
+			echo "<a href='./files/".$_SESSION['nick']."/".$value."'>".$value."</a><br>";
+		}
+
+		echo "<br><br>";
 
 		//Failo įkelimas į serverinę
-		echo "<form method='POST' enctype='multipart/form-data'>"; // be enctype neveikia, ka jis daro? who knows.
+		echo "<form method='POST' enctype='multipart/form-data'>"; // be enctype neveikia, ką jis daro? who knows.
 		echo "<input type='file' name='file'>";
 		echo "<button type='submit' name='submit'>Upload</button><br>";
 		echo "</form>";
-
 
 		//TODO: Automatiškai nesukuria vartotojui katalogo, kolkas jį manualiai reik sukurt, pagal vartotojo nick!
 

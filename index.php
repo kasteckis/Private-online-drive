@@ -42,32 +42,6 @@ foreach(glob("backend/*.php") as $back)
 	echo "lastLogged: ".$_SESSION['lastLogged']."</font><br>";
 
 
-/* Mano senas LOGIN (white/black)
-	echo '<form method="POST" id="loginForm">';
-	echo '<input type="text" name="username" placeholder="Username"></input><br>';
-	echo '<input type="password" name="password" placeholder="Password"></input><br>';
-	echo '<button id="btn" name="submit">Login</button><br>';
-	echo '</form>';
-*/
-
-	/*MARIAUS SENAS HTML
-
-	<div class="login-box">
-  <h1>Login</h1>
-  <div class="textbox">
-    <i class="fas fa-user"></i>
-    <input type="text" placeholder="Username">
-  </div>
-
-  <div class="textbox">
-    <i class="fas fa-lock"></i>
-    <input type="password" placeholder="Password">
-  </div>
-
-  <input type="button" class="btn" value="Sign in">
-</div>*/
-
-
 	echo '<form method="POST" id="loginForm">';
 	echo '<div class="login-box">';
 	echo ' <h1>Login</h1>';
