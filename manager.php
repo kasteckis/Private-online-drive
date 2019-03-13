@@ -25,6 +25,22 @@ foreach(glob("backend/*.php") as $back)
 
 	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
 	{
+		echo "<form method='POST''>";
+		echo "<button type='submit' name='logout'>Logout</button><br>";
+		echo "</form>";
+
+		if(isset($_POST['logout']))
+		{
+			if(Logout())
+			{
+				echo "Sėkmingai atsijungėte!<br>";
+			}
+			else
+			{
+				echo "KLAIDA<br>"; //neturetu but, but who knows
+			}
+		}
+
 		echo "Sveiki prisijungę, <b>".$_SESSION['nick']."</b>!<br><br>";
 
 		echo "<b>Failų sąrašas:</b><br>";
