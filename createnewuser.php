@@ -45,7 +45,7 @@ foreach(glob("backend/*.php") as $back)
 		{
 			//Validacija
 			$canICreateUser = true;
-			$validationErrors = array();
+			
 			$nick = mysqli_real_escape_string($conn, $_POST['nick']);
 			$status = mysqli_real_escape_string($conn, $_POST['role']);
 			$password = mysqli_real_escape_string($conn, $_POST['password']);
@@ -53,25 +53,12 @@ foreach(glob("backend/*.php") as $back)
 			$suspended = 0;
 			$lastLogged = date("0000-00-00 00:00");
 
-			echo "psw: ".$password."<br>";
-			echo "psw: ".$hashedPassword."<br>";
+			$validationErrors = CheckForValidation($nick, $status, $password, $hashedPassword, $suspended, $lastLogged);
 
-			if($nick == null)
+			if(empty($validationErrors))
 			{
-				array_push($validationErrors, "Nickname is empty");
-				$canICreateUser = false;
-			}
-
-			if($password == null)
-			{
-				array_push($validationErrors, "Password is empty");
-				$canICreateUser = false;
-			}
-
-			if($canICreateUser)
-			{
-				//TODO: Padaryt kad sukurtu useri
-				echo "ale sukuria useri";
+				CreateUser($nick, $status, $hashedPassword, $suspended, $lastLogged); //UserManagement.php
+				echo "Account with name ".$nick." was created!<br>";
 			}
 			else
 			{

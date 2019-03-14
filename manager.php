@@ -106,9 +106,13 @@ foreach(glob("backend/*.php") as $back)
 			echo FileUpload(); //backend/FileUpload.php
 		}
 
-		echo '<br><form action="/usermanager">';
-	    echo '<input type="submit" value="User manager" />';
-		echo '</form>';
+		if($_SESSION['status'] == "admin")
+		{
+			echo '<br><form action="/usermanager">';
+		    echo '<input type="submit" value="User manager" />';
+			echo '</form>';
+		}
+
 	}
 	else
 	{
