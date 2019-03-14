@@ -61,23 +61,28 @@ foreach(glob("backend/*.php") as $back)
 			<a href='./files/".$_SESSION['nick']."/".$value."'>".$value."</a><br>";
 			$thereAreNoFiles = false;
 		}
-		echo "<button type='submit' name='delete'>Delete selected</button><br>";
+		//Jeigu nera failu direktorijoja, nerodys delete mygtuko
+		if(!$thereAreNoFiles)
+		{
+			echo "<button type='submit' name='delete'>Delete selected</button><br>";
+		}
 		echo "</form>";
 
 		//TRINTI FAILUS
 		if(isset($_POST['delete']))
 		{
-			$selectedItems = $_POST['selectedItemsToDelete'];
+			if(isset($_POST['selectedItemsToDelete']))
+			{
+				$selectedItems = $_POST['selectedItemsToDelete'];
+			}
+			else
+			{
+				echo "<font color='red'>Select at least one file!</font><br>";
+			}
+			
 			if(!empty($selectedItems))
 			{
-				foreach ($selectedItems as $key => $value) 
-				{
-					if (file_exists("./files/".$_SESSION['nick']."/".$value))
-					{
-						unlink("./files/".$_SESSION['nick']."/".$value);
-						echo "File ".$value." was deleted!<br>";
-					}
-				}
+				DeleteTheseFiles($selectedItems); //FileUpload.php
 			}
 		}
 
