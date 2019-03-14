@@ -33,17 +33,17 @@ foreach(glob("backend/*.php") as $back)
 		{
 			if(Logout())
 			{
-				echo "Sėkmingai atsijungėte!<br>";
+				echo "You have logged out!<br>";
 			}
 			else
 			{
-				echo "KLAIDA<br>"; //neturetu but, but who knows
+				echo "ERROR<br>"; //neturetu but, but who knows
 			}
 		}
 
-		echo "Sveiki prisijungę, <b>".$_SESSION['nick']."</b>!<br><br>";
+		echo "Hello, <b>".$_SESSION['nick']."</b>!<br><br>";
 
-		echo "<b>Failų sąrašas:</b><br>";
+		echo "<b>File list:</b><br>";
 
 		//Perskaitome katalogo turinį
 		$usersDirectory = "./files/".$_SESSION['nick'];
@@ -52,16 +52,42 @@ foreach(glob("backend/*.php") as $back)
 		//Spausdiname katalogo turinį kaip href
 		//TODO: Reiks nekvailai padaryt, kad sortintu pagal įkėlimo datą!
 		$thereAreNoFiles = true;
+		echo "<form method='POST'>";
 		foreach ($fileList as $key => $value)
 		{
 			if($value == "." || $value == "..")
 				continue;
-			echo "<a href='./files/".$_SESSION['nick']."/".$value."'>".$value."</a><br>";
+			echo "<input type='checkbox' name='selectedItemsToDelete[]' value='".$value."'>
+			<a href='./files/".$_SESSION['nick']."/".$value."'>".$value."</a><br>";
 			$thereAreNoFiles = false;
+		}
+		//Jeigu nera failu direktorijoja, nerodys delete mygtuko
+		if(!$thereAreNoFiles)
+		{
+			echo "<button type='submit' name='delete'>Delete selected</button><br>";
+		}
+		echo "</form>";
+
+		//TRINTI FAILUS
+		if(isset($_POST['delete']))
+		{
+			if(isset($_POST['selectedItemsToDelete']))
+			{
+				$selectedItems = $_POST['selectedItemsToDelete'];
+			}
+			else
+			{
+				echo "<font color='red'>Select at least one file!</font><br>";
+			}
+			
+			if(!empty($selectedItems))
+			{
+				DeleteTheseFiles($selectedItems); //FileUpload.php
+			}
 		}
 
 		if($thereAreNoFiles)
-			echo "<font color='red'>Neturite failų pas save aplankale!</font><br>";
+			echo "<font color='red'>You have no files in your directory!</font><br>";
 
 		echo "<br><br>";
 
@@ -83,7 +109,7 @@ foreach(glob("backend/*.php") as $back)
 	else
 	{
 		//TODO: Kad redirectintu į kokį gražų ERROR puslapį.
-		echo "Neturite teisės matyti šio puslapio!<br>";
+		echo "You are not authorised to view this page!<br>";
 	}
 
 ?>
