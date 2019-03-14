@@ -46,6 +46,7 @@ foreach(glob("backend/*.php") as $back)
 		echo "<th>Is active</th>";
 		echo "<th>Last connection</th>";
 		echo "<th>Edit</th>";
+		echo "<th>Delete</th>";
 		echo "</tr>";
 		
 
@@ -60,6 +61,7 @@ foreach(glob("backend/*.php") as $back)
 	        	echo "<td>Suspended</td>";
 	        echo "<td>".$row['lastLogged']."</td>";
 	        echo "<td>bus button</td>";
+	        echo "<td>X</td>";
 	        echo "</tr>";
 	    }
 	    echo "</table>";
