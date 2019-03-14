@@ -23,11 +23,18 @@ foreach(glob("backend/*.php") as $back)
 <body>
 <?php
 
-	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
+	if($_SESSION['status'] == "admin")
 	{
+		//Mygtukas atgal
 		echo '<form action="/manager">';
 	    echo '<input type="submit" value="Back" />';
+		echo '</form>';
+
+		//Mygtukas sukurti useri jauna
+		echo '<br><form action="/createnewuser">';
+	    echo '<input type="submit" value="Create new user" />';
 		echo '</form><br><br>';
+
 		echo "<b>User list:</b><br>";
 		$sqlReadAllUsers = "SELECT * FROM Users";
 		$resultReadAllUsers = mysqli_query($conn, $sqlReadAllUsers);
