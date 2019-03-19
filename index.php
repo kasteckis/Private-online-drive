@@ -15,8 +15,7 @@ foreach(glob("backend/*.php") as $back)
 <head>
 <meta charset="UTF-8">
 <title><?php echo $WebsiteTitle; ?></title> <!-- Globalus kintamasis keičiamas per includes/config.php -->
-<link rel="icon" href="favicon.png" type="image/png" sizes="16x16"> <!-- Vėliau sukursim tą favicon, gal necrashins -->
-
+<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
 <link rel="stylesheet" href="css/style.css">
 
 </head>
