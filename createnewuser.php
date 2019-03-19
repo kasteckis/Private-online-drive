@@ -15,7 +15,7 @@ foreach(glob("backend/*.php") as $back)
 <head>
 <meta charset="UTF-8">
 <title><?php echo $WebsiteTitle; ?></title>
-<link rel="icon" href="favicon.png" type="image/png" sizes="16x16"> 
+<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" /> 
 <!--<link rel="stylesheet" href="css/style.css"> -->
 
 </head>
