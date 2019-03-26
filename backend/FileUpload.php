@@ -1,4 +1,15 @@
 <?php
+	function DeleteTheseFiles($selectedItems)
+	{
+		foreach ($selectedItems as $key => $value) 
+		{
+			if (file_exists("./files/".$_SESSION['nick']."/".$value))
+			{
+				unlink("./files/".$_SESSION['nick']."/".$value);
+				echo "File ".$value." was deleted!<br>";
+			}
+		}
+	}
 
 	function FileUpload()
 	{

@@ -15,7 +15,7 @@ foreach(glob("backend/*.php") as $back)
 <head>
 <meta charset="UTF-8">
 <title><?php echo $WebsiteTitle; ?></title>
-<link rel="icon" href="favicon.png" type="image/png" sizes="16x16"> 
+<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
 <!--<link rel="stylesheet" href="css/style.css"> -->
 
 </head>
@@ -25,9 +25,25 @@ foreach(glob("backend/*.php") as $back)
 
 	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
 	{
-		echo "Sveiki prisijungę, <b>".$_SESSION['nick']."</b>!<br><br>";
+		echo "<form method='POST''>";
+		echo "<button type='submit' name='logout'>Logout</button><br>";
+		echo "</form>";
 
-		echo "<b>Failų sąrašas:</b><br>";
+		if(isset($_POST['logout']))
+		{
+			if(Logout())
+			{
+				echo "You have logged out!<br>";
+			}
+			else
+			{
+				echo "ERROR<br>"; //neturetu but, but who knows
+			}
+		}
+
+		echo "Hello, <b>".$_SESSION['nick']."</b>!<br><br>";
+
+		echo "<b>File list:</b><br>";
 
 		//Perskaitome katalogo turinį
 		$usersDirectory = "./files/".$_SESSION['nick'];
@@ -35,12 +51,43 @@ foreach(glob("backend/*.php") as $back)
 
 		//Spausdiname katalogo turinį kaip href
 		//TODO: Reiks nekvailai padaryt, kad sortintu pagal įkėlimo datą!
+		$thereAreNoFiles = true;
+		echo "<form method='POST'>";
 		foreach ($fileList as $key => $value)
 		{
 			if($value == "." || $value == "..")
 				continue;
-			echo "<a href='./files/".$_SESSION['nick']."/".$value."'>".$value."</a><br>";
+			echo "<input type='checkbox' name='selectedItemsToDelete[]' value='".$value."'>
+			<a href='./files/".$_SESSION['nick']."/".$value."'>".$value."</a><br>";
+			$thereAreNoFiles = false;
 		}
+		//Jeigu nera failu direktorijoja, nerodys delete mygtuko
+		if(!$thereAreNoFiles)
+		{
+			echo "<button type='submit' name='delete'>Delete selected</button><br>";
+		}
+		echo "</form>";
+
+		//TRINTI FAILUS
+		if(isset($_POST['delete']))
+		{
+			if(isset($_POST['selectedItemsToDelete']))
+			{
+				$selectedItems = $_POST['selectedItemsToDelete'];
+			}
+			else
+			{
+				echo "<font color='red'>Select at least one file!</font><br>";
+			}
+			
+			if(!empty($selectedItems))
+			{
+				DeleteTheseFiles($selectedItems); //FileUpload.php
+			}
+		}
+
+		if($thereAreNoFiles)
+			echo "<font color='red'>You have no files in your directory!</font><br>";
 
 		echo "<br><br>";
 
@@ -58,11 +105,19 @@ foreach(glob("backend/*.php") as $back)
 		{
 			echo FileUpload(); //backend/FileUpload.php
 		}
+
+		if($_SESSION['status'] == "admin")
+		{
+			echo '<br><form action="/usermanager">';
+		    echo '<input type="submit" value="User manager" />';
+			echo '</form>';
+		}
+
 	}
 	else
 	{
 		//TODO: Kad redirectintu į kokį gražų ERROR puslapį.
-		echo "Neturite teisės matyti šio puslapio!<br>";
+		echo "You are not authorised to view this page!<br>";
 	}
 
 ?>

@@ -1,4 +1,24 @@
 <?php
+
+	function Logout()
+	{
+		$_SESSION['id'] = null;
+
+		$_SESSION['nick'] = null;
+
+		$_SESSION['status'] = null;
+
+		$_SESSION['password'] = null;
+
+		$_SESSION['suspended'] = null;
+
+		$_SESSION['lastLogged'] = null;
+
+		header('Location: /index');
+
+		return true;
+	}
+
 	function LoginMe($a, $b) //nick, psw
 	{
 		require 'includes/mysql_connection.php';
