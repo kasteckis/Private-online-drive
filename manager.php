@@ -16,33 +16,64 @@ foreach(glob("backend/*.php") as $back)
 <meta charset="UTF-8">
 <title><?php echo $WebsiteTitle; ?></title>
 <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
-<!--<link rel="stylesheet" href="css/style.css"> -->
+<link rel="stylesheet" href="css/styleManager.css"> 
 
 </head>
 
 <body>
+
 <?php
 
 	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
 	{
-		echo "<form method='POST''>";
-		echo "<button type='submit' name='logout'>Logout</button><br>";
-		echo "</form>";
+		?>
+		<div class="background">
 
-		if(isset($_POST['logout']))
-		{
-			if(Logout())
-			{
-				echo "You have logged out!<br>";
-			}
-			else
-			{
-				echo "ERROR<br>"; //neturetu but, but who knows
-			}
-		}
+			<div class="header">
+				<img src="images/logo.jpg" alt="Logo">
 
-		echo "Hello, <b>".$_SESSION['nick']."</b>!<br><br>";
+				<form method='POST'>
+					<button type='submit' name='logout'>Logout</button><br>
+				</form>
 
+				<?php
+				if(isset($_POST['logout']))
+				{
+					if(Logout())
+					{
+						echo "You have logged out!<br>";
+					}
+					else
+					{
+						echo "ERROR<br>"; //neturetu but, but who knows
+					}
+				}
+				?>
+
+				<h4>Hello, <?php echo $_SESSION['nick']?>!</h4>
+
+			</div>
+
+			<div class="filelist">
+
+			</div>
+
+			<div class="maindisplay">
+				<div class="upload">
+
+				</div>
+
+				<div class="icons">
+
+				</div>
+			</div>
+
+		</div>
+
+		
+		
+
+		<?php
 		echo "<b>File list:</b><br>";
 
 		//Perskaitome katalogo turinį
