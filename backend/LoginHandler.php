@@ -1,32 +1,22 @@
 <?php
+//Prideda headerius, jei ne ant localhosto turetu ju nereiketi nes jie prideti
+//.htaccess faile, taciau localhostas ju neleidzia todel reiktu situs naudoti
+//tik localiai o serveri turetu veikti .htaccess failas
+//Jeigu meta CORS pranesimus problemos su headeriais
+//header("Access-Control-Allow-Origin: *");
+//header("Access-Control-Allow-Headers: Content-Type");
 
-	function Logout()
+require 'includes/mysql_connection.php';
+require 'includes/config.php';
+
+	function LoginMe() //nick, psw
 	{
-		$_SESSION['id'] = null;
-
-		$_SESSION['nick'] = null;
-
-		$_SESSION['status'] = null;
-
-		$_SESSION['password'] = null;
-
-		$_SESSION['suspended'] = null;
-
-		$_SESSION['lastLogged'] = null;
-
-		header('Location: /index');
-
-		return true;
-	}
-
-	function LoginMe($a, $b) //nick, psw
-	{
-		require 'includes/mysql_connection.php';
-		require 'includes/config.php';
+		$rest_json = file_get_contents("php://input");
+		$_POST = json_decode($rest_json, true);
 
 		$username = mysqli_real_escape_string($conn, $a); //Nuo sql injection
 		$password = mysqli_real_escape_string($conn, $b); //Nuo sql injection
-		$sqlGetUserInformation = "SELECT * FROM Users WHERE nick='$username'"; 
+		$sqlGetUserInformation = "SELECT * FROM Users WHERE nick='$username'";
 		$getUserInformationResults = mysqli_query($conn, $sqlGetUserInformation);
 
 		if (mysqli_num_rows($getUserInformationResults) > 0)
@@ -63,5 +53,25 @@
 			//Tas pats lyg įvestas blogas slaptažodis.
 			return "Nerastas vartotojas<br>";
 		}
+	}
+
+
+	function Logout()
+	{
+		$_SESSION['id'] = null;
+
+		$_SESSION['nick'] = null;
+
+		$_SESSION['status'] = null;
+
+		$_SESSION['password'] = null;
+
+		$_SESSION['suspended'] = null;
+
+		$_SESSION['lastLogged'] = null;
+
+		header('Location: /index');
+
+		return true;
 	}
 ?>

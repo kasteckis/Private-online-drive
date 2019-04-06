@@ -1,10 +1,12 @@
 <?php
 	$dbServer = "localhost";
-	$dbUsername = "galgaldas_devbridge";
-	$dbPassword = "devbridge321";
+	//$dbUsername = "galgaldas_devbridge";
+	//$dbPassword = "devbridge321";
+	$dbUsername = "root";
+	$dbPassword = "";
 	$dbName = "galgaldas_devbridge";
 	$conn = mysqli_connect($dbServer, $dbUsername, $dbPassword, $dbName);
-	
+
 	if($conn == false)
 	{
 		//Jeigu prisijungimas blogas, stabdo kodą.
