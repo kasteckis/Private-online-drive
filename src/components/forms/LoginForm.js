@@ -15,7 +15,6 @@ class LoginForm extends Component {
 
   state = {
     data: {
-      marker: 'signup',
       username: '',
       password: ''
     },
