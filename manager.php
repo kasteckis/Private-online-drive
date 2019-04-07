@@ -16,162 +16,110 @@ foreach(glob("backend/*.php") as $back)
 <meta charset="UTF-8">
 <title><?php echo $WebsiteTitle; ?></title>
 <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
-<link rel="stylesheet" href="css/styleManager.css"> 
+<!--<link rel="stylesheet" href="css/style.css"> -->
 
 </head>
 
 <body>
-
 <?php
 
 	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
 	{
-		?>
-		<div class="background">
+		echo "<form method='POST''>";
+		echo "<button type='submit' name='logout'>Logout</button><br>";
+		echo "</form>";
 
-			<div class="header">
-				<div class="logo">
-					<img src="images/logo.jpg" alt="Logo" height="130" width="206"> 
-				</div>
+		if(isset($_POST['logout']))
+		{
+			if(Logout())
+			{
+				echo "You have logged out!<br>";
+			}
+			else
+			{
+				echo "ERROR<br>"; //neturetu but, but who knows
+			}
+		}
 
-				<div class="greeting">
-					<h4>Hello, <?php echo $_SESSION['nick']?>!</h4>
-					
-					<form method='POST'>
-						<button type='submit' name='logout'>Logout</button><br>
-					</form>
+		echo "Hello, <b>".$_SESSION['nick']."</b>!<br><br>";
 
-					<?php
-					if(isset($_POST['logout']))
-					{
-						if(Logout())
-						{
-							echo "You have logged out!<br>";
-						}
-						else
-						{
-							echo "ERROR<br>"; //neturetu but, but who knows
-						}
-					}
-					?>
-				</div>			
-			</div>
+		echo "<b>File list:</b><br>";
 
-			<div class="filelist">
-				 
-				<p>File list:</p><br>
+		//Perskaitome katalogo turinį
+		$usersDirectory = "./files/".$_SESSION['nick'];
+		$fileList = scandir($usersDirectory);
 
-				<?php
-				//Perskaitome katalogo turinį
-				$usersDirectory = "./files/".$_SESSION['nick'];
-				$fileList = scandir($usersDirectory);
-				
-				//Spausdiname katalogo turinį kaip href
-				//TODO: Reiks nekvailai padaryt, kad sortintu pagal įkėlimo datą!
-				$thereAreNoFiles = true;
-				?>
-				
-				<form method='POST'>
-				<?php foreach ($fileList as $key => $value)
-				{
-					if($value == "." || $value == "..")
-						continue; ?>
+		//Spausdiname katalogo turinį kaip href
+		//TODO: Reiks nekvailai padaryt, kad sortintu pagal įkėlimo datą!
+		$thereAreNoFiles = true;
+		echo "<form method='POST'>";
+		foreach ($fileList as $key => $value)
+		{
+			if($value == "." || $value == "..")
+				continue;
+			echo "<input type='checkbox' name='selectedItemsToDelete[]' value='".$value."'>
+			<a href='./files/".$_SESSION['nick']."/".$value."'>".$value."</a><br>";
+			$thereAreNoFiles = false;
+		}
+		//Jeigu nera failu direktorijoja, nerodys delete mygtuko
+		if(!$thereAreNoFiles)
+		{
+			echo "<button type='submit' name='delete'>Delete selected</button><br>";
+		}
+		echo "</form>";
 
-					<?php
-					echo "<input type='checkbox' name='selectedItemsToDelete[]' value='".$value."'>
-					<a href='./files/".$_SESSION['nick']."/".$value."'>".$value."</a><br>"; ?>
+		//TRINTI FAILUS
+		if(isset($_POST['delete']))
+		{
+			if(isset($_POST['selectedItemsToDelete']))
+			{
+				$selectedItems = $_POST['selectedItemsToDelete'];
+			}
+			else
+			{
+				echo "<font color='red'>Select at least one file!</font><br>";
+			}
+			
+			if(!empty($selectedItems))
+			{
+				DeleteTheseFiles($selectedItems); //FileUpload.php
+			}
+		}
 
-					<?php 
-					$thereAreNoFiles = false;
-				}?>
-				
-				<!-- Jeigu nera failu direktorijoja, nerodys delete mygtuko -->
-				<?php
-				if(!$thereAreNoFiles)
-				{
-					?>
-					<button type='submit' name='delete'>Delete selected</button><br>
-					<?php
-				} ?>
-				</form> 
+		if($thereAreNoFiles)
+			echo "<font color='red'>You have no files in your directory!</font><br>";
 
-				<?php
-				if(isset($_POST['delete']))
-				{
-					if(isset($_POST['selectedItemsToDelete']))
-					{
-						$selectedItems = $_POST['selectedItemsToDelete'];
-					}
-					else
-					{
-						echo "<font color='red'>Select at least one file!</font><br>";
-					}
-					
-					if(!empty($selectedItems))
-					{
-						DeleteTheseFiles($selectedItems); //FileUpload.php
-					}
-				}
-		
-				if($thereAreNoFiles)
-					echo "<font color='red'>You have no files in your directory!</font><br>";
-		
-				echo "<br><br>"; ?>
-						
-			</div>
+		echo "<br><br>";
 
-			<div class="maindisplay">
-				<div class="upload">
-					
-					<p>CIA BUS DRAG AND DROP I GUESS</p>
+		//Failo įkelimas į serverinę
+		echo "<form method='POST' enctype='multipart/form-data'>"; // be enctype neveikia, ką jis daro? who knows.
+		echo "<input type='file' name='file'>";
+		echo "<button type='submit' name='submit'>Upload</button><br>";
+		echo "</form>";
 
-					<!-- //Failo įkelimas į serverinę -->
-					<form method='POST' enctype='multipart/form-data'> <!--"; // be enctype neveikia, ką jis daro? who knows. -->
-					<input type='file' name='file'>
-					<button type='submit' name='submit'>Upload</button><br>
-					</form>
+		//TODO: Automatiškai nesukuria vartotojui katalogo, kolkas jį manualiai reik sukurt, pagal vartotojo nick!
 
-					<?php
-						//TODO: Automatiškai nesukuria vartotojui katalogo, kolkas jį manualiai reik sukurt, pagal vartotojo nick!
+		//Logika vykdoma po UPLOAD paspaudimo
+		//FAILAS issaugo files/nick kataloge!
+		if (isset($_POST['submit']))
+		{
+			echo FileUpload(); //backend/FileUpload.php
+		}
 
-						//Logika vykdoma po UPLOAD paspaudimo
-						//FAILAS issaugo files/nick kataloge!
-						if (isset($_POST['submit']))
-						{
-							echo FileUpload(); //backend/FileUpload.php
-						}
+		if($_SESSION['status'] == "admin")
+		{
+			echo '<br><form action="/usermanager">';
+		    echo '<input type="submit" value="User manager" />';
+			echo '</form>';
+		}
 
-						if($_SESSION['status'] == "admin")
-						{
-							echo '<br><form action="/usermanager">';
-							echo '<input type="submit" value="User manager" />';
-							echo '</form>';
-						}
-
-						} 
-
-
-						else
-						{
-						//TODO: Kad redirectintu į kokį gražų ERROR puslapį.
-						echo "You are not authorised to view this page!<br>";
-						} 
-					?>
-				</div>
-
-				<div class="icons">
-					<p>CIA BUS LOGO FAILU kaip GOOGLE drive</p>
-				</div>
-			</div>
-
-		</div>
-<?php
-/*
+	}
 	else
 	{
 		//TODO: Kad redirectintu į kokį gražų ERROR puslapį.
 		echo "You are not authorised to view this page!<br>";
-	} */
+	}
+
 ?>
 
 
