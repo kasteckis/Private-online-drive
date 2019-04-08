@@ -39,6 +39,8 @@ foreach(glob("backend/*.php") as $back)
 		$sqlReadAllUsers = "SELECT * FROM Users";
 		$resultReadAllUsers = mysqli_query($conn, $sqlReadAllUsers);
 
+		echo "<form method='POST'>";
+
 		echo "<table>";
 		echo "<tr>"; //nick, status, suspension, last connected
 		echo "<th>Nick</th>";
@@ -60,11 +62,21 @@ foreach(glob("backend/*.php") as $back)
 	        else
 	        	echo "<td>Suspended</td>";
 	        echo "<td>".$row['lastLogged']."</td>";
-	        echo "<td>bus button</td>";
+	        echo "<td><button name='edit".$row['id']."'>Edit</button></td>";
 	        echo "<td>X</td>";
 	        echo "</tr>";
+
+	   		if(isset($_POST['edit'.$row['id']]))
+		    {
+		    	$_SESSION['editableUser'] = $row['id'];
+		    	echo '<meta http-equiv="refresh" content="0; url=./edituser" />';
+		    }
 	    }
+
+
+
 	    echo "</table>";
+	    echo "</form>";
 	}
 	else
 	{
