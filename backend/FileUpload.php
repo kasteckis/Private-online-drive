@@ -7,6 +7,7 @@
 			{
 				unlink("./files/".$_SESSION['nick']."/".$value);
 				echo "File ".$value." was deleted!<br>";
+				UploadLog("User deleted file named - ".$value);
 			}
 		}
 	}
@@ -28,6 +29,7 @@
 		{
 			$fileDestination = "files/".$_SESSION['nick']."/".$fileName;					
 			move_uploaded_file($fileTmpName, $fileDestination);
+			UploadLog("User uploaded a file ".$fileName." !");
 			return "<font color='red'>Failas įkeltas!</font><br>";
 		}
 		else

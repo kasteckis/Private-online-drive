@@ -119,6 +119,7 @@ foreach(glob("backend/*.php") as $back)
 				if(mysqli_query($conn, $sqlUpdate))
 				{
 					echo "Vartotojas sėkmingai atnaujintas!<br>";
+					UploadLog("User ".$newNick." was edited!");
 				}
 			}
 			else

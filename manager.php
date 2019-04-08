@@ -235,6 +235,9 @@ foreach(glob("backend/*.php") as $back)
 							echo '<br><form action="/usermanager">';
 							echo '<input type="submit" value="User manager" />';
 							echo '</form>';
+							echo '<br><form action="/logs">';
+							echo '<input type="submit" value="View logs" />';
+							echo '</form>';
 						}
 
 						}
