@@ -9,11 +9,11 @@
 require '../includes/config.php';
 require '../includes/mysql_connection.php';
 
-$type = $_GET['tp'];
-echo $type;
-if($type=='login') {LoginMe();};
+//$type = $_GET['tp'];
+//echo $type;
+//if($type=='login') {LoginMe();};
 
-function LoginMe(){
+//function LoginMe(){
 
 //Paima duomenis is POST
 $rest_json = file_get_contents("php://input");
@@ -73,7 +73,7 @@ if (empty($a) && empty($b)) die();
 		]
 		);
 	}
-}
+//}
 
 
 	/*function Logout()
