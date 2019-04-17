@@ -54,7 +54,43 @@ foreach(glob("backend/*.php") as $back)
 						}
 					}
 					?>
-				</div>
+					<div class="adminbtn">
+						<?php
+							//TODO: Automatiškai nesukuria vartotojui katalogo, kolkas jį manualiai reik sukurt, pagal vartotojo nick!
+
+							//Logika vykdoma po UPLOAD paspaudimo
+
+							//FAILAS issaugo files/nick kataloge!
+							if (isset($_POST['submit']))
+							{
+								echo FileUpload(); //backend/FileUpload.php
+							}
+
+							if($_SESSION['status'] == "admin")
+							{
+								echo '<ul>';
+								echo '<li>';
+								echo '<form action="/usermanager">';
+								echo '<input type="submit" value="User manager" />';
+								echo '</form>';
+								echo '</li>';
+								echo '<li>';
+								echo '<form action="/logs">';
+								echo '<input type="submit" value="View logs" />';
+								echo '</form>';
+								echo '</li>';
+								echo '</ul>';
+							}
+
+							}
+							else
+							{
+							//TODO: Kad redirectintu į kokį gražų ERROR puslapį.
+							echo "You are not authorised to view this page!<br>";
+							}
+						?>
+					</div>
+				</div>	
 			</div>
 
 			<div class="filelist">
@@ -220,6 +256,7 @@ foreach(glob("backend/*.php") as $back)
 
 
 					<?php
+						/*
 						//TODO: Automatiškai nesukuria vartotojui katalogo, kolkas jį manualiai reik sukurt, pagal vartotojo nick!
 
 						//Logika vykdoma po UPLOAD paspaudimo
@@ -247,13 +284,12 @@ foreach(glob("backend/*.php") as $back)
 						{
 						//TODO: Kad redirectintu į kokį gražų ERROR puslapį.
 						echo "You are not authorised to view this page!<br>";
-						}
+						} */
 					?>
 				</div>
 
 				<div class="icons">
-          <br><br><br>
-					<p>CIA BUS LOGO FAILU kaip GOOGLE drive</p>
+
 				</div>
 			</div>
 
