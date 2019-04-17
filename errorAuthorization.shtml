@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Authorization Error</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/styleAuthorization.css">
+    <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
+</head>
+<body>
+    <div id="clouds">
+        <div class="cloud x1"></div>
+        <div class="cloud x1_5"></div>
+        <div class="cloud x2"></div>
+        <div class="cloud x3"></div>
+        <div class="cloud x4"></div>
+        <div class="cloud x5"></div>
+    </div>
+    <div class='c'>
+        <div class='_404'>ERROR</div>
+    <hr>
+        <div class='_1'>NOT AUTHORISED</div>
+        <div class='_2'>TO ACCESS THIS PAGE</div>
+        <a class='btn' href='#'>BACK TO PREVIOUS PAGE</a>
+    </div>
+</body>
+</html>
