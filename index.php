@@ -60,7 +60,7 @@ foreach(glob("backend/*.php") as $back)
 	//Kodas vykdomas po LOGIN paspaudimo
 
 	if(isset($_POST['submit']))
-	{
+	{ 
 		echo LoginMe($_POST['username'], $_POST['password']);
 	}
 
