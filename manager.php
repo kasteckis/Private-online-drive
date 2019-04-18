@@ -65,9 +65,18 @@ foreach(glob("backend/*.php") as $back)
 								echo FileUpload(); //backend/FileUpload.php
 							}
 
+
+							echo '<ul>';
+
+							echo '<li>';
+							echo '<form action="/notes">';
+							echo '<input type="submit" value="Notes" />';
+							echo '</form>';
+							echo '</li>';
+
 							if($_SESSION['status'] == "admin")
 							{
-								echo '<ul>';
+
 								echo '<li>';
 								echo '<form action="/usermanager">';
 								echo '<input type="submit" value="User manager" />';
@@ -78,8 +87,12 @@ foreach(glob("backend/*.php") as $back)
 								echo '<input type="submit" value="View logs" />';
 								echo '</form>';
 								echo '</li>';
-								echo '</ul>';
+
+
+								
 							}
+
+							echo '</ul>';
 
 							}
 							else
