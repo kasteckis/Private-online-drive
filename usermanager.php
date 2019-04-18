@@ -80,6 +80,8 @@ foreach(glob("backend/*.php") as $back)
 		    	if(mysqli_query($conn, $sqlDeleteUser))
 		    	{
 		    		echo $detetableNick." sėkmingai ištrintas!<br>";
+		    		// TODO: KAZKODEL NESIREFRESHINA??
+		    		echo '<meta http-equiv="refresh" content="0; />';
 		    	}
 		    	else
 		    	{

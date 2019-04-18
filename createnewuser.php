@@ -59,6 +59,7 @@ foreach(glob("backend/*.php") as $back)
 			{
 				CreateUser($nick, $status, $hashedPassword, $suspended, $lastLogged); //UserManagement.php
 				echo "Account with name ".$nick." was created!<br>";
+				echo '<meta http-equiv="refresh" content="0; url=./usermanager" />';
 			}
 			else
 			{

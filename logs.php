@@ -68,6 +68,7 @@ foreach(glob("backend/*.php") as $back)
 		    	if(mysqli_query($conn, $sqlDeleteCurrentLog))
 		    	{
 		    		echo "Sėkmingai ištrintas!<br>";
+		    		echo '<meta http-equiv="refresh" content="0;" />';
 		    	}
 		    	else
 		    	{

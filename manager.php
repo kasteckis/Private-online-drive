@@ -65,7 +65,6 @@ foreach(glob("backend/*.php") as $back)
 								echo FileUpload(); //backend/FileUpload.php
 							}
 
-
 							echo '<ul>';
 
 							echo '<li>';
@@ -76,7 +75,6 @@ foreach(glob("backend/*.php") as $back)
 
 							if($_SESSION['status'] == "admin")
 							{
-
 								echo '<li>';
 								echo '<form action="/usermanager">';
 								echo '<input type="submit" value="User manager" />';
@@ -88,12 +86,10 @@ foreach(glob("backend/*.php") as $back)
 								echo '</form>';
 								echo '</li>';
 
-
 								
 							}
 
 							echo '</ul>';
-
 							}
 							else
 							{
@@ -158,6 +154,7 @@ foreach(glob("backend/*.php") as $back)
 					if(!empty($selectedItems))
 					{
 						DeleteTheseFiles($selectedItems); //FileUpload.php
+						//echo '<meta http-equiv="refresh" content="0; />';
 					}
 				}
 
