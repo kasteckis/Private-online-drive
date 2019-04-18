@@ -68,6 +68,12 @@ foreach(glob("backend/*.php") as $back)
 							echo '<ul>';
 
 							echo '<li>';
+							echo '<form action="/settings">';
+							echo '<input type="submit" value="Settings" />';
+							echo '</form>';
+							echo '</li>';
+
+							echo '<li>';
 							echo '<form action="/notes">';
 							echo '<input type="submit" value="Notes" />';
 							echo '</form>';
