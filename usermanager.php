@@ -63,13 +63,28 @@ foreach(glob("backend/*.php") as $back)
 	        	echo "<td>Suspended</td>";
 	        echo "<td>".$row['lastLogged']."</td>";
 	        echo "<td><button name='edit".$row['id']."'>Edit</button></td>";
-	        echo "<td>X</td>";
+	        echo "<td><button name='remove".$row['id']."'>X</button></td></td>";
 	        echo "</tr>";
 
 	   		if(isset($_POST['edit'.$row['id']]))
 		    {
 		    	$_SESSION['editableUser'] = $row['id'];
 		    	echo '<meta http-equiv="refresh" content="0; url=./edituser" />';
+		    }
+	   		if(isset($_POST['remove'.$row['id']]))
+		    {
+		    	$deletableId = $row['id'];
+		    	$detetableNick = $row['nick'];
+		    	$sqlDeleteUser = "DELETE FROM Users WHERE id='$deletableId'";
+		    	delete_directory("./files/".$detetableNick);
+		    	if(mysqli_query($conn, $sqlDeleteUser))
+		    	{
+		    		echo $detetableNick." sėkmingai ištrintas!<br>";
+		    	}
+		    	else
+		    	{
+		    		echo "KLAIDA trinant useri.<br>"; // niekada neturetu buti sitos klaidos
+		    	}
 		    }
 	    }
 
