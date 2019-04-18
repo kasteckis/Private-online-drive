@@ -63,7 +63,10 @@ foreach(glob("backend/*.php") as $back)
 	        	echo "<td>Suspended</td>";
 	        echo "<td>".$row['lastLogged']."</td>";
 	        echo "<td><button name='edit".$row['id']."'>Edit</button></td>";
-	        echo "<td><button name='remove".$row['id']."'>X</button></td></td>";
+	        if($_SESSION['nick'] == $row['nick'])
+	        	echo "<td>X</td>";
+	        else
+	        	echo "<td><button name='remove".$row['id']."'>X</button></td></td>";
 	        echo "</tr>";
 
 	   		if(isset($_POST['edit'.$row['id']]))
