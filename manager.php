@@ -91,6 +91,11 @@ foreach(glob("backend/*.php") as $back)
 								echo '<input type="submit" value="View logs" />';
 								echo '</form>';
 								echo '</li>';
+								// echo '<li>';
+								// echo '<form action="/viewother">';
+								// echo '<input type="submit" value="View other files" />';
+								// echo '</form>';
+								// echo '</li>';
 
 								
 							}

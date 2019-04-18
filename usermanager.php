@@ -49,6 +49,7 @@ foreach(glob("backend/*.php") as $back)
 		echo "<th>Last connection</th>";
 		echo "<th>Edit</th>";
 		echo "<th>Delete</th>";
+		echo "<th>View Files</th>";
 		echo "</tr>";
 		
 
@@ -67,6 +68,7 @@ foreach(glob("backend/*.php") as $back)
 	        	echo "<td>X</td>";
 	        else
 	        	echo "<td><button name='remove".$row['id']."'>X</button></td></td>";
+	        echo "<td><button name='view".$row['id']."'>View</button></td>";
 	        echo "</tr>";
 
 	   		if(isset($_POST['edit'.$row['id']]))
@@ -90,6 +92,11 @@ foreach(glob("backend/*.php") as $back)
 		    	{
 		    		echo "KLAIDA trinant useri.<br>"; // niekada neturetu buti sitos klaidos
 		    	}
+		    }
+   			if(isset($_POST['view'.$row['id']]))
+		    {
+		    	$_SESSION['viewingFiles'] = $row['nick'];
+		    	echo '<meta http-equiv="refresh" content="0; url=./viewfiles" />';
 		    }
 	    }
 

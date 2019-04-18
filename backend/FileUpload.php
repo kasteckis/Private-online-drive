@@ -11,6 +11,18 @@
 		}
 	}
 
+	function DeleteTheseFiles2($selectedItems, $nick)
+	{
+		foreach ($selectedItems as $key => $value)
+		{
+			if (file_exists("./files/".$nick."/".$value))
+			{
+				unlink("./files/".$nick."/".$value);
+				echo "File ".$value." was deleted!<br>";
+			}
+		}
+	}
+
 	function FileUpload()
 	{
 		//TODO: Automatiškai nesukuria vartotojui katalogo, kolkas jį manualiai reik sukurt, pagal vartotojo nick!

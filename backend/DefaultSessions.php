@@ -29,6 +29,10 @@
 	{
 		$_SESSION['editableUser'] = null;
 	}
+	if(!isset($_SESSION['viewingFiles']))
+	{
+		$_SESSION['viewingFiles'] = null;
+	}
 
 	//TODO: Padaryti patikrinimą kiekvieną refreshą ir atnaujinti visus sesijos duomenis, jeigu ID turi reikšmę.
 ?>
