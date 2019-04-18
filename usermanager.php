@@ -39,6 +39,8 @@ foreach(glob("backend/*.php") as $back)
 		$sqlReadAllUsers = "SELECT * FROM Users";
 		$resultReadAllUsers = mysqli_query($conn, $sqlReadAllUsers);
 
+		echo "<form method='POST'>";
+
 		echo "<table>";
 		echo "<tr>"; //nick, status, suspension, last connected
 		echo "<th>Nick</th>";
@@ -60,16 +62,41 @@ foreach(glob("backend/*.php") as $back)
 	        else
 	        	echo "<td>Suspended</td>";
 	        echo "<td>".$row['lastLogged']."</td>";
-	        echo "<td>bus button</td>";
-	        echo "<td>X</td>";
+	        echo "<td><button name='edit".$row['id']."'>Edit</button></td>";
+	        echo "<td><button name='remove".$row['id']."'>X</button></td></td>";
 	        echo "</tr>";
+
+	   		if(isset($_POST['edit'.$row['id']]))
+		    {
+		    	$_SESSION['editableUser'] = $row['id'];
+		    	echo '<meta http-equiv="refresh" content="0; url=./edituser" />';
+		    }
+	   		if(isset($_POST['remove'.$row['id']]))
+		    {
+		    	$deletableId = $row['id'];
+		    	$detetableNick = $row['nick'];
+		    	$sqlDeleteUser = "DELETE FROM Users WHERE id='$deletableId'";
+		    	delete_directory("./files/".$detetableNick);
+		    	if(mysqli_query($conn, $sqlDeleteUser))
+		    	{
+		    		echo $detetableNick." sėkmingai ištrintas!<br>";
+		    	}
+		    	else
+		    	{
+		    		echo "KLAIDA trinant useri.<br>"; // niekada neturetu buti sitos klaidos
+		    	}
+		    }
 	    }
+
+
+
 	    echo "</table>";
+	    echo "</form>";
 	}
 	else
 	{
-		//TODO: Kad redirectintu į kokį gražų ERROR puslapį.
 		echo "You are not authorised to view this page!<br>";
+		echo '<meta http-equiv="refresh" content="0; url=./errorAuthorization.shtml" />';
 	}
 
 ?>

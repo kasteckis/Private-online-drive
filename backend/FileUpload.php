@@ -1,7 +1,7 @@
 <?php
 	function DeleteTheseFiles($selectedItems)
 	{
-		foreach ($selectedItems as $key => $value) 
+		foreach ($selectedItems as $key => $value)
 		{
 			if (file_exists("./files/".$_SESSION['nick']."/".$value))
 			{
@@ -26,7 +26,7 @@
 
 		if($fileError === 0)
 		{
-			$fileDestination = "files/".$_SESSION['nick']."/".$fileName;					
+			$fileDestination = "files/".$_SESSION['nick']."/".$fileName;
 			move_uploaded_file($fileTmpName, $fileDestination);
 			return "<font color='red'>Failas įkeltas!</font><br>";
 		}

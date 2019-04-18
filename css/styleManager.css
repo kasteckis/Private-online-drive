@@ -1,0 +1,240 @@
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.background{
+    width:100%;
+    height:100vh;
+}
+
+.header{
+    background-color: #f4f4f4;
+    padding: 0px;
+    width: 100%;
+    height: 130px;
+    border-bottom: 5px solid red
+}
+
+.logo{
+    background-color: #f4f4f4;
+    float: left;
+    width: 15%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.greeting{
+    background-color: #f4f4f4;
+    float: right;
+    width: 85%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.adminbtn li{
+  float: left;
+  display: inline;
+  margin: 0px 5px 0px 15px;
+}
+
+.adminbtn input{
+  background-color: #4CAF50;
+    border: none;
+    border-radius: 8%;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.filelist{
+    width:15%;
+    height:100%;
+    background-color: salmon;
+    float: left;
+
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.maindisplay{
+    width:85%;
+    height:100%;
+    background-color: rgb(49, 48, 38);
+    float: right;
+}
+
+.upload{
+    width:100%;
+    height:28%;
+    background-color: #F0FFFF;
+}
+
+.icons{
+    width:100%;
+    height:80%;
+    background-color: #f4f4f4;
+}
+
+
+.greeting button{
+    float: right;
+    margin-right: 7%;
+
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+
+}
+
+.greeting h4{
+    vertical-align: middle;
+    font-family: Tahoma;
+    font-size: 32px;
+    margin-left: 15px;
+}
+
+.filelist p {
+    font-family: Tahoma;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10%;
+}
+
+.filelist button{
+    margin: 10% 20% 10% 20%;
+
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 7px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+
+    box-sizing: border-box;
+}
+
+.filelist input{
+
+}
+
+.filelist a{
+    text-decoration: none;
+}
+
+.filelist a:hover {
+    text-decoration: underline;
+}
+
+.upload{
+    padding-top: 10px;
+}
+
+.upload input{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 7px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+
+    box-sizing: border-box;
+}
+
+.upload button{
+    background-color: #5F9EA0;
+    border: none;
+    color: white;
+    padding: 7px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+
+    box-sizing: border-box;
+}
+#dropFileForm {
+  margin: 16px;
+  text-align: center;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+#dropFileForm #fileLabel {
+  background-color: #F0FFFF;
+  border: 3px dashed #6495ED;
+  border-bottom-color: #F0FFFF;
+  display: block;
+  padding: 16px;
+  position: relative;
+  cursor: pointer;
+}
+
+#dropFileForm #fileInput {
+  display: none;
+}
+
+#dropFileForm #fileLabel:after,
+#dropFileForm #fileLabel:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: -2;
+  border-radius: 8px 8px 0 0;
+}
+
+#dropFileForm #fileLabel:before {
+  z-index: -1;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 5%,
+    black 5%,
+    black 10%
+  );
+  opacity: 0;
+  transition: 0.5s;
+}
+
+#dropFileForm.fileHover #fileLabel:before {
+  opacity: 0.25;
+}
+
+#dropFileForm .uploadButton {
+  border: 0;
+  outline: 0;
+  width: 100%;
+  padding: 8px;
+  background-color: #5F9EA0;
+  border: 3px dashed #6495ED;
+  color: #fff;
+  cursor: pointer;
+}
+
+#dropFileForm.fileHover {
+  box-shadow: 0 0 16px limeGreen;
+}

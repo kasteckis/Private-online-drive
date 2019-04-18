@@ -23,6 +23,7 @@
 	{
 		require 'includes/mysql_connection.php';
 		require 'includes/config.php';
+		//require 'backend/LogsSystem.php';
 
 		$username = mysqli_real_escape_string($conn, $a); //Nuo sql injection
 		$password = mysqli_real_escape_string($conn, $b); //Nuo sql injection
@@ -54,14 +55,20 @@
 				}
 				else
 				{
-					return "Blogas slaptažodis<br>";
+					UploadLog("Tried to connect to ".$username." account and failed!");
+					echo "<h1 id='wrongpass' style='color:white; margin-top: 66vh; text-align: center;'>Wrong password</h1>";
+					//return "Blogas slaptažodis<br>";
+					return null;
 				}
 		    }
 		}
 		else
 		{
 			//Tas pats lyg įvestas blogas slaptažodis.
-			return "Nerastas vartotojas<br>";
+			UploadLog("Tried to connect to non-existant ".$username." account!");	
+			echo "<h1 id='notfound' style='color:white; margin-top: 66vh; text-align: center;'>User not found</h1>";
+			//return "Nerastas vartotojas<br>";
+			return null;
 		}
 	}
 ?>

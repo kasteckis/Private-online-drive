@@ -32,13 +32,13 @@ foreach(glob("backend/*.php") as $back)
 
 
 	//debuginimo tikslams
-	echo "<font color='red'>Sesijos duomenys<br>";
-	echo "id: ".$_SESSION['id']."<br>";
-	echo "nick: ".$_SESSION['nick']."<br>";
-	echo "status: ".$_SESSION['status']."<br>";
-	echo "password: ".$_SESSION['password']."<br>";
-	echo "suspended: ".$_SESSION['suspended']."<br>";
-	echo "lastLogged: ".$_SESSION['lastLogged']."</font><br>";
+	// echo "<font color='red'>Sesijos duomenys<br>";
+	// echo "id: ".$_SESSION['id']."<br>";
+	// echo "nick: ".$_SESSION['nick']."<br>";
+	// echo "status: ".$_SESSION['status']."<br>";
+	// echo "password: ".$_SESSION['password']."<br>";
+	// echo "suspended: ".$_SESSION['suspended']."<br>";
+	// echo "lastLogged: ".$_SESSION['lastLogged']."</font><br>";
 
 
 	echo '<form method="POST" id="loginForm">';
@@ -60,7 +60,7 @@ foreach(glob("backend/*.php") as $back)
 	//Kodas vykdomas po LOGIN paspaudimo
 
 	if(isset($_POST['submit']))
-	{
+	{ 
 		echo LoginMe($_POST['username'], $_POST['password']);
 	}
 

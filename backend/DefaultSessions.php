@@ -25,6 +25,10 @@
 	{
 		$_SESSION['lastLogged'] = null;
 	}
+	if(!isset($_SESSION['editableUser']))
+	{
+		$_SESSION['editableUser'] = null;
+	}
 
 	//TODO: Padaryti patikrinimą kiekvieną refreshą ir atnaujinti visus sesijos duomenis, jeigu ID turi reikšmę.
 ?>
