@@ -11,6 +11,8 @@ Projekto ideja: Google drive arba microsoft onedrive kopija, tik sukurtas TVS, a
 
 https://docs.google.com/document/d/1Ujij61YYIwm0dDhkEgLVqUTsWfDoXChcB9TAYCl3Sg8/edit?fbclid=IwAR3O1ku3REkq6YGqGESucW22PCXwVWXWxu_D22sq00001YsOQ3kvAw_sODY
 
+https://trello.com/b/vofeEYK9/private-online-drive
+
 Node.js naudojimo gidas
 
 npm install - Iraso visus failus kurie yra package.json, uztenka viena karta irasyti ir tada jau naujus failus ant virsaus uzrasot ir veikti turi. Jeigu atsiranda nauju dependencies tai galima is naujo ja paleisti ir turetu tik ta viena irasyti
