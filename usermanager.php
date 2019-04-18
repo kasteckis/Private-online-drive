@@ -80,8 +80,8 @@ foreach(glob("backend/*.php") as $back)
 	}
 	else
 	{
-		//TODO: Kad redirectintu į kokį gražų ERROR puslapį.
 		echo "You are not authorised to view this page!<br>";
+		echo '<meta http-equiv="refresh" content="0; url=./errorAuthorization.shtml" />';
 	}
 
 ?>

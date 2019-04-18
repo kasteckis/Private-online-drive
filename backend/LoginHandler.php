@@ -57,7 +57,8 @@
 				{
 					UploadLog("Tried to connect to ".$username." account and failed!");
 					echo "<h1 id='wrongpass' style='color:white; margin-top: 66vh; text-align: center;'>Wrong password</h1>";
-					return "Blogas slaptažodis<br>";
+					//return "Blogas slaptažodis<br>";
+					return null;
 				}
 		    }
 		}
@@ -66,7 +67,8 @@
 			//Tas pats lyg įvestas blogas slaptažodis.
 			UploadLog("Tried to connect to non-existant ".$username." account!");	
 			echo "<h1 id='notfound' style='color:white; margin-top: 66vh; text-align: center;'>User not found</h1>";
-			return "Nerastas vartotojas<br>";
+			//return "Nerastas vartotojas<br>";
+			return null;
 		}
 	}
 ?>

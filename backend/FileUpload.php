@@ -1,13 +1,12 @@
 <?php
 	function DeleteTheseFiles($selectedItems)
 	{
-		foreach ($selectedItems as $key => $value) 
+		foreach ($selectedItems as $key => $value)
 		{
 			if (file_exists("./files/".$_SESSION['nick']."/".$value))
 			{
 				unlink("./files/".$_SESSION['nick']."/".$value);
 				echo "File ".$value." was deleted!<br>";
-				UploadLog("User deleted file named - ".$value);
 			}
 		}
 	}
@@ -27,9 +26,8 @@
 
 		if($fileError === 0)
 		{
-			$fileDestination = "files/".$_SESSION['nick']."/".$fileName;					
+			$fileDestination = "files/".$_SESSION['nick']."/".$fileName;
 			move_uploaded_file($fileTmpName, $fileDestination);
-			UploadLog("User uploaded a file ".$fileName." !");
 			return "<font color='red'>Failas įkeltas!</font><br>";
 		}
 		else

@@ -56,7 +56,6 @@ foreach(glob("backend/*.php") as $back)
 					?>
 					<div class="adminbtn">
 						<?php
-							//TODO: Automatiškai nesukuria vartotojui katalogo, kolkas jį manualiai reik sukurt, pagal vartotojo nick!
 
 							//Logika vykdoma po UPLOAD paspaudimo
 
@@ -85,7 +84,7 @@ foreach(glob("backend/*.php") as $back)
 							}
 							else
 							{
-							//TODO: Kad redirectintu į kokį gražų ERROR puslapį.
+							echo '<meta http-equiv="refresh" content="0; url=./errorAuthorization.shtml" />';
 							echo "You are not authorised to view this page!<br>";
 							}
 						?>
