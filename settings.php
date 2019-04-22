@@ -16,7 +16,7 @@ foreach(glob("backend/*.php") as $back)
 <meta charset="UTF-8">
 <title><?php echo $WebsiteTitle; ?></title>
 <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" /> 
-<!--<link rel="stylesheet" href="css/style.css"> -->
+<link rel="stylesheet" href="css/styleSettings.css"> 
 
 </head>
 
@@ -24,20 +24,36 @@ foreach(glob("backend/*.php") as $back)
 <?php
 
 	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
-	{
-		//Mygtukas atgal
-		echo '<form action="/manager">';
-	    echo '<input type="submit" value="Back" />';
-		echo '</form><br><br>';
+	{?>
+		<div class="background">
+			<div class="back">
+				<?php
+				//Mygtukas atgal
+				echo '<form action="/manager">'; 
+				echo '<input type="submit" value="Back" />';
+				echo '</form>'; 
+				?>
+			</div>
 
-		echo "Change password:<br>";
-		echo "<form method='POST'>";
-		echo "<input type='password' name='currPass' placeholder='Current Password'></input><br>";
-		echo "<input type='password' name='newPass1' placeholder='New Password'></input><br>";
-		echo "<input type='password' name='newPass2' placeholder='Repeat new password'></input><br>";
-		echo "<button name='submitChange'>Change Password</button>";
-		echo "</form>";
+			<div class="changebox">
+				<?php
+				echo "<h3>Change password:</h3>";
+				echo "<form method='POST'>";?>
+				<div class="inputs">
+					<?php
+					echo "<input type='password' name='currPass' placeholder='Current Password'></input>";
+					echo "<input type='password' name='newPass1' placeholder='New Password'></input>";
+					echo "<input type='password' name='newPass2' placeholder='Repeat new password'></input>";
+					echo "<button name='submitChange'>Change Password</button>";
+					?>
+				</div>
+				<?php
+				echo "</form>";
+				?>
+			</div>
+		</div>
 
+		<?php
 		if(isset($_POST['submitChange']))
 		{
 			$currentPasswordInput = mysqli_real_escape_string($conn, $_POST['currPass']);
