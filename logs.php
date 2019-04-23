@@ -37,7 +37,7 @@ foreach(glob("backend/*.php") as $back)
 
 			<div class="main">
 				<?php
-				$sqlGetData = "SELECT * FROM Logs";
+				$sqlGetData = "SELECT * FROM Logs ORDER BY date DESC";
 				$resultsData = mysqli_query($conn, $sqlGetData);
 
 				echo "<form method='POST'>";
