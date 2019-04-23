@@ -16,7 +16,7 @@ foreach(glob("backend/*.php") as $back)
 <meta charset="UTF-8">
 <title><?php echo $WebsiteTitle; ?></title>
 <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" /> 
-<!--<link rel="stylesheet" href="css/style.css"> -->
+<link rel="stylesheet" href="css/styleNotes.css"> 
 
 </head>
 
@@ -25,37 +25,52 @@ foreach(glob("backend/*.php") as $back)
 
 	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
 	{
-		//Mygtukas atgal
-		echo '<form action="/manager">';
-	    echo '<input type="submit" value="Back" />';
-		echo '</form><br><br>';
-
-		$userId = $_SESSION['id'];
-		$sqlGetUsersNote = "SELECT * FROM Users WHERE id='$userId'";
-		$resultsGetUsersNote = mysqli_query($conn, $sqlGetUsersNote);
-		$row = mysqli_fetch_assoc($resultsGetUsersNote);
-
-		echo "<form method='POST'>";
-		echo '<textarea rows="15" cols="50" name="note">';
-		echo $row['note'];
-		echo '</textarea><br>';
-		echo "<button name='update'>Update</button>";
-		echo "</form>";
-
-		if(isset($_POST['update']))
-		{
-			$newNote = mysqli_real_escape_string($conn, $_POST['note']);
-			$updateNote = "UPDATE Users SET note='$newNote' WHERE id='$userId'";
-			if(mysqli_query($conn, $updateNote))
-			{
-				echo "Updated succesfully!<br>";
-				echo '<meta http-equiv="refresh" content="0;" />';
-			}
-			else
-			{
-				echo "ERROR."; //niekada neturetu buti
-			}
-		}
+		?>
+		<div class="background">
+			<div class="back">
+				<?php
+				//Mygtukas atgal
+				echo '<form action="/manager">';
+				echo '<input type="submit" value="Back" />';
+				echo '</form>';
+				?>
+			</div>
+			<div class="main">
+				<?php
+				$userId = $_SESSION['id'];
+				$sqlGetUsersNote = "SELECT * FROM Users WHERE id='$userId'";
+				$resultsGetUsersNote = mysqli_query($conn, $sqlGetUsersNote);
+				$row = mysqli_fetch_assoc($resultsGetUsersNote);
+				?>
+				<div class="note">
+					<?php
+					echo "<form method='POST'>";
+					echo '<textarea rows="15" cols="50" name="note">';
+					echo $row['note'];
+					echo '</textarea>';
+					echo "<button name='update'>Update</button>";
+					echo "</form>";
+					?>
+				</div>
+				<?php
+				if(isset($_POST['update']))
+				{
+					$newNote = mysqli_real_escape_string($conn, $_POST['note']);
+					$updateNote = "UPDATE Users SET note='$newNote' WHERE id='$userId'";
+					if(mysqli_query($conn, $updateNote))
+					{
+						echo "Updated succesfully!<br>";
+						echo '<meta http-equiv="refresh" content="0;" />';
+					}
+					else
+					{
+						echo "ERROR."; //niekada neturetu buti
+					}
+				} 
+				?>
+			</div>
+		</div>
+		<?php
 	}
 	else
 	{
