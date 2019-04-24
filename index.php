@@ -1,7 +1,8 @@
-﻿<?php
+ ﻿<?php
 session_start();
 require 'includes/mysql_connection.php';
 require 'includes/config.php';
+  require 'includes/messages.php';
 
 //Includins visus skriptus is backendo, nežinau ar funkcijas į vieną .php failą kraut ar į atskirus
 foreach(glob("backend/*.php") as $back)
@@ -40,27 +41,37 @@ foreach(glob("backend/*.php") as $back)
 	// echo "suspended: ".$_SESSION['suspended']."<br>";
 	// echo "lastLogged: ".$_SESSION['lastLogged']."</font><br>";
 
+  ?>
+  <div class="container">
+    <form method="POST" id="loginForm">
+    <div class="login-box">
+     <h1>Login</h1>
+    <div class="textbox">
+     <i class="fas fa-user"></i>
+    <input type="text" name="username" placeholder="Username"></input>
+      </div>
+      <div class="textbox">
+        <i class="fas fa-lock"></i>
 
-	echo '<form method="POST" id="loginForm">';
-	echo '<div class="login-box">';
-	echo ' <h1>Login</h1>';
-	echo '<div class="textbox">';
-	echo ' <i class="fas fa-user"></i>';
-	echo '<input type="text" name="username" placeholder="Username"></input>';
-	echo '  </div>';
-	echo '  <div class="textbox">';
-	echo '    <i class="fas fa-lock"></i>';
+    <input type="password" name="password" placeholder="Password"></input>
+      </div>
+    <button class="btn" name="submit">Sign In</button>
+    </div>
+    </form>
+    <div class="login-remind">
+       <form action="forgotPassword">
+       <input type="submit" value="Forgot my password" />
+       </form>
 
-	echo '<input type="password" name="password" placeholder="Password"></input>';
-	echo '  </div>';
-	echo '<button class="btn" name="submit">Sign In</button><br>';
-	echo '</div>';
-	echo '</form>';
+    </div>
+  </div>
 
+
+   <?php
 	//Kodas vykdomas po LOGIN paspaudimo
 
 	if(isset($_POST['submit']))
-	{ 
+	{
 		echo LoginMe($_POST['username'], $_POST['password']);
 	}
 

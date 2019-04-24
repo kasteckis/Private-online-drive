@@ -1,3 +1,11 @@
+<style>
+	.login-error {
+		color:white;
+		margin-top: 3%;
+		text-align: center;
+	}
+</style>
+
 <?php
 
 	function Logout()
@@ -57,7 +65,7 @@
 				else
 				{
 					UploadLog("Tried to connect to ".$username." account and failed!");
-					echo "<h1 id='wrongpass' style='color:white; margin-top: 3%; text-align: center;'>".$wrongPassword."</h1>";
+					echo "<h1 class='login-error'>".$wrongPassword."</h1>";
 					//return "Blogas slaptažodis<br>";
 					return null;
 				}
@@ -67,7 +75,7 @@
 		{
 			//Tas pats lyg įvestas blogas slaptažodis.
 			UploadLog("Tried to connect to non-existant ".$username." account!");
-			echo "<h1 id='not-found' style='color:white; margin-top: 3%; text-align: center;'>".$wrongUser."</h1>";
+			echo "<h1 class='login-error'>".$wrongUser."</h1>";
 			//return "Nerastas vartotojas<br>";
 			return null;
 		}
