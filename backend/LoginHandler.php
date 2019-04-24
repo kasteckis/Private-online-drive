@@ -1,3 +1,11 @@
+<style>
+	.login-error {
+		color:white;
+		margin-top: 3%;
+		text-align: center;
+	}
+</style>
+
 <?php
 
 	function Logout()
@@ -23,11 +31,12 @@
 	{
 		require 'includes/mysql_connection.php';
 		require 'includes/config.php';
+		require 'includes/messages.php';
 		//require 'backend/LogsSystem.php';
 
 		$username = mysqli_real_escape_string($conn, $a); //Nuo sql injection
 		$password = mysqli_real_escape_string($conn, $b); //Nuo sql injection
-		$sqlGetUserInformation = "SELECT * FROM Users WHERE nick='$username'"; 
+		$sqlGetUserInformation = "SELECT * FROM Users WHERE nick='$username'";
 		$getUserInformationResults = mysqli_query($conn, $sqlGetUserInformation);
 
 		if (mysqli_num_rows($getUserInformationResults) > 0)
@@ -51,12 +60,12 @@
 					$sqlUpdateUserLastLoggedDate = "UPDATE Users SET lastLogged='$currentDate' WHERE id='$tempId'";
 					mysqli_query($conn, $sqlUpdateUserLastLoggedDate);
 					header('Location: /manager');
-					return "Sveiki atvykę, ".$row['nick']."!<br>";
+					return $welcome.", ".$row['nick']."!<br>";
 				}
 				else
 				{
 					UploadLog("Tried to connect to ".$username." account and failed!");
-					echo "<h1 id='wrongpass' style='color:white; margin-top: 66vh; text-align: center;'>Wrong password</h1>";
+					echo "<h1 class='login-error'>".$wrongPassword."</h1>";
 					//return "Blogas slaptažodis<br>";
 					return null;
 				}
@@ -65,8 +74,8 @@
 		else
 		{
 			//Tas pats lyg įvestas blogas slaptažodis.
-			UploadLog("Tried to connect to non-existant ".$username." account!");	
-			echo "<h1 id='notfound' style='color:white; margin-top: 66vh; text-align: center;'>User not found</h1>";
+			UploadLog("Tried to connect to non-existant ".$username." account!");
+			echo "<h1 class='login-error'>".$wrongUser."</h1>";
 			//return "Nerastas vartotojas<br>";
 			return null;
 		}
