@@ -27,7 +27,7 @@
 
 		$username = mysqli_real_escape_string($conn, $a); //Nuo sql injection
 		$password = mysqli_real_escape_string($conn, $b); //Nuo sql injection
-		$sqlGetUserInformation = "SELECT * FROM Users WHERE nick='$username'"; 
+		$sqlGetUserInformation = "SELECT * FROM Users WHERE nick='$username'";
 		$getUserInformationResults = mysqli_query($conn, $sqlGetUserInformation);
 
 		if (mysqli_num_rows($getUserInformationResults) > 0)
@@ -50,7 +50,8 @@
 
 					$sqlUpdateUserLastLoggedDate = "UPDATE Users SET lastLogged='$currentDate' WHERE id='$tempId'";
 					mysqli_query($conn, $sqlUpdateUserLastLoggedDate);
-					header('Location: /manager');
+					//header('Location: /manager');
+					header('Location: /devb/manager');
 					return "Sveiki atvykę, ".$row['nick']."!<br>";
 				}
 				else
@@ -65,8 +66,8 @@
 		else
 		{
 			//Tas pats lyg įvestas blogas slaptažodis.
-			UploadLog("Tried to connect to non-existant ".$username." account!");	
-			echo "<h1 id='notfound' style='color:white; margin-top: 66vh; text-align: center;'>User not found</h1>";
+			UploadLog("Tried to connect to non-existant ".$username." account!");
+			echo "<h1 id='notfound' style='color:white; margin-top: 3%; text-align: center;'>User not found</h1>";
 			//return "Nerastas vartotojas<br>";
 			return null;
 		}
