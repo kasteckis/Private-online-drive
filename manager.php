@@ -2,6 +2,7 @@
 session_start();
 require 'includes/mysql_connection.php';
 require 'includes/config.php';
+require 'includes/messages.php';
 
 //Includins visus skriptus is backendo, nežinau ar funkcijas į vieną .php failą kraut ar į atskirus
 foreach(glob("backend/*.php") as $back)
@@ -35,7 +36,7 @@ foreach(glob("backend/*.php") as $back)
 				</div>
 
 				<div class="greeting">
-					<h4>Hello, <?php echo $_SESSION['nick']?>!</h4>
+					<h4><?php echo $welcome.", ".$_SESSION['nick']?>!</h4>
 
 					<form method='POST'>
 						<button type='submit' name='logout'>Logout</button><br>
@@ -46,11 +47,11 @@ foreach(glob("backend/*.php") as $back)
 					{
 						if(Logout())
 						{
-							echo "You have logged out!<br>";
+							echo $loggedOut;
 						}
 						else
 						{
-							echo "ERROR<br>"; //neturetu but, but who knows
+							echo $error; //neturetu but, but who knows
 						}
 					}
 					?>
@@ -97,19 +98,19 @@ foreach(glob("backend/*.php") as $back)
 								// echo '</form>';
 								// echo '</li>';
 
-								
+
 							}
 
 							echo '</ul>';
 							}
 							else
 							{
-							echo '<meta http-equiv="refresh" content="0; url=./errorAuthorization.shtml" />';	
-							echo "You are not authorised to view this page!<br>";
+							echo '<meta http-equiv="refresh" content="0; url=./errorAuthorization.shtml" />';
+							echo $notAuthorised;
 							}
 						?>
 					</div>
-				</div>	
+				</div>
 			</div>
 
 			<div class="filelist">
@@ -159,7 +160,7 @@ foreach(glob("backend/*.php") as $back)
 					}
 					else
 					{
-						echo "<font color='red'>Select at least one file!</font><br>";
+						echo "<font color='red'>".$selectFile."</font><br>";
 					}
 
 					if(!empty($selectedItems))
@@ -170,7 +171,7 @@ foreach(glob("backend/*.php") as $back)
 				}
 
 				if($thereAreNoFiles)
-					echo "<font color='red'>You have no files in your directory!</font><br>";
+					echo "<font color='red'>".$noFilesInDirectory."</font><br>";
 
 				echo "<br><br>"; ?>
 
@@ -187,7 +188,7 @@ foreach(glob("backend/*.php") as $back)
             <i class="fa fa-download fa-5x"></i>
             <br>
             <span id="fileLabelText">
-              Choose a file or drag it here
+              <?php echo $chooseFile;?>
             </span>
             <br>
             <span id="uploadStatus"></span>
