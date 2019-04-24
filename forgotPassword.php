@@ -23,46 +23,29 @@
 
 			</div>
 
+      <div class="box-success">
+        <?php if(isset($_GET["reset"])){
+          if($_GET["reset"] == "success"){
+            ?> <p>
+              Check your email
+            </p> <?php
+          }
+        }
+          ?>
+      </div>
+
 			<div class="changebox">
-				<h3>Write your email to recover your password</h3> <!-- $emailRecovery-->
-				<form method='POST'>
+				<h3>Write your username to recover your password</h3> <!-- $emailRecovery-->
+        <h2>An e-mail will be sent to you with instructions on how to reset your password</h2>
+				<form action="backend/ResetPassword.php" method='POST'>
 				<div class="inputs">
-          <input type='text' name='email' placeholder='Email' required></input>
-					<button name='submitEmail'>Forgot password</button> <!-- $emailPasswordRecovery -->
+          <input type='text' name='email' placeholder='Enter your e-mail address..' required></input>
+					<button type="submit" name='reset-password-submit'>Forgot password</button> <!-- $emailPasswordRecovery -->
 				</div>
       </form>
+
 			</div>
 		</div>
-
-		<?php
-
-    if(isset($_POST) & !empty($_POST)){
-    	$username = mysqli_real_escape_string($conn, $_POST['username']);
-    	$sql = "SELECT * FROM `Users` WHERE nick = '$username'";
-    	$res = mysqli_query($conn, $sql);
-    	$count = mysqli_num_rows($res);
-    	if($count == 1){
-    		echo "Send email to user with password";
-    	}else{
-    		echo "User name does not exist in database";
-    	}
-    }
-
-      $r = mysqli_fetch_assoc($res);
-      $password = $r['password'];
-      $to = $r['email'];
-      $subject = "Your Recovered Password";
-
-      $message = "Please use this password to login " . $password;
-      $headers = "From : tidish@inbox.lt";
-      if(mail($to, $subject, $message, $headers)){
-      	echo "Your Password has been sent to your email id";
-      }else{
-      	echo "Failed to Recover your password, try again";
-      }
-
-?>
-
 </body>
 
 </html>

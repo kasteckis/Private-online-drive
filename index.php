@@ -2,7 +2,7 @@
 session_start();
 require 'includes/mysql_connection.php';
 require 'includes/config.php';
-  require 'includes/messages.php';
+require 'includes/messages.php';
 
 //Includins visus skriptus is backendo, nežinau ar funkcijas į vieną .php failą kraut ar į atskirus
 foreach(glob("backend/*.php") as $back)
@@ -43,6 +43,7 @@ foreach(glob("backend/*.php") as $back)
 
   ?>
   <div class="container">
+    <!-- password reset success spot-->
     <form method="POST" id="loginForm">
     <div class="login-box">
      <h1>Login</h1>
@@ -59,9 +60,7 @@ foreach(glob("backend/*.php") as $back)
     </div>
     </form>
     <div class="login-remind">
-       <form action="forgotPassword">
-       <input type="submit" value="Forgot my password" />
-       </form>
+       <a href="forgotPassword.php">Forgot your password?</a>
 
     </div>
   </div>
