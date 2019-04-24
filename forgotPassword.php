@@ -2,6 +2,7 @@
   require 'includes/mysql_connection.php';
   require 'includes/config.php';
   require 'includes/messages.php';
+  require 'backend/PasswordReset/ResetPassword.php';
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +10,6 @@
 <head>
 <meta charset="UTF-8">
 <title><?php echo $WebsiteTitle; ?></title>
-<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
 <link rel="stylesheet" href="css/styleSettings.css">
 
 </head>
@@ -38,13 +38,18 @@
 			<div class="changebox">
 				<h3>Write your email address to recover your password</h3> <!-- $emailRecovery-->
         <h2>An email will be sent to you with instructions on how to reset your password</h2>
-				<form action="backend/PasswordReset/ResetPassword.php" method='POST'>
+				<form method='POST'>
 				<div class="inputs">
-          <input type='text' name='email' placeholder='Enter your e-mail address..' required></input>
-					<button type="submit" name='reset-password-submit'>Forgot password</button> <!-- $emailPasswordRecovery -->
+          <input type="text" name="email" placeholder="Enter your e-mail address.." required></input>
+					<button type="submit" name="reset-request-submit">Forgot password</button> <!-- $emailPasswordRecovery -->
 				</div>
       </form>
-
+      <?php
+      if(isset($_POST['reset-request-submit']))
+      {
+        echo ResetPassword($_POST['email']);
+      }
+      ?>
 			</div>
 		</div>
 </body>

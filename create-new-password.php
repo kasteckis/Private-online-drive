@@ -1,6 +1,7 @@
 <?php
-  // require 'includes/mysql_connection.php';
-  // require 'includes/config.php';
+  require 'includes/mysql_connection.php';
+  require 'includes/config.php';
+	require 'backend/PasswordReset/CreatePassword.php';
 ?>
 
 <!DOCTYPE html>
@@ -31,20 +32,22 @@
         }else{
           if(ctype_xdigit($selector) !== false && ctype_xdigit($validator) !== false){
             ?>
-              <form action="backend/PasswordReset/CreatePassword.php" method="POST">
+              <form method="POST">
                 <input type="hidden" name="selector" value="<?php echo $selector; ?>">
                 <input type="hidden" name="validator" value="<?php echo $validator; ?>">
-                <input type="password" name="pwd" value="Enter a new password..."/>
-                <input type="password" name="pwd-repeat" value="Repeat new password..."/>
+                <input type="password" name="pwd" placeholder="Enter a new password..."/>
+                <input type="password" name="pwd-repeat" placeholder="Repeat new password..."/>
                 <button type="submit" name="reset-password-submit">Reset password</button>
               </form>
 
             <?php
           }
         }
-
+				if(isset($_POST['reset-password-submit']))
+	      {
+	        echo CreatePassword($_POST["selector"], $_POST["validator"], $_POST["pwd"], $_POST["pwd-repeat"]);
+	      }
       ?>
-
 		</div>
 </body>
 

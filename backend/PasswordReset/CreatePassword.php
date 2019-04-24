@@ -1,11 +1,9 @@
 <?php
-  if (isset($_POST["reset-password-submit"])) {
+
+
+  function CreatePassword($selector, $validator, $password, $passwordRepeat) {
     require 'includes/mysql_connection.php';
     require 'includes/config.php';
-    $selector = $_POST["selector"];
-    $validator = $_POST["validator"];
-    $password = $_POST["pwd"];
-    $passwordRepeat = $_POST["pwd-repeat"];
 
     if (empty($password) || empty($passwordRepeat)) {
       echo "Password is empty";
@@ -16,13 +14,13 @@
     }
     $currentDate = date("U");
 
-    $sql = "SELECT * FROM pwdReset WHERE pwdResetSelector=? AND pwdResetExpires >= ?;";
+    $sql = "SELECT * FROM pwdReset WHERE pwdResetSelector=? AND pwdResetExpires >= $currentDate;";
     $statement = mysqli_stmt_init($conn); //stmt
     if(!mysqli_stmt_prepare($statement, $sql)){
       echo "Couldnt prepare";
       exit();
     }else{
-      mysqli_stmt_bind_param($statement, "ss", $selector, $currentDate);
+      mysqli_stmt_bind_param($statement, "s", $selector);
       mysqli_stmt_execute($statement);
 
       $result = mysqli_stmt_get_result($statement);
@@ -83,7 +81,5 @@
       }
     }
 
-  }else{
-    header("Location: ../../index.php");
   }
 ?>
