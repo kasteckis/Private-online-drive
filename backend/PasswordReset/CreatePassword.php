@@ -73,7 +73,7 @@
                 }else{
                   mysqli_stmt_bind_param($statement, "s", $tokenEmail);
                   mysqli_stmt_execute($statement);
-                  header("Location: index.php?newpwd=passwordupdated");
+                  header("Location: ../../index.php?newpwd=passwordupdated");
                 }
 
               }
@@ -84,6 +84,6 @@
     }
 
   }else{
-    header("Location: index.php");
+    header("Location: ../../index.php");
   }
 ?>

@@ -31,7 +31,7 @@
         }else{
           if(ctype_xdigit($selector) !== false && ctype_xdigit($validator) !== false){
             ?>
-              <form action="backend/CreatePassword.php" method="POST">
+              <form action="backend/PasswordReset/CreatePassword.php" method="POST">
                 <input type="hidden" name="selector" value="<?php echo $selector; ?>">
                 <input type="hidden" name="validator" value="<?php echo $validator; ?>">
                 <input type="password" name="pwd" value="Enter a new password..."/>

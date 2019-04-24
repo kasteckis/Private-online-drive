@@ -58,8 +58,11 @@ if(isset($_POST["reset-password-submit"])) {
 
   mail($to, $subject, $message, $headers);
 
-  header("Location: forgotPassword.php?reset=success");
+  header("Location: ../../forgotPassword.php?reset=success");
 
+}else{
+  echo "nothing is done";
+  exit();
 }
 
 ?>

@@ -1,6 +1,7 @@
 <?php
   require 'includes/mysql_connection.php';
   require 'includes/config.php';
+  require 'includes/messages.php';
 ?>
 
 <!DOCTYPE html>
@@ -35,9 +36,9 @@
       </div>
 
 			<div class="changebox">
-				<h3>Write your username to recover your password</h3> <!-- $emailRecovery-->
-        <h2>An e-mail will be sent to you with instructions on how to reset your password</h2>
-				<form action="backend/ResetPassword.php" method='POST'>
+				<h3>Write your email address to recover your password</h3> <!-- $emailRecovery-->
+        <h2>An email will be sent to you with instructions on how to reset your password</h2>
+				<form action="backend/PasswordReset/ResetPassword.php" method='POST'>
 				<div class="inputs">
           <input type='text' name='email' placeholder='Enter your e-mail address..' required></input>
 					<button type="submit" name='reset-password-submit'>Forgot password</button> <!-- $emailPasswordRecovery -->
