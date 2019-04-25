@@ -48,11 +48,19 @@
 					<button type="submit" name="reset-request-submit"><?php echo $emailRecoveryPassword; ?></button>
 				</div>
       </form>
+
       <?php
       if(isset($_POST['reset-request-submit']))
       {
-      	$userInput = mysqli_real_escape_string($conn, $_POST['email']); //padariau apsauga nuo sql injection -Valentinas
-        echo ResetPassword($userInput);
+        if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $userInput = mysqli_real_escape_string($conn, $_POST['email']); //padariau apsauga nuo sql injection -Valentinas
+            echo ResetPassword($userInput);
+        }
+        else {
+          echo "<div style='text-align:center;'>
+              <p style='color:red;'>That is not a password</p>
+          </div>";
+        }
       }
       ?>
 			</div>
