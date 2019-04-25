@@ -50,8 +50,10 @@ function ResetPassword($emailAddress) { //comes from forgotPassword.php
   $message .='<a href="' . $url . '">' . $url . '</a></p>';
 
   //headers for email message
-  $headers = "From: private-online-drive <tidish@inbox.lt> \r\n";
-  $headers .= "Reply-To: tidish@inbox.lt \r\n";
+  //Pop/Imap server is for receiving email
+  //Smtp is for sending email
+  $headers = "From: private-online-drive <mail.devbridge.tk> \r\n";
+  $headers .= "Reply-To: mail.devbridge.tk \r\n";
   $headers .= "Content-type: text/html\r\n";
 
   mail($to, $subject, $message, $headers);
