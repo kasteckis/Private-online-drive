@@ -41,6 +41,25 @@ foreach(glob("backend/*.php") as $back)
 				$resultsData = mysqli_query($conn, $sqlGetData);
 
 				echo "<form method='POST'>";
+				echo '<button name="deleteOldLogs">Delete logs older than 7 days</button>';
+				echo "</form>";
+				if(isset($_POST['deleteOldLogs']))
+				{
+					$sqlGetCountOfOldLogs = "SELECT * FROM Logs WHERE DATE(date) < DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
+					$resultsGetCountOfOldLogs = mysqli_query($conn, $sqlGetCountOfOldLogs);
+					$removedOldLogsCount = mysqli_num_rows($resultsGetCountOfOldLogs);
+
+					$sqlDeleteOldLogs = "DELETE FROM Logs WHERE DATE(date) < DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
+					if(mysqli_query($conn, $sqlDeleteOldLogs))
+					{
+						echo $removedOldLogsCount." old logs were succesfully removed!<br>";
+					}
+					else
+					{
+						echo "ERROR".mysqli_error($conn);
+					}
+				}
+				echo "<form method='POST'>";
 
 				echo "<table>";
 				echo "<tr>"; //nick, status, suspension, last connected

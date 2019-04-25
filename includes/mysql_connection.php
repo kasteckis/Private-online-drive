@@ -4,7 +4,7 @@
 	$dbPassword = "devbridge321";
 	$dbName = "galgaldas_devbridge";
 	$conn = mysqli_connect($dbServer, $dbUsername, $dbPassword, $dbName);
-
+	
 	if($conn == false)
 	{
 		//Jeigu prisijungimas blogas, stabdo kodą.
