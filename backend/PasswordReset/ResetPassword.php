@@ -1,8 +1,6 @@
 <?php
 
-
-if(isset($_POST["reset-password-submit"])) {
-
+function ResetPassword($emailAddress) { //comes from forgotPassword.php
   require 'includes/mysql_connection.php';
   require 'includes/config.php';
 
@@ -16,7 +14,7 @@ if(isset($_POST["reset-password-submit"])) {
   //Timer when the token expires in database
   $expires = date("U") + 1200;
 
-  $userEmail = $_POST["email"];
+  $userEmail = $emailAddress;
 
   //Delete the same users tokens that were not used
   $sql = "DELETE FROM pwdReset WHERE pwdResetEmail=?;";
@@ -52,17 +50,16 @@ if(isset($_POST["reset-password-submit"])) {
   $message .='<a href="' . $url . '">' . $url . '</a></p>';
 
   //headers for email message
-  $headers = "From: private-online-drive <tidish@inbox.lt> \r\n";
-  $headers .= "Reply-To: tidish@inbox.lt \r\n";
+  //Pop/Imap server is for receiving email
+  //Smtp is for sending email
+  $headers = "From: private-online-drive <mail.devbridge.tk> \r\n";
+  $headers .= "Reply-To: mail.devbridge.tk \r\n";
   $headers .= "Content-type: text/html\r\n";
 
   mail($to, $subject, $message, $headers);
 
   header("Location: ../../forgotPassword.php?reset=success");
 
-}else{
-  echo "nothing is done";
-  exit();
 }
 
 ?>

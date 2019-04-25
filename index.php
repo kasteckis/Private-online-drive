@@ -18,6 +18,7 @@ foreach(glob("backend/*.php") as $back)
 <title><?php echo $WebsiteTitle; ?></title> <!-- Globalus kintamasis keičiamas per includes/config.php -->
 <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/styleSettings.css">
 
 </head>
 
@@ -44,8 +45,22 @@ foreach(glob("backend/*.php") as $back)
   ?>
   <div class="container">
     <!-- password reset success spot-->
-    <form method="POST" id="loginForm">
+    <?php
+    if(isset($_GET["newpwd"])){
+     if($_GET["newpwd"] == "passwordupdated"){
+       ?>
+       <div class="message-box">
+         <div class="isa_success">
+         <i class="fa fa-check"></i>
+         Your password has been updated!
+       </div>
+     </div>
+         <?php
+     }
+    }
+    ?>
     <div class="login-box">
+    <form method="POST" id="loginForm">
      <h1>Login</h1>
     <div class="textbox">
      <i class="fas fa-user"></i>
@@ -57,14 +72,12 @@ foreach(glob("backend/*.php") as $back)
     <input type="password" name="password" placeholder="Password"></input>
       </div>
     <button class="btn" name="submit">Sign In</button>
-    </div>
     </form>
     <div class="login-remind">
        <a href="forgotPassword.php">Forgot your password?</a>
 
     </div>
   </div>
-
 
    <?php
 	//Kodas vykdomas po LOGIN paspaudimo
