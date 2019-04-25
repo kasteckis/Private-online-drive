@@ -51,7 +51,8 @@
       <?php
       if(isset($_POST['reset-request-submit']))
       {
-        echo ResetPassword($_POST['email']);
+      	$userInput = mysqli_real_escape_string($conn, $_POST['email']); //padariau apsauga nuo sql injection -Valentinas
+        echo ResetPassword($userInput);
       }
       ?>
 			</div>
