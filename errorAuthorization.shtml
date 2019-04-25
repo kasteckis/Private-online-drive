@@ -45,8 +45,10 @@
         <div class='_1'>NOT AUTHORISED</div>
 
         <div class='_2'>TO ACCESS THIS PAGE</div>
-
-        <a class='btn' href='#'>BACK TO PREVIOUS PAGE</a>
+        
+        <form action="/index">
+        <button class='btn' href='#'>BACK TO HOME PAGE</button>
+        </form>
 
     </div>
 
