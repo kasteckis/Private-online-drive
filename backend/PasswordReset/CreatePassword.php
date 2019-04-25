@@ -6,10 +6,14 @@
     require 'includes/config.php';
 
     if (empty($password) || empty($passwordRepeat)) {
-      echo "Password is empty";
+      echo "<div style='text-align:center;'>
+          <p style='color:red;'>Password is empty</p>
+      </div>";
       exit();
     } elseif($password != $passwordRepeat) {
-      echo "password is not the same";
+      echo "<div style='text-align:center;'>
+          <p style='color:red;'>Passwords do not match</p>
+      </div>";
       exit();
     }
     $currentDate = date("U");

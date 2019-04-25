@@ -2,6 +2,7 @@
   require 'includes/mysql_connection.php';
   require 'includes/config.php';
 	require 'backend/PasswordReset/CreatePassword.php';
+  require 'includes/messages.php';
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +25,7 @@
 			</div>
 
       <?php
+
         $selector = $_GET["selector"];
         $validator = $_GET["validator"];
 
@@ -32,22 +34,27 @@
         }else{
           if(ctype_xdigit($selector) !== false && ctype_xdigit($validator) !== false){
             ?>
+            <div class="changebox">
+              <h3>Change your password</h3>
               <form method="POST">
-                <input type="hidden" name="selector" value="<?php echo $selector; ?>">
-                <input type="hidden" name="validator" value="<?php echo $validator; ?>">
-                <input type="password" name="pwd" placeholder="Enter a new password..."/>
-                <input type="password" name="pwd-repeat" placeholder="Repeat new password..."/>
-                <button type="submit" name="reset-password-submit">Reset password</button>
+                <div class="inputs">
+                  <input type="hidden" name="selector" value="<?php echo $selector; ?>">
+                  <input type="hidden" name="validator" value="<?php echo $validator; ?>">
+                  <input type="password" name="pwd" placeholder="Enter a new password..."/>
+                  <input type="password" name="pwd-repeat" placeholder="Repeat new password..."/>
+                  <button type="submit" name="reset-password-submit">Reset password</button>
+                </div>
               </form>
 
             <?php
           }
         }
-				if(isset($_POST['reset-password-submit']))
-	      {
-	        echo CreatePassword($_POST["selector"], $_POST["validator"], $_POST["pwd"], $_POST["pwd-repeat"]);
-	      }
+        if(isset($_POST['reset-password-submit']))
+        {
+          echo CreatePassword($_POST["selector"], $_POST["validator"], $_POST["pwd"], $_POST["pwd-repeat"]);
+        }
       ?>
+      </div>
 		</div>
 </body>
 

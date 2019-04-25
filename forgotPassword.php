@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title><?php echo $WebsiteTitle; ?></title>
+<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
 <link rel="stylesheet" href="css/styleSettings.css">
 
 </head>
@@ -17,31 +18,34 @@
 <body>
 		<div class="background">
 			<div class="back">
-				<!--Mygtukas atgal-->
-				<form action="/index">
+       <form action="/index">
 				<input type="submit" value="Back" />
 				</form>
 
 			</div>
 
-      <div class="box-success">
-        <?php if(isset($_GET["reset"])){
-          if($_GET["reset"] == "success"){
-            ?> <p>
-              Check your email
-            </p> <?php
-          }
+        <?php
+        if(isset($_GET["reset"])){
+         if($_GET["reset"] == "success"){
+           ?>
+           <div class="message-box">
+             <div class="isa_success">
+             <i class="fa fa-check"></i>
+             <?php echo $emailRecoverySent; ?>
+           </div>
+         </div>
+             <?php
+         }
         }
-          ?>
-      </div>
+        ?>
 
 			<div class="changebox">
-				<h3>Write your email address to recover your password</h3> <!-- $emailRecovery-->
-        <h2>An email will be sent to you with instructions on how to reset your password</h2>
+				<h2><?php echo $emailRecovery; ?></h2>
+        <h4><?php echo $emailRecoveryInstructions; ?></h4>
 				<form method='POST'>
 				<div class="inputs">
           <input type="text" name="email" placeholder="Enter your e-mail address.." required></input>
-					<button type="submit" name="reset-request-submit">Forgot password</button> <!-- $emailPasswordRecovery -->
+					<button type="submit" name="reset-request-submit"><?php echo $emailRecoveryPassword; ?></button>
 				</div>
       </form>
       <?php
