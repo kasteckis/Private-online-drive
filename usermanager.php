@@ -74,7 +74,10 @@ foreach(glob("backend/*.php") as $back)
 						echo "<td>Active</td>";
 					else
 						echo "<td>Suspended</td>";
-					echo "<td>".$row['lastLogged']."</td>";
+					if("0000-00-00 00:00:00" == $row['lastLogged'])
+						echo "<td>Never</td>";
+					else
+						echo "<td>".$row['lastLogged']."</td>";
 					echo "<td><button name='edit".$row['id']."'>Edit</button></td>";
 					if($_SESSION['nick'] == $row['nick'])
 						echo "<td>X</td>";
