@@ -15,8 +15,8 @@ foreach(glob("backend/*.php") as $back)
 <head>
 <meta charset="UTF-8">
 <title><?php echo $WebsiteTitle; ?></title>
-<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" /> 
-<!--<link rel="stylesheet" href="css/style.css"> -->
+<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
+<link rel="stylesheet" href="css/styleSettings.css">
 
 </head>
 
@@ -25,10 +25,15 @@ foreach(glob("backend/*.php") as $back)
 
 	if($_SESSION['status'] == "admin")
 	{
+    ?>
+    <div class="background">
+      <div class="back">
+        <?php
 		//Mygtukas atgal
 		echo '<form action="/usermanager">';
 	    echo '<input type="submit" value="Back" />';
 		echo '</form><br><br>';
+    echo '</div>';
 
 		$sqlGetMember = "SELECT * FROM Users WHERE id=".$_SESSION['editableUser'];
 		$resultGetMember = mysqli_query($conn, $sqlGetMember);
@@ -43,7 +48,7 @@ foreach(glob("backend/*.php") as $back)
 	        $userID = $row['id'];
 	        $oldNick = $row['nick'];
 	        $oldHashedPassword = $row['password'];
-
+          echo '<div class="changebox">';
 	        echo "<form method='POST'>";
 	        echo "ID: ".$row['id']."<br>";
 	        echo "<input name='nick' placeholder='slapyvardis' value=".$row['nick']."></input><br>";
@@ -64,11 +69,11 @@ foreach(glob("backend/*.php") as $back)
 	        else
 	        	echo "<option value='1' selected>Uzblokuotas</option>";
 	        echo "</select><br>";
-	        echo "<button name='submit'>Edit</button><br>";
+	        echo "<button name='submit' class='changebox-button'>Edit</button><br>";
 	        echo "</form>";
 	    }
 
-		if(!$doesUserExist) 
+		if(!$doesUserExist)
 		{
 		    echo "ERROR. User does not exist!<br>"; //klaida kurios neturetu buti niekada, bet del viso pikto
 		}
@@ -90,8 +95,8 @@ foreach(glob("backend/*.php") as $back)
 			//VALIDACIJA
 
 			$validationAccepted = true;
-			
-			
+
+
 			// reiskia naudojam sena slaptazodi
 			if(strlen($newPassword) == 0)
 			{
@@ -109,7 +114,7 @@ foreach(glob("backend/*.php") as $back)
 					$validationAccepted = false;
 				}
 			}
-			
+
 
 			// ----- VALIDACIJOS PABAIGA
 
@@ -127,7 +132,7 @@ foreach(glob("backend/*.php") as $back)
 				echo "<font color='red'>VALIDACIJOS KLAIDA!</font><br>";
 			}
 		}
-
+    echo '</div>';
 	}
 	else
 	{
@@ -136,7 +141,7 @@ foreach(glob("backend/*.php") as $back)
 	}
 
 ?>
-
+</div>
 
 
 </body>

@@ -87,7 +87,7 @@ body{
     padding: 5px 0px
 }
 
-.inputs button, .delete-button{
+.inputs button, .changebox-button{
     width: 100%;
     margin: 0 auto;
     background-color: #E8A87C;

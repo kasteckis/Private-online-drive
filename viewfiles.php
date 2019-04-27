@@ -70,7 +70,7 @@ foreach(glob("backend/*.php") as $back)
 
 		if(!$thereAreNoFiles)
 		{
-			echo "<button type='submit' class='delete-button' name='delete'>Delete selected</button><br>";
+			echo "<button type='submit' class='changebox-button' name='delete'>Delete selected</button><br>";
 		}
 		echo "</form>";
 
