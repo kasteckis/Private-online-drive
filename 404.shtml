@@ -22,7 +22,9 @@
     <hr>
         <div class='_1'>THE PAGE</div>
         <div class='_2'>WAS NOT FOUND</div>
-        <a class='btn' href='#'>BACK TO PREVIOUS PAGE</a>
+        <form action="/index">
+        <button class='btn' href='#'>BACK TO HOME PAGE</button>
+        </form>
     </div>
 </body>
 </html>

@@ -1,11 +1,23 @@
 <?php
 	function DeleteTheseFiles($selectedItems)
 	{
-		foreach ($selectedItems as $key => $value) 
+		foreach ($selectedItems as $key => $value)
 		{
 			if (file_exists("./files/".$_SESSION['nick']."/".$value))
 			{
 				unlink("./files/".$_SESSION['nick']."/".$value);
+				echo "File ".$value." was deleted!<br>";
+			}
+		}
+	}
+
+	function DeleteTheseFiles2($selectedItems, $nick)
+	{
+		foreach ($selectedItems as $key => $value)
+		{
+			if (file_exists("./files/".$nick."/".$value))
+			{
+				unlink("./files/".$nick."/".$value);
 				echo "File ".$value." was deleted!<br>";
 			}
 		}
@@ -17,23 +29,14 @@
 
 		//Logika vykdoma po UPLOAD paspaudimo
 		//FAILAS issaugo files/nick kataloge!
-		$file = $_FILES['file'];
-		$fileName = $_FILES['file']['name'];
-		$fileTmpName = $_FILES['file']['tmp_name'];
-		$fileSize = $_FILES['file']['size'];
-		$fileError = $_FILES['file']['error'];
-		$fileType= $_FILES['file']['type'];
+		$msg = "";
+		$targetFile = "files/".$_SESSION['nick']."/" . basename($_FILES['attachments']['name'][0]);
+		if (file_exists($targetFile))
+				$msg = array("status" => 0, "msg" => "File already exists!");
+		else if (move_uploaded_file($_FILES['attachments']['tmp_name'][0], $targetFile))
+				$msg = array("status" => 1, "msg" => "File has been Uploaded", "path" => $targetFile);
 
-		if($fileError === 0)
-		{
-			$fileDestination = "files/".$_SESSION['nick']."/".$fileName;					
-			move_uploaded_file($fileTmpName, $fileDestination);
-			return "<font color='red'>Failas įkeltas!</font><br>";
-		}
-		else
-		{
-			return "<font color='red'>Error įkeliant failą!</font><br>";
-		}
+		exit(json_encode($msg));
 	}
 
 ?>

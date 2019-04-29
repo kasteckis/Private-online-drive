@@ -54,3 +54,14 @@ body{
   cursor: pointer;
   margin: 12px 0;
 }
+h1{
+  color:white;
+}
+
+.login-remind a{
+  text-decoration: none;
+  color: white:
+}
+.login-remind a:visited{
+  color:white;
+}
