@@ -65,6 +65,10 @@ foreach(glob("backend/*.php") as $back)
 							{
 								echo FileUpload(); //backend/FileUpload.php
 							}
+              if (isset($_FILES['attachments']))
+              {
+                echo FileUpload();
+              }
 
 							echo '<ul>';
 
@@ -181,97 +185,196 @@ foreach(glob("backend/*.php") as $back)
 				<div class="upload">
 
 					<!-- //Failo įkelimas į serverinę -->
-					<form method='POST' id="dropFileForm" enctype="multipart/form-data" ondrop="uploadFiles(event);"> <!--"; // be enctype neveikia, ką jis daro? who knows. -->
-					<input type="file" name="file" id="fileInput" multiple onchange="addFiles(event)" >
-          <label for="fileInput" id="fileLabel" ondragover="overrideDefault(event);fileHover();" ondragenter="overrideDefault(event);fileHover();" ondragleave="overrideDefault(event);fileHoverEnd();" ondrop="overrideDefault(event);fileHoverEnd();
-                addFiles(event)">
-            <i class="fa fa-download fa-5x"></i>
-            <br>
-            <span id="fileLabelText">
-              <?php echo $chooseFile;?>
-            </span>
-            <br>
-            <span id="uploadStatus"></span>
-          </label>
-          <button type='submit' name='submit' class="uploadButton">Upload</button><br>
-					</form>
+
+          <style type="text/css">
+          #dropZone {
+            border: 3px dashed #0088cc;
+            padding: 50px;
+            width: 90%;
+            height: 150%;
+            margin-top: 20px;
+            margin: 16px;
+            text-align: center;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.5s;
+            background-color: #f5f5f5;
+            display: block;
+            position: relative;
+          }
+          .inputfile {
+        	width: 0.1px;
+        	height: 0.1px;
+        	opacity: 0;
+        	overflow: hidden;
+        	position: absolute;
+        	z-index: -1;
+        }
+
+        .inputfile + label {
+            font-size: 1.25em;
+            font-weight: 700;
+            color: white;
+            background-color: #2699ab;
+            display: inline-block;
+            cursor: pointer;
+            border: solid;
+            border-width: 1px;
+            border-color: #124d77;
+            width: 150px;
+            height: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .inputfile:focus + label {
+        	outline: 1px dotted #000;
+        	outline: -webkit-focus-ring-color auto 5px;
+        }
+
+        .inputfile:focus + label,
+        .inputfile + label:hover {
+            background-color: #228999;
+        }
+
+        #dropZone:after,
+        #dropZone:before {
+          position: absolute;
+          content: "";
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background-color: #fff;
+          z-index: -2;
+          border-radius: 8px 8px 0 0;
+        }
+
+        #dropZone:before {
+          z-index: -1;
+          background: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 5%,
+            black 5%,
+            black 10%
+          );
+          opacity: 0;
+          transition: 0.5s;
+        }
+
+        #dropZone.fileHover:before {
+          opacity: 0.25;
+        }
+          #files {
+            border: 1px dotted #0088cc;
+            padding: 20px;
+            width: 200px;
+            display: none;
+          }
+
+          #error {
+            color: red;
+            display: none;
+          }
+          #dropZone.fileHover {
+          box-shadow: 0 0 16px blue;
+        }
+          #progressBar {
+            display: none;
+          }
+          #progress {
+            display: none;
+          }
+          .upload{
+              width:100%;
+              height:28%;
+              background-color: #f5f5f5;
+          }
+          </style>
+          <div id="dropZone" ondragover="overrideDefault(event);fileHover();" ondragenter="overrideDefault(event);fileHover();" ondragleave="overrideDefault(event);fileHoverEnd();" ondrop="overrideDefault(event);fileHoverEnd();addFiles(event)">
+            <img src="images/upload.png" alt="uploadpic" width="100px" height="100px">
+            <h2 id=fileLabelText>Drag and Drop files here...</h2><br>
+            <input type="file" id="fileupload" class="inputfile" name="attachments[]" multiple onchange="addFiles(event)">
+            <label for="fileupload"> Choose a file... </label><br><br><br>
+            <progress id="progressBar" value="0" max="100"></progress>
+            <h3 id="progress"></h3><br><br><br><br>
+            <h3 id="error"></h3><br><br>
+          </div>
           <br><br><br>
 
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script src="http://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+          <script src="js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
+          <script src="js/jquery.iframe-transport.js" type="text/javascript"></script>
+          <script src="js/jquery.fileupload.js" type="text/javascript"></script>
           <script type="text/javascript">
+            $(function () {
+              var files = $("#files");
 
-          var dropFileForm = document.getElementById("dropFileForm");
-          var fileLabelText = document.getElementById("fileLabelText");
-          var uploadStatus = document.getElementById("uploadStatus");
-          var fileInput = document.getElementById("fileInput");
-          var droppedFiles;
+              $("#fileupload").fileupload({
+                url: 'manager',
+                dropZone: '#dropZone',
+                dataType: 'json',
+                autoUpload: false
+              }).on('fileuploadadd', function (e, data) {
+            /*    var fileTypeAllowed = /.\.(gif|jpg|png|jpeg)$/i;
+                var fileName = data.originalFiles[0]['name'];
+                var fileSize = data.originalFiles[0]['size'];
+                if (!fileTypeAllowed.test(fileName))
+                  $("#error").html("Only images are allowed");
+                else if (fileSize > 500000)
+                  $("#error").html("Your file is too big!")
+                else {
+                  $("#error").html("");
+                  data.submit();
+                } */
 
-          function overrideDefault(event) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-
-          function fileHover() {
-            dropFileForm.classList.add("fileHover");
-          }
-
-          function fileHoverEnd() {
-            dropFileForm.classList.remove("fileHover");
-          }
-
-          function addFiles(event) {
-            droppedFiles = event.target.files || event.dataTransfer.files;
-            showFiles(droppedFiles);
-          }
-
-          function showFiles(files) {
-            if (files.length > 1) {
-              fileLabelText.innerText = files.length + " files selected";
-            } else {
-              fileLabelText.innerText = files[0].name;
-            }
-          }
-          var fileobj;
-          function uploadFiles(event) {
-            event.preventDefault();
-            changeStatus("Uploading...");
-            for (i = 0; i < droppedFiles.length; i++) {
-              fileobj = droppedFiles[i];
-              ajax_file_upload(fileobj);
-            }
-            }
-
-
-
-          function file_explorer() {
-            document.getElementById('fileInput').click();
-            document.getElementById('fileInput').onchange = function() {
-                fileobj = document.getElementById('fileInput').files[0];
-              ajax_file_upload(fileobj);
-            };
-          }
-
-          function ajax_file_upload(file_obj) {
-            if(file_obj != undefined) {
-              var form_data = new FormData();
-              form_data.append('file', form_data);
-              $.ajax({
-                type: 'POST',
-                url: 'Ajax.php',
-                contentType: false,
-                processData: false,
-                data: form_data,
-                success:function(response) {
-                  alert(response);
-                  $('#selectfile').val('');
-                }
+                data.submit();
+              }).on('fileuploaddone', function (e, data) {
+                // on fileuploaddone...
+              }).on('fileuploadprogressall', function(e, data) {
+                  var progress = parseInt(data.loaded / data.total * 100, 10);
+                  var bar = document.getElementById('progressBar');
+                  $("#progress").html("Completed: " + progress + "%");
+                  bar.value = progress;
+                  if (progress == 100)
+                  {
+                    $("#error").html("Uploaded succesfully!");
+                  }
               });
-            }
-          }
-          function changeStatus(text) {
-            uploadStatus.innerText = text;
-          }
+            });
 
+                  function overrideDefault(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    document.getElementById('progressBar').style.display = "none";
+                    document.getElementById('error').style.display = "none";
+                    document.getElementById('progress').style.display = "none";
+                    $("#error").html("");
+                  }
+
+                  function fileHover() {
+                    dropZone.classList.add("fileHover");
+                  }
+
+                  function fileHoverEnd() {
+                    dropZone.classList.remove("fileHover");
+                  }
+
+                  function addFiles(event) {
+                    droppedFiles = event.target.files || event.dataTransfer.files;
+                    showFiles(droppedFiles);
+                    document.getElementById('progressBar').style.display = "inline";
+                    document.getElementById('error').style.display = "inline";
+                    document.getElementById('progress').style.display = "inline";
+                  }
+
+                  function showFiles(files) {
+                    if (files.length > 1) {
+                      fileLabelText.innerText = files.length + " files selected";
+                    } else {
+                      fileLabelText.innerText = files[0].name;
+                    }
+                  }
 
           </script>
 
