@@ -24,7 +24,7 @@ foreach(glob("backend/*.php") as $back)
 <?php
 
 	if($_SESSION['status'] == "admin")
-	{	
+	{
 		?>
 		<div class="background">
 			<div class="back">
@@ -63,9 +63,9 @@ foreach(glob("backend/*.php") as $back)
 				echo "<th>Delete</th>";
 				echo "<th>View Files</th>";
 				echo "</tr>";
-				
 
-				while($row = mysqli_fetch_assoc($resultReadAllUsers)) 
+
+				while($row = mysqli_fetch_assoc($resultReadAllUsers))
 				{
 					echo "<tr>";
 					echo "<td>".$row['nick']."</td>";
@@ -121,7 +121,7 @@ foreach(glob("backend/*.php") as $back)
 				echo "</form>";
 				?>
 			</div>
-		
+
 		</div> <?php
 	}
 	else
