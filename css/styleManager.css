@@ -172,30 +172,56 @@
 
     box-sizing: border-box;
 }
-#dropFileForm {
+#dropZone {
+  border: 3px dashed #0088cc;
+  padding: 50px;
+  width: 500px;
+  margin-top: 20px;
   margin: 16px;
   text-align: center;
   border-radius: 8px;
   overflow: hidden;
   transition: 0.5s;
-}
-
-#dropFileForm #fileLabel {
-  background-color: #F0FFFF;
-  border: 3px dashed #6495ED;
-  border-bottom-color: #F0FFFF;
+  background-color: #f5f5f5;
   display: block;
-  padding: 16px;
   position: relative;
+}
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: #2699ab;
+  display: inline-block;
   cursor: pointer;
+  border: solid;
+  border-width: 1px;
+  border-color: #124d77;
+  width: 150px;
+  height: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+.inputfile:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
 }
 
-#dropFileForm #fileInput {
-  display: none;
+.inputfile:focus + label,
+.inputfile + label:hover {
+  background-color: #228999;
 }
 
-#dropFileForm #fileLabel:after,
-#dropFileForm #fileLabel:before {
+#dropZone:after,
+#dropZone:before {
   position: absolute;
   content: "";
   top: 0;
@@ -207,7 +233,7 @@
   border-radius: 8px 8px 0 0;
 }
 
-#dropFileForm #fileLabel:before {
+#dropZone:before {
   z-index: -1;
   background: repeating-linear-gradient(
     45deg,
@@ -220,21 +246,26 @@
   transition: 0.5s;
 }
 
-#dropFileForm.fileHover #fileLabel:before {
+#dropZone.fileHover:before {
   opacity: 0.25;
 }
-
-#dropFileForm .uploadButton {
-  border: 0;
-  outline: 0;
-  width: 100%;
-  padding: 8px;
-  background-color: #5F9EA0;
-  border: 3px dashed #6495ED;
-  color: #fff;
-  cursor: pointer;
+#files {
+  border: 1px dotted #0088cc;
+  padding: 20px;
+  width: 200px;
+  display: none;
 }
 
-#dropFileForm.fileHover {
-  box-shadow: 0 0 16px limeGreen;
+#error {
+  color: red;
+  display: none;
+}
+#dropZone.fileHover {
+  box-shadow: 0 0 16px blue;
+}
+#progressBar {
+  display: none;
+}
+#progress {
+  display: none;
 }
