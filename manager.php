@@ -16,69 +16,73 @@
   }
   ?>
 
-			<div class="filelist">
+	<div class="file-nav-container">
 
-				<p>File list:</p><br>
+		<h2>Directory</h2>
+		<?php
+			//Perskaitome katalogo turinį
+			$usersDirectory = "./files/".$_SESSION['nick'];
+			$fileList = scandir($usersDirectory);
 
-				<?php
-				//Perskaitome katalogo turinį
-				$usersDirectory = "./files/".$_SESSION['nick'];
-				$fileList = scandir($usersDirectory);
+			//Spausdiname katalogo turinį kaip href
+			//TODO: Reiks nekvailai padaryt, kad sortintu pagal įkėlimo datą!
+			$thereAreNoFiles = true;
+		?>
+		<div class="file-nav">
+			<form method='POST'>
+				<ul class="file-nav-list">
+						<?php
+							foreach ($fileList as $key => $value)
+							{
+								if($value == "." || $value == "..")
+									continue;
 
-				//Spausdiname katalogo turinį kaip href
-				//TODO: Reiks nekvailai padaryt, kad sortintu pagal įkėlimo datą!
-				$thereAreNoFiles = true;
-				?>
+									print("<li>
+									<a href='./files/".$_SESSION['nick']."/".$value."'>".$value."</a>
+									<input class='nav-checkbox' type='checkbox' name='selectedItemsToDelete[]' value='".$value."'>
+									</li>");
 
-				<form method='POST'>
-				<?php foreach ($fileList as $key => $value)
-				{
-					if($value == "." || $value == "..")
-						continue; ?>
 
-					<?php
-					echo "<input type='checkbox' name='selectedItemsToDelete[]' value='".$value."'>
-					<a href='./files/".$_SESSION['nick']."/".$value."'>".$value."</a><br>"; ?>
+								$thereAreNoFiles = false;
+							}
+						echo "</ul>";
+							// Jeigu nera failu direktorijoja, nerodys delete mygtuko
+							if(!$thereAreNoFiles)
+							{
+								print("<div class='btn-delete-file'>
+					        <button type='submit' name='delete'>Delete selected</button>
+					      </div>");
 
-					<?php
-					$thereAreNoFiles = false;
-				}?>
+							}
+							echo '</form>';
+							if(isset($_POST['delete']))
+							{
+								if(isset($_POST['selectedItemsToDelete']))
+								{
+									$selectedItems = $_POST['selectedItemsToDelete'];
+								}
+								else
+								{
+									echo "<font color='red'>".$selectFile."</font><br>";
+								}
 
-				<!-- Jeigu nera failu direktorijoja, nerodys delete mygtuko -->
-				<?php
-				if(!$thereAreNoFiles)
-				{
-					?>
-					<button type='submit' name='delete'>Delete selected</button><br>
-					<?php
-				} ?>
-				</form>
+								if(!empty($selectedItems))
+								{
+									DeleteTheseFiles($selectedItems); //FileUpload.php
+									//echo '<meta http-equiv="refresh" content="0; />';
+								}
+							}
 
-				<?php
-				if(isset($_POST['delete']))
-				{
-					if(isset($_POST['selectedItemsToDelete']))
-					{
-						$selectedItems = $_POST['selectedItemsToDelete'];
-					}
-					else
-					{
-						echo "<font color='red'>".$selectFile."</font><br>";
-					}
 
-					if(!empty($selectedItems))
-					{
-						DeleteTheseFiles($selectedItems); //FileUpload.php
-						//echo '<meta http-equiv="refresh" content="0; />';
-					}
-				}
+		echo "</div>";
 
-				if($thereAreNoFiles)
-					echo "<font color='red'>".$noFilesInDirectory."</font><br>";
+		if($thereAreNoFiles)
+			echo "<font color='red'>".$noFilesInDirectory."</font><br>";
+			?>
+	</div>
 
-				echo "<br><br>"; ?>
 
-			</div>
+
 
 			<div class="maindisplay">
 				<div class="upload">
