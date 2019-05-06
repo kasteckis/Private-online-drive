@@ -22,6 +22,7 @@ $(function () {
     data.submit();
   }).on('fileuploaddone', function (e, data) {
     // on fileuploaddone...
+
   }).on('fileuploadprogressall', function(e, data) {
       var progress = parseInt(data.loaded / data.total * 100, 10);
       var bar = document.getElementById('progressBar');
@@ -30,8 +31,11 @@ $(function () {
       if (progress == 100)
       {
         $("#error").html("Uploaded succesfully!");
+        location.reload(true);
       }
-  });
+  }).on('completemultiple', function () {
+    location.reload();
+    });
 });
 
       function overrideDefault(event) {

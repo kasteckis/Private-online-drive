@@ -19,7 +19,6 @@
     }
   ?>
 
-
 			<div class="filelist">
 
 				<p>File list:</p><br>
@@ -134,13 +133,8 @@
 						} */
 					?>
 				</div>
-
-				<div class="icons">
-
-				</div>
 			</div>
-
-		</div>
+      <script src="js/fileUpload.js"></script>
 <?php
 /*
 	else
