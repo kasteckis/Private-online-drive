@@ -8,7 +8,7 @@
 	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
 	{
 		?>
-		<div class="background">
+		<div class="container">
       <?php
       include 'includes/navbar.php';
     }

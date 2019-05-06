@@ -3,8 +3,8 @@
 		<img src="../images/logo.jpg" alt="Logo" height="130" width="206">
 	</div>
 
-	<div class="greeting">
-		<h4><?php echo $welcome.", ".$_SESSION['nick']?>!</h4>
+	<!-- <div class="greeting"> -->
+		<!-- <h4><?php //echo $welcome.", ".$_SESSION['nick']?>!</h4> -->
 
 		<form method='POST'>
 			<button type='submit' name='logout'>Logout</button><br>
@@ -76,5 +76,5 @@
 				echo '</ul>';
 			?>
 		</div>
-	</div>
+	<!-- </div> -->
 </div>
