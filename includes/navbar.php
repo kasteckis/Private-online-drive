@@ -1,14 +1,19 @@
 <div class="header">
+	<div class="navigation-container">
+
 	<div class="logo">
-		<img src="../images/logo.jpg" alt="Logo" height="130" width="206">
+		<img class="logo-img" src="../images/logo.jpg" alt="Logo">
 	</div>
 
 	<!-- <div class="greeting"> -->
 		<!-- <h4><?php //echo $welcome.", ".$_SESSION['nick']?>!</h4> -->
 
-		<form method='POST'>
-			<button type='submit' name='logout'>Logout</button><br>
-		</form>
+		<div class="btn-place">
+			<div class="btn-logout">
+				<form method='POST'>
+					<button type='submit' name='logout'>Logout</button>
+				</form>
+			</div>
 
 		<?php
 		if(isset($_POST['logout']))
@@ -22,10 +27,6 @@
 				echo $error; //neturetu but, but who knows
 			}
 		}
-		?>
-		<div class="adminbtn">
-			<?php
-
 				//Logika vykdoma po UPLOAD paspaudimo
 
 				//FAILAS issaugo files/nick kataloge!
@@ -37,44 +38,43 @@
         {
           echo FileUpload();
         }
+				?>
 
-				echo '<ul>';
 
-				echo '<li>';
-				echo '<form action="/settings">';
-				echo '<input type="submit" value="Settings" />';
-				echo '</form>';
-				echo '</li>';
-
-				echo '<li>';
-				echo '<form action="/notes">';
-				echo '<input type="submit" value="Notes" />';
-				echo '</form>';
-				echo '</li>';
-
+				<ul class="link-list">
+				 <li>
+					 <form action="/settings">
+					 <button type="submit">Settings</button>
+					 </form>
+				 </li>
+				 <li>
+					 <form action="/notes">
+					 <button type="submit">Notes</button>
+					 </form>
+				 </li>
+				 <?php
 				if($_SESSION['status'] == "admin")
 				{
-					echo '<li>';
-					echo '<form action="/usermanager">';
-					echo '<input type="submit" value="User manager" />';
-					echo '</form>';
-					echo '</li>';
-					echo '<li>';
-					echo '<form action="/logs">';
-					echo '<input type="submit" value="View logs" />';
-					echo '</form>';
-					echo '</li>';
-					// echo '<li>';
-					// echo '<form action="/viewother">';
-					// echo '<input type="submit" value="View other files" />';
-					// echo '</form>';
-					// echo '</li>';
+					?>
 
+					<li>
+						<form action="/usermanager">
+						<button type="submit">User manager</button>
+						</form>
+						</li>
+					<li>
+						<form action="/logs">
+						<button type="submit">View logs</button>
+						</form>
+					</li>
+					 <!-- <li>
+					 <form action="/viewother">
+					 <button type="submit">View other files</button>
+					 </form>
+					 </li> -->
 
-				}
-
-				echo '</ul>';
-			?>
+				<?php }?>
+				</ul>
+			</div>
 		</div>
-	<!-- </div> -->
-</div>
+	</div>

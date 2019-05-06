@@ -2,21 +2,18 @@
 ?>
 <body>
 
+<div class="container">
 <?php
-
   //Ar sitas turi per visa puslapi eiti ar ne?
 	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
 	{
-		?>
-		<div class="container">
-      <?php
-      include 'includes/navbar.php';
-    }
-    else
-    {
-    echo '<meta http-equiv="refresh" content="0; url=./errorAuthorization.shtml" />';
-    echo $notAuthorised;
-    }
+    include 'includes/navbar.php';
+  }
+  else
+  {
+		echo '<meta http-equiv="refresh" content="0; url=./errorAuthorization.shtml" />';
+		echo $notAuthorised;
+  }
   ?>
 
 			<div class="filelist">
@@ -133,8 +130,8 @@
 						} */
 					?>
 				</div>
-			</div>
-      <script src="js/fileUpload.js"></script>
+
+
 <?php
 /*
 	else
@@ -144,8 +141,8 @@
 	} */
 ?>
 
-
-
+	</div>
+	<script src="js/fileUpload.js"></script>
 </body>
 
 </html>
