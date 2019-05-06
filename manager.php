@@ -1,121 +1,24 @@
-<?php
-session_start();
-require 'includes/mysql_connection.php';
-require 'includes/config.php';
-require 'includes/messages.php';
-
-//Includins visus skriptus is backendo, nežinau ar funkcijas į vieną .php failą kraut ar į atskirus
-foreach(glob("backend/*.php") as $back)
-{
-    require $back;
-}
+<?php include 'includes/header.php';
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title><?php echo $WebsiteTitle; ?></title>
-<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
-<link rel="stylesheet" href="css/styleManager.css">
-
-</head>
-
 <body>
 
 <?php
 
+  //Ar sitas turi per visa puslapi eiti ar ne?
 	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
 	{
 		?>
 		<div class="background">
+      <?php
+      include 'includes/navbar.php';
+    }
+    else
+    {
+    echo '<meta http-equiv="refresh" content="0; url=./errorAuthorization.shtml" />';
+    echo $notAuthorised;
+    }
+  ?>
 
-			<div class="header">
-				<div class="logo">
-					<img src="images/logo.jpg" alt="Logo" height="130" width="206">
-				</div>
-
-				<div class="greeting">
-					<h4><?php echo $welcome.", ".$_SESSION['nick']?>!</h4>
-
-					<form method='POST'>
-						<button type='submit' name='logout'>Logout</button><br>
-					</form>
-
-					<?php
-					if(isset($_POST['logout']))
-					{
-						if(Logout())
-						{
-							echo $loggedOut;
-						}
-						else
-						{
-							echo $error; //neturetu but, but who knows
-						}
-					}
-					?>
-					<div class="adminbtn">
-						<?php
-
-							//Logika vykdoma po UPLOAD paspaudimo
-
-							//FAILAS issaugo files/nick kataloge!
-							if (isset($_POST['submit']))
-							{
-								echo FileUpload(); //backend/FileUpload.php
-							}
-              if (isset($_FILES['attachments']))
-              {
-                echo FileUpload();
-              }
-
-							echo '<ul>';
-
-							echo '<li>';
-							echo '<form action="/settings">';
-							echo '<input type="submit" value="Settings" />';
-							echo '</form>';
-							echo '</li>';
-
-							echo '<li>';
-							echo '<form action="/notes">';
-							echo '<input type="submit" value="Notes" />';
-							echo '</form>';
-							echo '</li>';
-
-							if($_SESSION['status'] == "admin")
-							{
-								echo '<li>';
-								echo '<form action="/usermanager">';
-								echo '<input type="submit" value="User manager" />';
-								echo '</form>';
-								echo '</li>';
-								echo '<li>';
-								echo '<form action="/logs">';
-								echo '<input type="submit" value="View logs" />';
-								echo '</form>';
-								echo '</li>';
-								// echo '<li>';
-								// echo '<form action="/viewother">';
-								// echo '<input type="submit" value="View other files" />';
-								// echo '</form>';
-								// echo '</li>';
-
-
-							}
-
-							echo '</ul>';
-							}
-							else
-							{
-							echo '<meta http-equiv="refresh" content="0; url=./errorAuthorization.shtml" />';
-							echo $notAuthorised;
-							}
-						?>
-					</div>
-				</div>
-			</div>
 
 			<div class="filelist">
 
@@ -185,113 +88,10 @@ foreach(glob("backend/*.php") as $back)
 				<div class="upload">
 
 					<!-- //Failo įkelimas į serverinę -->
-
-          <style type="text/css">
-          #dropZone {
-            border: 3px dashed #0088cc;
-            padding: 50px;
-            width: 90%;
-            height: 150%;
-            margin-top: 20px;
-            margin: 16px;
-            text-align: center;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: 0.5s;
-            background-color: #f5f5f5;
-            display: block;
-            position: relative;
-          }
-          .inputfile {
-        	width: 0.1px;
-        	height: 0.1px;
-        	opacity: 0;
-        	overflow: hidden;
-        	position: absolute;
-        	z-index: -1;
-        }
-
-        .inputfile + label {
-            font-size: 1.25em;
-            font-weight: 700;
-            color: white;
-            background-color: #2699ab;
-            display: inline-block;
-            cursor: pointer;
-            border: solid;
-            border-width: 1px;
-            border-color: #124d77;
-            width: 150px;
-            height: 20px;
-            text-align: center;
-            font-size: 18px;
-        }
-        .inputfile:focus + label {
-        	outline: 1px dotted #000;
-        	outline: -webkit-focus-ring-color auto 5px;
-        }
-
-        .inputfile:focus + label,
-        .inputfile + label:hover {
-            background-color: #228999;
-        }
-
-        #dropZone:after,
-        #dropZone:before {
-          position: absolute;
-          content: "";
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background-color: #fff;
-          z-index: -2;
-          border-radius: 8px 8px 0 0;
-        }
-
-        #dropZone:before {
-          z-index: -1;
-          background: repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 5%,
-            black 5%,
-            black 10%
-          );
-          opacity: 0;
-          transition: 0.5s;
-        }
-
-        #dropZone.fileHover:before {
-          opacity: 0.25;
-        }
-          #files {
-            border: 1px dotted #0088cc;
-            padding: 20px;
-            width: 200px;
-            display: none;
-          }
-
-          #error {
-            color: red;
-            display: none;
-          }
-          #dropZone.fileHover {
-          box-shadow: 0 0 16px blue;
-        }
-          #progressBar {
-            display: none;
-          }
-          #progress {
-            display: none;
-          }
-          .upload{
-              width:100%;
-              height:28%;
-              background-color: #f5f5f5;
-          }
-          </style>
-          <div id="dropZone" ondragover="overrideDefault(event);fileHover();" ondragenter="overrideDefault(event);fileHover();" ondragleave="overrideDefault(event);fileHoverEnd();" ondrop="overrideDefault(event);fileHoverEnd();addFiles(event)">
+          <div id="dropZone" ondragover="overrideDefault(event);fileHover();"
+          ondragenter="overrideDefault(event);fileHover();"
+          ondragleave="overrideDefault(event);fileHoverEnd();"
+          ondrop="overrideDefault(event);fileHoverEnd();addFiles(event)">
             <img src="images/upload.png" alt="uploadpic" width="100px" height="100px">
             <h2 id=fileLabelText>Drag and Drop files here...</h2><br>
             <input type="file" id="fileupload" class="inputfile" name="attachments[]" multiple onchange="addFiles(event)">
@@ -302,10 +102,6 @@ foreach(glob("backend/*.php") as $back)
           </div>
           <br><br><br>
 
-          <script src="http://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
-          <script src="js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
-          <script src="js/jquery.iframe-transport.js" type="text/javascript"></script>
-          <script src="js/jquery.fileupload.js" type="text/javascript"></script>
           <script type="text/javascript">
             $(function () {
               var files = $("#files");
