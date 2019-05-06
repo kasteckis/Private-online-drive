@@ -1,56 +1,85 @@
-@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
 *{
-    margin: 0;
-    padding: 0;
+    box-sizing: border-box;
 }
-
-.background{
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Muli', sans-serif;
+  font-size: 120%;
+  line-height: 1.5em;
+}
+.container{
     width:100%;
-    height:100vh;
+    margin:auto;
+    overflow:hidden;
 }
 
 .header{
     background-color: #f4f4f4;
-    padding: 0px;
     width: 100%;
-    height: 130px;
-    border-bottom: 5px solid red
+    border-bottom: 1px solid #c3c3c3;
+    position:relative;
+    margin:auto;
+    overflow: hidden;
 }
 
 .logo{
-    background-color: #f4f4f4;
     float: left;
     width: 15%;
-    height: 100%;
-    box-sizing: border-box;
 }
 
-.greeting{
+.logo-img {
+  width: 60%;
+}
+
+.btn-logout{
+  float:right;
+}
+
+/* .greeting{
     background-color: #f4f4f4;
     float: right;
     width: 85%;
     height: 100%;
     padding: 20px;
     box-sizing: border-box;
+ } */
+
+.navigation-container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
 }
 
-.adminbtn li{
-  float: left;
-  display: inline;
-  margin: 0px 5px 0px 15px;
+ul.link-list{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align:center;
+  position: relative;
+  display: inline-flex;
 }
 
-.adminbtn input{
+.btn-place{
+  padding: 1.5% 1% 0 0;
+}
+
+.link-list li{
+  margin-right: 15px;
+}
+
+.navigation-container button{
   background-color: #4CAF50;
-    border: none;
-    border-radius: 8%;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    cursor: pointer;
+  border: none;
+  border-radius: 8%;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .filelist{
@@ -58,7 +87,6 @@
     height:100%;
     background-color: salmon;
     float: left;
-
     padding: 5px;
     box-sizing: border-box;
 }
@@ -83,7 +111,7 @@
 }
 
 
-.greeting button{
+/*.greeting button{
     float: right;
     margin-right: 7%;
 
@@ -104,7 +132,7 @@
     font-family: Tahoma;
     font-size: 32px;
     margin-left: 15px;
-}
+} */
 
 .filelist p {
     font-family: Tahoma;
@@ -175,7 +203,8 @@
 #dropZone {
   border: 3px dashed #0088cc;
   padding: 50px;
-  width: 500px;
+  width: 90%;
+  height: 150%;
   margin-top: 20px;
   margin: 16px;
   text-align: center;
@@ -187,12 +216,12 @@
   position: relative;
 }
 .inputfile {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
+width: 0.1px;
+height: 0.1px;
+opacity: 0;
+overflow: hidden;
+position: absolute;
+z-index: -1;
 }
 
 .inputfile + label {
@@ -211,8 +240,8 @@
   font-size: 18px;
 }
 .inputfile:focus + label {
-  outline: 1px dotted #000;
-  outline: -webkit-focus-ring-color auto 5px;
+outline: 1px dotted #000;
+outline: -webkit-focus-ring-color auto 5px;
 }
 
 .inputfile:focus + label,
@@ -222,32 +251,32 @@
 
 #dropZone:after,
 #dropZone:before {
-  position: absolute;
-  content: "";
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #fff;
-  z-index: -2;
-  border-radius: 8px 8px 0 0;
+position: absolute;
+content: "";
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+background-color: #fff;
+z-index: -2;
+border-radius: 8px 8px 0 0;
 }
 
 #dropZone:before {
-  z-index: -1;
-  background: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 5%,
-    black 5%,
-    black 10%
-  );
-  opacity: 0;
-  transition: 0.5s;
+z-index: -1;
+background: repeating-linear-gradient(
+  45deg,
+  transparent,
+  transparent 5%,
+  black 5%,
+  black 10%
+);
+opacity: 0;
+transition: 0.5s;
 }
 
 #dropZone.fileHover:before {
-  opacity: 0.25;
+opacity: 0.25;
 }
 #files {
   border: 1px dotted #0088cc;
@@ -261,11 +290,16 @@
   display: none;
 }
 #dropZone.fileHover {
-  box-shadow: 0 0 16px blue;
+box-shadow: 0 0 16px blue;
 }
 #progressBar {
   display: none;
 }
 #progress {
   display: none;
+}
+.upload{
+    width:100%;
+    height:28%;
+    background-color: #f5f5f5;
 }

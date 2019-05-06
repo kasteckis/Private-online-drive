@@ -1,0 +1,80 @@
+<div class="header">
+	<div class="navigation-container">
+
+	<div class="logo">
+		<img class="logo-img" src="../images/logo.jpg" alt="Logo">
+	</div>
+
+	<!-- <div class="greeting"> -->
+		<!-- <h4><?php //echo $welcome.", ".$_SESSION['nick']?>!</h4> -->
+
+		<div class="btn-place">
+			<div class="btn-logout">
+				<form method='POST'>
+					<button type='submit' name='logout'>Logout</button>
+				</form>
+			</div>
+
+		<?php
+		if(isset($_POST['logout']))
+		{
+			if(Logout())
+			{
+				echo $loggedOut;
+			}
+			else
+			{
+				echo $error; //neturetu but, but who knows
+			}
+		}
+				//Logika vykdoma po UPLOAD paspaudimo
+
+				//FAILAS issaugo files/nick kataloge!
+				if (isset($_POST['submit']))
+				{
+					echo FileUpload(); //backend/FileUpload.php
+				}
+        if (isset($_FILES['attachments']))
+        {
+          echo FileUpload();
+        }
+				?>
+
+
+				<ul class="link-list">
+				 <li>
+					 <form action="/settings">
+					 <button type="submit">Settings</button>
+					 </form>
+				 </li>
+				 <li>
+					 <form action="/notes">
+					 <button type="submit">Notes</button>
+					 </form>
+				 </li>
+				 <?php
+				if($_SESSION['status'] == "admin")
+				{
+					?>
+
+					<li>
+						<form action="/usermanager">
+						<button type="submit">User manager</button>
+						</form>
+						</li>
+					<li>
+						<form action="/logs">
+						<button type="submit">View logs</button>
+						</form>
+					</li>
+					 <!-- <li>
+					 <form action="/viewother">
+					 <button type="submit">View other files</button>
+					 </form>
+					 </li> -->
+
+				<?php }?>
+				</ul>
+			</div>
+		</div>
+	</div>
