@@ -26,4 +26,5 @@ foreach(glob("backend/*.php") as $back)
     <script src="js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
     <script src="js/jquery.iframe-transport.js" type="text/javascript"></script>
     <script src="js/jquery.fileupload.js" type="text/javascript"></script>
+    <script src="js/FileUpload.js" type="text/javascript"></script>
   </head>
