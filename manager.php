@@ -16,87 +16,122 @@
   }
   ?>
 
-			<div class="filelist">
+	<div class="file-nav-container">
 
-				<p>File list:</p><br>
+		<h2>Directory</h2>
+		<?php
+			//Perskaitome katalogo turinį
+			$usersDirectory = "./files/".$_SESSION['nick'];
+			$fileList = scandir($usersDirectory);
 
-				<?php
-				//Perskaitome katalogo turinį
-				$usersDirectory = "./files/".$_SESSION['nick'];
-				$fileList = scandir($usersDirectory);
+			//Spausdiname katalogo turinį kaip href
+			//TODO: Reiks nekvailai padaryt, kad sortintu pagal įkėlimo datą!
+			$thereAreNoFiles = true;
+		?>
+		<div class="file-nav">
+			<form method='POST'>
+				<ul class="file-nav-list">
+						<?php
+							foreach ($fileList as $key => $value)
+							{
+								if($value == "." || $value == "..")
+									continue;
 
-				//Spausdiname katalogo turinį kaip href
-				//TODO: Reiks nekvailai padaryt, kad sortintu pagal įkėlimo datą!
-				$thereAreNoFiles = true;
-				?>
+									print("<li>
+									<a href='./files/".$_SESSION['nick']."/".$value."'>".$value."</a>
+									<input class='nav-checkbox' type='checkbox' name='selectedItemsToDelete[]' value='".$value."'>
+									</li>");
 
+
+								$thereAreNoFiles = false;
+							}
+						echo "</ul>";
+							// Jeigu nera failu direktorijoja, nerodys delete mygtuko
+							if(!$thereAreNoFiles)
+							{
+								print("<div class='btn-delete-file'>
+					        <button type='submit' name='delete'>Delete selected</button>
+					      </div>");
+
+							}
+							echo '</form>';
+							if(isset($_POST['delete']))
+							{
+								if(isset($_POST['selectedItemsToDelete']))
+								{
+									$selectedItems = $_POST['selectedItemsToDelete'];
+								}
+								else
+								{
+									echo "<font color='red'>".$selectFile."</font><br>";
+								}
+
+								if(!empty($selectedItems))
+								{
+									DeleteTheseFiles($selectedItems); //FileUpload.php
+									//echo '<meta http-equiv="refresh" content="0; />';
+								}
+							}
+
+
+		echo "</div>";
+
+		if($thereAreNoFiles)
+			echo "<font color='red'>".$noFilesInDirectory."</font><br>";
+			?>
+	</div>
+
+
+
+
+			<div class="main-display">
 				<form method='POST'>
-				<?php foreach ($fileList as $key => $value)
-				{
-					if($value == "." || $value == "..")
-						continue; ?>
+					<div class="display-menu">
+						<ul>
+							<li>
+								<button class="btn-display-menu" type='submit' name='delete'>Delete selected</button>
+							</li>
+							<li>
+								<input type="file" id="fileupload" class="inputfile" name="attachments[]" multiple onchange="addFiles(event)">
+								<label for="fileupload"> Choose a file... </label>
+							</li>
+							<li>
+								<button class="btn-display-menu">Other feature</button>
+							</li>
+						</ul>
+					</div>
 
-					<?php
-					echo "<input type='checkbox' name='selectedItemsToDelete[]' value='".$value."'>
-					<a href='./files/".$_SESSION['nick']."/".$value."'>".$value."</a><br>"; ?>
-
-					<?php
-					$thereAreNoFiles = false;
-				}?>
-
-				<!-- Jeigu nera failu direktorijoja, nerodys delete mygtuko -->
-				<?php
-				if(!$thereAreNoFiles)
-				{
-					?>
-					<button type='submit' name='delete'>Delete selected</button><br>
-					<?php
-				} ?>
-				</form>
-
-				<?php
-				if(isset($_POST['delete']))
-				{
-					if(isset($_POST['selectedItemsToDelete']))
-					{
-						$selectedItems = $_POST['selectedItemsToDelete'];
-					}
-					else
-					{
-						echo "<font color='red'>".$selectFile."</font><br>";
-					}
-
-					if(!empty($selectedItems))
-					{
-						DeleteTheseFiles($selectedItems); //FileUpload.php
-						//echo '<meta http-equiv="refresh" content="0; />';
-					}
-				}
-
-				if($thereAreNoFiles)
-					echo "<font color='red'>".$noFilesInDirectory."</font><br>";
-
-				echo "<br><br>"; ?>
-
-			</div>
-
-			<div class="maindisplay">
 				<div class="upload">
-
 					<!-- //Failo įkelimas į serverinę -->
-          <div id="dropZone" ondragover="overrideDefault(event);fileHover();"
-          ondragenter="overrideDefault(event);fileHover();"
-          ondragleave="overrideDefault(event);fileHoverEnd();"
-          ondrop="overrideDefault(event);fileHoverEnd();addFiles(event)">
-            <img src="images/upload.png" alt="uploadpic" width="100px" height="100px">
-            <h2 id=fileLabelText>Drag and Drop files here...</h2><br>
-            <input type="file" id="fileupload" class="inputfile" name="attachments[]" multiple onchange="addFiles(event)">
-            <label for="fileupload"> Choose a file... </label><br><br><br>
+					<div id="dropZone" ondragover="overrideDefault(event);fileHover();" ondragenter="overrideDefault(event);fileHover();" ondragleave="overrideDefault(event);fileHoverEnd();" ondrop="overrideDefault(event);fileHoverEnd();addFiles(event)">
             <progress id="progressBar" value="0" max="100"></progress>
-            <h3 id="progress"></h3><br><br><br><br>
-            <h3 id="error"></h3><br><br>
+            <h3 id="progress"></h3>
+            <h3 id="error"></h3>
+            <!-- <img id="img-upload" src="images/upload.png" alt="uploadpic"> -->
+            <table class="sortable">
+              <thead>
+                <tr>
+									<th></th>
+                  <th>Filename</th>
+                  <th>Type</th>
+                <th>Size</th>
+                <th>Date Modified</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-row">
+									<td>
+										<input class='nav-checkbox' type='checkbox'>
+									</td>
+            			<td><a>$name</a></td>
+                  <td><a>$extn</a></td>
+            			<td ><a>$size</a></td>
+            			<td ><a>$modtime</a></td>
+            		</tr>
+              </tbody>
+            </table>
+						<h2 id=fileLabelText>Drag and Drop files here...</h2>
           </div>
-          <br><br><br>
 
 					<?php
 						/*
@@ -142,7 +177,9 @@
 ?>
 
 	</div>
+</div>
 	<script src="js/fileUpload.js"></script>
+	<!-- <script src="js/.sorttable.js"></script> -->
 </body>
 
 </html>
