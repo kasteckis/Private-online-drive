@@ -84,23 +84,54 @@
 
 
 
-			<div class="maindisplay">
-				<div class="upload">
+			<div class="main-display">
+				<form method='POST'>
+					<div class="display-menu">
+						<ul>
+							<li>
+								<button class="btn-display-menu" type='submit' name='delete'>Delete selected</button>
+							</li>
+							<li>
+								<input type="file" id="fileupload" class="inputfile" name="attachments[]" multiple onchange="addFiles(event)">
+								<label for="fileupload"> Choose a file... </label>
+							</li>
+							<li>
+								<button class="btn-display-menu">Other feature</button>
+							</li>
+						</ul>
+					</div>
 
+				<div class="upload">
 					<!-- //Failo įkelimas į serverinę -->
-          <div id="dropZone" ondragover="overrideDefault(event);fileHover();"
-          ondragenter="overrideDefault(event);fileHover();"
-          ondragleave="overrideDefault(event);fileHoverEnd();"
-          ondrop="overrideDefault(event);fileHoverEnd();addFiles(event)">
-            <img src="images/upload.png" alt="uploadpic" width="100px" height="100px">
-            <h2 id=fileLabelText>Drag and Drop files here...</h2><br>
-            <input type="file" id="fileupload" class="inputfile" name="attachments[]" multiple onchange="addFiles(event)">
-            <label for="fileupload"> Choose a file... </label><br><br><br>
+					<div id="dropZone" ondragover="overrideDefault(event);fileHover();" ondragenter="overrideDefault(event);fileHover();" ondragleave="overrideDefault(event);fileHoverEnd();" ondrop="overrideDefault(event);fileHoverEnd();addFiles(event)">
             <progress id="progressBar" value="0" max="100"></progress>
-            <h3 id="progress"></h3><br><br><br><br>
-            <h3 id="error"></h3><br><br>
+            <h3 id="progress"></h3>
+            <h3 id="error"></h3>
+            <!-- <img id="img-upload" src="images/upload.png" alt="uploadpic"> -->
+            <table class="sortable">
+              <thead>
+                <tr>
+									<th></th>
+                  <th>Filename</th>
+                  <th>Type</th>
+                <th>Size</th>
+                <th>Date Modified</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-row">
+									<td>
+										<input class='nav-checkbox' type='checkbox'>
+									</td>
+            			<td><a>$name</a></td>
+                  <td><a>$extn</a></td>
+            			<td ><a>$size</a></td>
+            			<td ><a>$modtime</a></td>
+            		</tr>
+              </tbody>
+            </table>
+						<h2 id=fileLabelText>Drag and Drop files here...</h2>
           </div>
-          <br><br><br>
 
 					<?php
 						/*
@@ -146,7 +177,9 @@
 ?>
 
 	</div>
+</div>
 	<script src="js/fileUpload.js"></script>
+	<!-- <script src="js/.sorttable.js"></script> -->
 </body>
 
 </html>

@@ -31,11 +31,9 @@ $(function () {
       if (progress == 100)
       {
         $("#error").html("Uploaded succesfully!");
-        location.reload(true);
+        // location.reload(true);
       }
-  }).on('completemultiple', function () {
-    location.reload();
-    });
+  });
 });
 
       function overrideDefault(event) {
@@ -44,15 +42,18 @@ $(function () {
         document.getElementById('progressBar').style.display = "none";
         document.getElementById('error').style.display = "none";
         document.getElementById('progress').style.display = "none";
+        // document.getElementById('img-upload').style.display = "none";
         $("#error").html("");
       }
 
       function fileHover() {
         dropZone.classList.add("fileHover");
+        //document.getElementById('img-upload').style.display = "inline";
       }
 
       function fileHoverEnd() {
         dropZone.classList.remove("fileHover");
+        //document.getElementById('img-upload').style.display = "none";
       }
 
       function addFiles(event) {
