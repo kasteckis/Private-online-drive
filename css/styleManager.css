@@ -6,7 +6,7 @@ body {
   padding: 0;
   font-family: 'Muli', sans-serif;
   font-size: 120%;
-  /* line-height: 1.5em; */
+  line-height: 1.5em;
 }
 .container{
     width:100%;
@@ -15,7 +15,7 @@ body {
 }
 
 .header{
-    background-color: #f4f4f4;
+    /* background-color: #f4f4f4; */
     width: 100%;
     border-bottom: 1px solid #c3c3c3;
     position:relative;
@@ -136,9 +136,9 @@ button{
 
 /* Sidebar navigation */
 .file-nav-container{
-    width:15%;
+    width:20%;
     height:100%;
-    background-color: #f4f4f4 ;
+    background-color: #484848;
     float: left;
     box-sizing: border-box;
     border-right: 1px solid #c3c3c3;
@@ -153,14 +153,17 @@ button{
     text-align: center;
     font-weight: bold;
     margin-top: 10%;
+    color:white;
 }
 
-.file-nav-list {
+
+ul.file-nav-list {
   list-style-type: none;
   padding:0;
+  width: 100%;
 }
 
-.file-nav-list li {
+.file-nav-list a {
   padding-left:10%;
 }
 
@@ -174,16 +177,23 @@ button{
 } */
 
 .file-nav-list a{
-    text-decoration: none;
-    cursor: pointer;
+  display:block;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  color: #A8A8A8;
+  width: 100%;
 }
 
-.file-nav-list li:hover{
-  background-color: white;
+.file-nav-list a:link, .file-nav-list a:visited, .file-nav-list a:focus {
+  color: #A8A8A8;
+  background: #484848;
 }
 
-.file-nav-list a:link, a:visited {
-  color:black;
+.file-nav-list a:hover{
+  background: #787878;
+  color:white;
+  cursor:pointer;
 }
 
 .nav-checkbox{
