@@ -46,6 +46,7 @@
 		    {
 				if(password_verify($password, $row['password']))
 				{
+					$userIP = $_SERVER['REMOTE_ADDR'];
 					$_SESSION['id'] = $row['id'];
 					$_SESSION['nick'] = $row['nick'];
 					$_SESSION['status'] = $row['status'];
@@ -59,11 +60,70 @@
 
 					$sqlUpdateUserLastLoggedDate = "UPDATE Users SET lastLogged='$currentDate' WHERE id='$tempId'";
 					mysqli_query($conn, $sqlUpdateUserLastLoggedDate);
+					$sqlDelete = "delete from serverBadLogins where ip='$userIP'";
+					mysqli_query($conn, $sqlDelete);
 					header('Location: /manager');
 					return $welcome.", ".$row['nick']."!<br>";
 				}
 				else
 				{
+					// ---
+
+					if($a != null && $b != null)
+					{	
+						$userIP = $_SERVER['REMOTE_ADDR'];
+						$currentTime = date("Y-m-d H:i:s");
+						$tries = 1;
+						$sqlRead = "select * from BadLogins";
+						$doesTheIPExist = false;
+						$result = mysqli_query($conn, $sqlRead);
+						if (mysqli_num_rows($result) > 0) 
+						{
+							while($row = mysqli_fetch_assoc($result))
+							{
+								if($userIP == $row['ip'])
+								{
+									$tries = $row['tries'];
+									$tries++;
+									$doesTheIPExist = true;
+									break;
+								}
+							}
+						}
+						if($doesTheIPExist)
+						{
+							if($tries >= $MaximumTriesWhileLogging)
+							{
+								$newBanDate = date("Y-m-d H:i:s", strtotime($currentTime.'+ '.$BanLength.' minutes'));
+								$sqlUpdate = "update BadLogins SET tries='$tries', bannedTill='$newBanDate', lastLogin='$currentTime' where ip='$userIP'";
+								//Logu struktura: "User (IP) did ..."
+								$logText = "User (".$userIP.") just got banned until ".$newBanDate;
+								UploadLog($logText);
+								echo "<h1 class='login-error'><font color='red' size='5'><b>You have been banned!</b></font></h1><br>";
+							}
+							else
+							{
+								//Logu struktura: "User (IP) did ..."
+								$logText = "User (".$userIP.") tried to connect with incorrect logins into system. He used his ".$tries." tries";
+								UploadLog($logText);
+								$sqlUpdate = "update BadLogins SET tries='$tries', lastLogin='$currentTime' where ip='$userIP'";
+							}
+							mysqli_query($conn, $sqlUpdate);
+						}
+						else
+						{
+							$sqlInsert = "insert into BadLogins(ip, tries, lastLogin) VALUES ('$userIP','$tries', '$currentTime')";
+							mysqli_query($conn, $sqlInsert);
+							//Logu struktura: "User (IP) did ..."
+							$logText = "User (".$userIP.") tried to connect with incorrect logins into system. He used his ".$tries." tries";
+							UploadLog($logText);
+						}
+						echo "<h1 class='login-error'><font color='red' size='5'><b>You weren't connected to the system. You used $tries of ".$MaximumTriesWhileLogging." attempts."."</b></font></h1><br>";
+						$_SESSION['status'] = "user";
+						$_SESSION['nick'] = "unlogged";
+					}
+
+					// ---
 					UploadLog("Tried to connect to ".$username." account and failed!");
 					echo "<h1 class='login-error'>".$wrongPassword."</h1>";
 					//return "Blogas slaptažodis<br>";
