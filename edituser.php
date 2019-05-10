@@ -52,6 +52,7 @@ foreach(glob("backend/*.php") as $back)
 	        echo "<form method='POST'>";
 	        echo "ID: ".$row['id']."<br>";
 	        echo "<input name='nick' placeholder='slapyvardis' value=".$row['nick']."></input><br>";
+	        echo "<input name='email' placeholder='Email' value=".$row['email']."></input><br>";
 	        echo "<input type='password' name='password' placeholder='slaptazodis'></input> If not changed, password will stay the same<br>";
 
 	        echo "<select name='status'>";
@@ -89,6 +90,7 @@ foreach(glob("backend/*.php") as $back)
 			$newPassword = mysqli_real_escape_string($conn, $_POST['password']);
 			$newSuspension = mysqli_real_escape_string($conn, $_POST['suspended']);
 			$newStatus = mysqli_real_escape_string($conn, $_POST['status']);
+			$newEmail = mysqli_real_escape_string($conn, $_POST['email']);
 
 			$hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT); //encryptinimas
 
@@ -120,7 +122,7 @@ foreach(glob("backend/*.php") as $back)
 
 			if($validationAccepted)
 			{
-				$sqlUpdate = "UPDATE Users SET nick='$newNick', password='$hashedPassword', status='$newStatus', suspended='$newSuspension' WHERE id='$userID'";
+				$sqlUpdate = "UPDATE Users SET nick='$newNick', password='$hashedPassword', status='$newStatus', suspended='$newSuspension', email='$newEmail' WHERE id='$userID'";
 				if(mysqli_query($conn, $sqlUpdate))
 				{
 					echo "Vartotojas sėkmingai atnaujintas!<br>";
