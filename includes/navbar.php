@@ -67,6 +67,11 @@
 						<button type="submit">View logs</button>
 						</form>
 					</li>
+					<li>
+						<form action="/bans">
+						<button type="submit">Bans</button>
+						</form>
+					</li>
 					 <!-- <li>
 					 <form action="/viewother">
 					 <button type="submit">View other files</button>
