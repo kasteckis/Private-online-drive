@@ -1,4 +1,5 @@
 <?php
+	require 'backend/DefaultSessions.php'; //kartais meta warningus, todel reiktu sita parequirint
 	$tempUserNick = $_SESSION['nick'];
 	$userPasswordInDB = null;
 	$sqlGetCurrentUser = "SELECT * FROM Users where nick='$tempUserNick'";
