@@ -50,7 +50,7 @@
 
 
 
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> sita irasyti i header kai bus galima -->
+
 			<div class="main-display">
 				<form method='POST'>
 					<div class="display-menu">
@@ -84,6 +84,7 @@
 
 								foreach ($fileList as $key => $value)
 								{
+
 									if($value == "." || $value == "..")
 										continue;
 									$favicon="";
@@ -140,6 +141,29 @@
 									 		// 	<td sorttable_customkey='$timekey'><a href='./$namehref'>$modtime</a></td>
 									 		// </tr>");
 
+										$fileSize = filesize("./files/".$_SESSION['nick']."/".$value);
+										$fileSizeType = "Bytes";
+										if($fileSize >= 1024)
+										{
+											$fileSize = round($fileSize / 1024, 2);
+											$fileSizeType = "KB";
+											if($fileSize >= 1024)
+											{
+												$fileSize = round($fileSize / 1024, 2);
+												$fileSizeType = "MB";
+												if($fileSize >= 1024)
+												{
+													$fileSize = round($fileSize / 1024, 2);
+													$fileSizeType = "GB";
+												}
+											}
+										}
+
+										$fileSize = $fileSize." ".$fileSizeType;
+
+
+										$fileModTime = date ("Y-m-d H:i:s", filemtime("./files/".$_SESSION['nick']."/".$value));
+
 										echo("
 										<tr class='$class'>
 											<td>
@@ -147,8 +171,8 @@
 											</td>
 		            			<td><a href='./files/".$_SESSION['nick']."/".$value."'>".$value."</a></td>
 		                  <td><a href='./files/".$_SESSION['nick']."/".$value."'>$extn</a></td>
-		            			<td><a href='./files/".$_SESSION['nick']."/".$value."'>size</a></td>
-		            			<td><a href='./files/".$_SESSION['nick']."/".$value."'>modtime</a></td>
+		            			<td><a href='./files/".$_SESSION['nick']."/".$value."'>".$fileSize."</a></td>
+		            			<td><a href='./files/".$_SESSION['nick']."/".$value."'>".$fileModTime."</a></td>
 		            		</tr>
 										");
 
