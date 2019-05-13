@@ -49,8 +49,6 @@
 	</div>
 
 
-
-
 			<div class="main-display">
 				<form method='POST'>
 					<div class="display-menu">
@@ -90,11 +88,6 @@
 									$favicon="";
 									$class="file";
 
-
-										//Doesnt work for getting date
-										// $modtime=date("M j Y g:i A", filemtime($value));
-										// $timekey=date("YmdHis", filemtime($value));
-
 										// Gets file extension
 										$extn=pathinfo($value, PATHINFO_EXTENSION);
 
@@ -129,17 +122,7 @@
 
 											default: if($extn!=""){$extn=strtoupper($extn)." File";} else{$extn="Unknown";} break;
 										}
-										// Gets and cleans up file size/ Doesnt get file size problems with filesize
-											// $size=pretty_filesize($value);
-											// $sizekey=filesize($value);
 
-											// echo("
-									 		// <tr class='$class'>
-									 		// 	<td><a href='./$namehref'$favicon class='name'>$name</a></td>
-									 		// 	<td><a href='./$namehref'>$extn</a></td>
-									 		// 	<td sorttable_customkey='$sizekey'><a href='./$namehref'>$size</a></td>
-									 		// 	<td sorttable_customkey='$timekey'><a href='./$namehref'>$modtime</a></td>
-									 		// </tr>");
 
 										$fileSize = filesize("./files/".$_SESSION['nick']."/".$value);
 										$fileSizeType = "Bytes";
@@ -177,13 +160,6 @@
 										");
 
 
-
-										// print("<li>
-										// <a href='./files/".$_SESSION['nick']."/".$value."'>".$value."</a>
-										// <input class='nav-checkbox' type='checkbox' name='selectedItemsToDelete[]' value='".$value."'>
-										// </li>");
-
-
 									$thereAreNoFiles = false;
 								}
 ?>
@@ -196,18 +172,6 @@
           </div>
 
 					<?php
-					// Adds pretty filesizes/ Doesnt work because filesize doesnt get files size
-					// function pretty_filesize($file) {
-					// 	$size=filesize($file);
-					// 	if($size<1024){$size=$size." Bytes";}
-					// 	elseif(($size<1048576)&&($size>1023)){$size=round($size/1024, 1)." KB";}
-					// 	elseif(($size<1073741824)&&($size>1048575)){$size=round($size/1048576, 1)." MB";}
-					// 	else{$size=round($size/1073741824, 1)." GB";}
-					// 	return $size;
-					// }
-
-
-
 
 						/*
 						//TODO: Automatiškai nesukuria vartotojui katalogo, kolkas jį manualiai reik sukurt, pagal vartotojo nick!
