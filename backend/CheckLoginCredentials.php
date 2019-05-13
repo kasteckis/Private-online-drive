@@ -11,7 +11,7 @@
 
 	if($_SESSION['password'] != $userPasswordInDB)
 	{
-		echo "Your password have been changed!<br>";
+		echo "Your password has been changed!<br>";
 		$_SESSION['id'] = null;
 		$_SESSION['nick'] = null;
 		$_SESSION['status'] = null;

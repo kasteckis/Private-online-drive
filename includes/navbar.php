@@ -2,7 +2,7 @@
 	<div class="navigation-container">
 
 	<div class="logo">
-		<img class="logo-img" src="../images/logo.jpg" alt="Logo">
+		<a href="./manager"><img class="logo-img" src="../images/logo.jpg" alt="Logo"></a>
 	</div>
 
 	<!-- <div class="greeting"> -->
