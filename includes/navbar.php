@@ -11,7 +11,7 @@
 		<div class="btn-place">
 			<div class="btn-logout">
 				<form method='POST'>
-					<button type='submit' name='logout'>Logout</button>
+					<button class="btn-navbar" type='submit' name='logout'>Logout</button>
 				</form>
 			</div>
 
@@ -44,12 +44,12 @@
 				<ul class="link-list">
 				 <li>
 					 <form action="/settings">
-					 <button type="submit">Settings</button>
+					 <button class="btn-navbar" type="submit">Settings</button>
 					 </form>
 				 </li>
 				 <li>
 					 <form action="/notes">
-					 <button type="submit">Notes</button>
+					 <button class="btn-navbar" type="submit">Notes</button>
 					 </form>
 				 </li>
 				 <?php
@@ -59,17 +59,17 @@
 
 					<li>
 						<form action="/usermanager">
-						<button type="submit">User manager</button>
+						<button class="btn-navbar" type="submit">User manager</button>
 						</form>
 						</li>
 					<li>
 						<form action="/logs">
-						<button type="submit">View logs</button>
+						<button class="btn-navbar" type="submit">View logs</button>
 						</form>
 					</li>
 					<li>
 						<form action="/bans">
-						<button type="submit">Bans</button>
+						<button class="btn-navbar" type="submit">Bans</button>
 						</form>
 					</li>
 					 <!-- <li>

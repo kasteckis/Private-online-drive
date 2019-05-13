@@ -50,23 +50,17 @@
 
 
 
-
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> sita irasyti i header kai bus galima -->
 			<div class="main-display">
 				<form method='POST'>
 					<div class="display-menu">
-						<ul>
-							<li>
-								<button class="btn-display-menu" type='submit' name='delete'>Delete selected</button>
-							</li>
-							<li>
-								<input type="file" id="fileupload" class="inputfile" name="attachments[]" multiple onchange="addFiles(event)">
-								<label for="fileupload"> Choose a file... </label>
-							</li>
-							<li>
-								<button class="btn-display-menu">Other feature</button>
-							</li>
-						</ul>
-					</div>
+	          <button class="btn-display-menu" type='submit' name='delete'><i class="fas fa-trash-alt"></i> Delete selected</button>
+	          <input type="file" id="fileupload" class="inputfile" name="attachments[]" multiple onchange="addFiles(event)">
+	          <label for="fileupload"><i class="fas fa-file-upload"></i> Choose a file... </label>
+	          <!-- <li>
+	            <button class="btn-display-menu">Other feature</button>
+	            </li> -->
+	        </div>
 
 				<div class="upload">
 					<!-- //Failo įkelimas į serverinę -->
@@ -175,8 +169,6 @@
 						if($thereAreNoFiles)
 							echo "<font color='red'>".$noFilesInDirectory."</font><br>";
 							?>
-
-						<h2 id=fileLabelText>Drag and Drop files here...</h2>
           </div>
 
 					<?php
