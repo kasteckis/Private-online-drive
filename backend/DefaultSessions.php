@@ -34,5 +34,4 @@
 		$_SESSION['viewingFiles'] = null;
 	}
 
-	//TODO: Padaryti patikrinimą kiekvieną refreshą ir atnaujinti visus sesijos duomenis, jeigu ID turi reikšmę.
 ?>

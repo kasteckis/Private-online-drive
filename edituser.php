@@ -51,9 +51,9 @@ foreach(glob("backend/*.php") as $back)
           echo '<div class="changebox">';
 	        echo "<form method='POST'>";
 	        echo "ID: ".$row['id']."<br>";
-	        echo "<input name='nick' placeholder='slapyvardis' value=".$row['nick']."></input><br>";
+	        echo "<input name='nick' placeholder='nickname' value=".$row['nick']."></input><br>";
 	        echo "<input name='email' placeholder='Email' value=".$row['email']."></input><br>";
-	        echo "<input type='password' name='password' placeholder='slaptazodis'></input> If not changed, password will stay the same<br>";
+	        echo "<input type='password' name='password' placeholder='password'></input> If not changed, password will stay the same<br>";
 
 	        echo "<select name='status'>";
 	        echo "<option value='user'>User</option>";
@@ -64,11 +64,11 @@ foreach(glob("backend/*.php") as $back)
 	        echo "</select><br>";
 
 	        echo "<select name='suspended'>";
-	        echo "<option value='0'>Neuzblokuotas</option>";
+	        echo "<option value='0'>Suspended</option>";
 	        if($row['suspended'] == "0")
-	        	echo "<option value='1'>Uzblokuotas</option>";
+	        	echo "<option value='1'>Suspended</option>";
 	        else
-	        	echo "<option value='1' selected>Uzblokuotas</option>";
+	        	echo "<option value='1' selected>Suspended</option>";
 	        echo "</select><br>";
 	        echo "<button name='submit' class='changebox-button'>Edit</button><br>";
 	        echo "</form>";
@@ -125,13 +125,13 @@ foreach(glob("backend/*.php") as $back)
 				$sqlUpdate = "UPDATE Users SET nick='$newNick', password='$hashedPassword', status='$newStatus', suspended='$newSuspension', email='$newEmail' WHERE id='$userID'";
 				if(mysqli_query($conn, $sqlUpdate))
 				{
-					echo "Vartotojas sėkmingai atnaujintas!<br>";
+					echo "User has been succesfully edited!<br>";
 					UploadLog("User ".$newNick." was edited!");
 				}
 			}
 			else
 			{
-				echo "<font color='red'>VALIDACIJOS KLAIDA!</font><br>";
+				echo "<font color='red'>VALIDATION ERROR!</font><br>";
 			}
 		}
     echo '</div>';
