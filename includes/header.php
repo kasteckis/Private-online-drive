@@ -18,6 +18,7 @@ foreach(glob("backend/*.php") as $back)
     <title><?php echo $WebsiteTitle; ?></title>
     <link rel="icon" type="image/png" href="../images/favicon-16x16.png" sizes="16x16" />
     <link rel="stylesheet" href="css/styleManager.css">
+    <link rel="stylesheet" href="css/styleMediaQ.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
