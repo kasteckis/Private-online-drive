@@ -68,7 +68,7 @@ ul.link-list {
   margin-right: 15px;
 }
 
-button {
+.btn-navbar {
   font-family: 'Muli', sans-serif;
   background-color: #4CAF50;
   border: none;
@@ -181,24 +181,31 @@ ul.file-nav-list {
   float: right;
 }
 
-.display-menu {
-  border-bottom: 1px solid black;
-}
 
-.display-menu ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-.display-menu li {
-  float: left;
-  width: 10%;
-}
-
+/* Display buttons styles */
 .btn-display-menu {
-  padding: 10%;
+  font-family: 'Muli', sans-serif;
+  background-color: rgb(49, 48, 38);
+  color: white;
+  padding: 1%;
+  font-size: 0.9em;
+  cursor: pointer;
+  border:none;
+}
+
+/* Clear floats (clearfix hack) */
+.display-menu:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-display-menu:hover {
+  background-color: #26251f;
+}
+
+.inputfile+label:hover {
+  background-color: #26251f;
 }
 
 .inputfile {
@@ -211,16 +218,11 @@ ul.file-nav-list {
 }
 
 .inputfile+label {
-  background-color: #4CAF50;
-  border: none;
-  border-radius: 8%;
   color: white;
-  padding: 10% 11%;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
+  padding: 1%;
+  font-size: 0.9em;
   cursor: pointer;
+  border:none;
 }
 
 /* .inputfile:focus+label {
