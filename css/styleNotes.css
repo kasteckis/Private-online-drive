@@ -61,3 +61,26 @@ body{
     width: 100%;
     background-color: white;
 }
+
+.back table{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.back table td, .back table th{
+    border: 1px solid #c38d9e;
+    padding: 8px;
+}
+
+.back table tr:nth-child(even){background-color: #8ddfd4;}
+
+.back table tr:hover {background-color: #e27d60;}
+
+.back table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #c38d9e;
+  color: black;
+}
