@@ -7,8 +7,6 @@
 	
 	if($conn == false)
 	{
-		//Jeigu prisijungimas blogas, stabdo kodą.
-		//TODO: Sukurti kokį gražų error handlerį, kuris gražiai įspėtu vartotoja, kad neįšeina prisijungti prie duomenų bazės.
-		die("Prisijungimas prie duomenu bazes buvo blogas<br>".mysqli_connect_error());
+		die("Connection to database was incorrect! You should check includes/mysql_connection.php file and renew your information!<br>".mysqli_connect_error());
 	}
 ?>

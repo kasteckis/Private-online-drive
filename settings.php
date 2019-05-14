@@ -47,9 +47,29 @@ foreach(glob("backend/*.php") as $back)
 					echo "<button name='submitChange'>Change Password</button>";
 					?>
 				</div>
+				<div class="inputs">
+				
 				<?php
-				echo "</form>";
+					$currentNick = $_SESSION['nick'];
+					$currentEmail = null;
+					$sqlGetEmail = "SELECT email FROM Users WHERE nick='$currentNick'";
+					$resultsGetEmail = mysqli_query($conn, $sqlGetEmail);
+
+					if (mysqli_num_rows($resultsGetEmail) > 0) 
+					{
+						while($row = mysqli_fetch_assoc($resultsGetEmail))
+						{
+							$currentEmail = $row['email'];
+							break;
+						}
+					}
+
+					echo "<h3>Change email:</h3>";
+					echo "<input type='text' name='currEmail' placeholder='Your email' value='".$currentEmail."'></input>";
+					echo "<button name='submitChangeEmail'>Change Email</button>";
+					echo "</form>";
 				?>
+				</div>
 			</div>
 		</div>
 
@@ -86,6 +106,20 @@ foreach(glob("backend/*.php") as $back)
 			else
 			{
 				echo "Your old password is wrong!<br>";
+			}
+		}
+
+		if(isset($_POST['submitChangeEmail']))
+		{
+			$userNewEmail = mysqli_real_escape_string($conn, $_POST['currEmail']);
+			$sqlChangeUsersEmail = "UPDATE Users SET email='$userNewEmail' WHERE nick='$currentNick'";
+			if(mysqli_query($conn, $sqlChangeUsersEmail))
+			{
+				echo "Your email has been changed!<br>";
+			}
+			else
+			{
+				echo "ERROR!"; //niekad neturetu but
 			}
 		}
 	}

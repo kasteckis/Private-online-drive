@@ -17,7 +17,7 @@
 		}
 		else
 		{
-			echo "<font color='red'>NEEINA IKELTI I LOGUS. LogsSystem.php!!!! SITOS ZINUTES NETURI BUT!!!</font><br>";
+			echo "<font color='red'>Critical error. I cannot update logs database!</font><br>";
 			return false;
 		}
 	}

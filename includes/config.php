@@ -7,6 +7,8 @@
 	//Kadangi čia globalūs kintamieji, rašom iš didžiųjų!!
 
 	$WebsiteTitle = "Private online drive"; //Webo Title
+	$BanLength = 20;
+	$MaximumTriesWhileLogging = 3;
 	date_default_timezone_set("Europe/Vilnius"); //default timezone http://php.net/manual/en/timezones.php
 	
 	//Kad rodytu warningus per web

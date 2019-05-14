@@ -25,8 +25,6 @@
 
 	function FileUpload()
 	{
-		//TODO: Automatiškai nesukuria vartotojui katalogo, kolkas jį manualiai reik sukurt, pagal vartotojo nick!
-
 		//Logika vykdoma po UPLOAD paspaudimo
 		//FAILAS issaugo files/nick kataloge!
 		$msg = "";

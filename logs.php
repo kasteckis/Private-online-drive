@@ -93,7 +93,7 @@ foreach(glob("backend/*.php") as $back)
 						$sqlDeleteCurrentLog = "DELETE FROM Logs WHERE id='$rowId'";
 						if(mysqli_query($conn, $sqlDeleteCurrentLog))
 						{
-							echo "Sėkmingai ištrintas!<br>";
+							echo "You have succesfully removed a log!<br>";
 							echo '<meta http-equiv="refresh" content="0;" />';
 						}
 						else

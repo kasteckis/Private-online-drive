@@ -48,7 +48,7 @@ foreach(glob("backend/*.php") as $back)
 			<div class="main">
 				<?php
 				echo "<h3>User list:</h3>";
-				$sqlReadAllUsers = "SELECT * FROM Users";
+				$sqlReadAllUsers = "SELECT * FROM Users ORDER BY lastLogged DESC";
 				$resultReadAllUsers = mysqli_query($conn, $sqlReadAllUsers);
 
 				echo "<form method='POST'>";
