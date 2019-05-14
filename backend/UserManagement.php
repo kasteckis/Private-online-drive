@@ -44,7 +44,6 @@
 
 	function delete_directory($dirname)
 	{
-		echo $dirname;
 		$dir_Handle = false;
          if (is_dir($dirname))
            $dir_handle = opendir($dirname);
