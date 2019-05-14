@@ -21,7 +21,7 @@
 
 		$sqlGetConflictedUsers = "SELECT * FROM Users WHERE nick='$nick'";
 		$resultsGetConflictedUsers = mysqli_query($conn, $sqlGetConflictedUsers);
-	    while($row = mysqli_fetch_assoc($resultsGetConflictedUsers)) 
+	    while($row = mysqli_fetch_assoc($resultsGetConflictedUsers))
 	    {
 	    	array_push($validationErrors, "Nickname already exists");
 	    }
@@ -42,7 +42,7 @@
 		return $validationErrors;
 	}
 
-	function delete_directory($dirname) 
+	function delete_directory($dirname)
 	{
 		$dir_Handle = false;
          if (is_dir($dirname))
