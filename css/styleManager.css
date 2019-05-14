@@ -68,7 +68,7 @@ ul.link-list {
   margin-right: 15px;
 }
 
-button {
+.btn-navbar {
   font-family: 'Muli', sans-serif;
   background-color: #4CAF50;
   border: none;
@@ -94,7 +94,6 @@ button {
 /*.greeting button{
     float: right;
     margin-right: 7%;
-
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -104,9 +103,7 @@ button {
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-
 }
-
 .greeting h4{
     vertical-align: middle;
     font-family: Tahoma;
@@ -181,24 +178,31 @@ ul.file-nav-list {
   float: right;
 }
 
-.display-menu {
-  border-bottom: 1px solid black;
-}
 
-.display-menu ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-.display-menu li {
-  float: left;
-  width: 10%;
-}
-
+/* Display buttons styles */
 .btn-display-menu {
-  padding: 10%;
+  font-family: 'Muli', sans-serif;
+  background-color: rgb(49, 48, 38);
+  color: white;
+  padding: 1%;
+  font-size: 0.9em;
+  cursor: pointer;
+  border:none;
+}
+
+/* Clear floats (clearfix hack) */
+.display-menu:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-display-menu:hover {
+  background-color: #26251f;
+}
+
+.inputfile+label:hover {
+  background-color: #26251f;
 }
 
 .inputfile {
@@ -211,16 +215,11 @@ ul.file-nav-list {
 }
 
 .inputfile+label {
-  background-color: #4CAF50;
-  border: none;
-  border-radius: 8%;
   color: white;
-  padding: 10% 11%;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
+  padding: 1%;
+  font-size: 0.9em;
   cursor: pointer;
+  border:none;
 }
 
 /* .inputfile:focus+label {
@@ -255,7 +254,6 @@ ul.file-nav-list {
   cursor: pointer;
   box-sizing: border-box;
 }
-
 .upload button {
   background-color: #5F9EA0;
   border: none;
@@ -489,4 +487,33 @@ table tr td:nth-of-type(2) a[href$=".sql"] {
 /* link */
 table tr td:nth-of-type(2) a[href$=".URL"] {
   background-image: url(../images/file-icons/link.png);
+}
+#cancel {
+  display: none;
+}
+.butn {
+  background: #e7ecf0;
+  background-image: -webkit-linear-gradient(top, #e7ecf0, #abc3d1);
+  background-image: -moz-linear-gradient(top, #e7ecf0, #abc3d1);
+  background-image: -ms-linear-gradient(top, #e7ecf0, #abc3d1);
+  background-image: -o-linear-gradient(top, #e7ecf0, #abc3d1);
+  background-image: linear-gradient(to bottom, #e7ecf0, #abc3d1);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #030303;
+  font-size: 12px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.butn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
 }

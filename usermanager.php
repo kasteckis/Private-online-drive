@@ -16,7 +16,7 @@ foreach(glob("backend/*.php") as $back)
 <meta charset="UTF-8">
 <title><?php echo $WebsiteTitle; ?></title>
 <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
-<link rel="stylesheet" href="css/styleUser.css"> 
+<link rel="stylesheet" href="css/styleUser.css">
 
 </head>
 
@@ -82,7 +82,7 @@ foreach(glob("backend/*.php") as $back)
 					if($_SESSION['nick'] == $row['nick'])
 						echo "<td>X</td>";
 					else
-						echo "<td><button name='remove".$row['id']."'>X</button></td></td>";
+						echo "<td><button type='button' name='".$row['nick']."' id='".$row['id']."' class='button_1' >X</button></td></td>";
 					echo "<td><button name='view".$row['id']."'>View</button></td>";
 					echo "</tr>";
 
@@ -91,23 +91,7 @@ foreach(glob("backend/*.php") as $back)
 						$_SESSION['editableUser'] = $row['id'];
 						echo '<meta http-equiv="refresh" content="0; url=./edituser" />';
 					}
-					if(isset($_POST['remove'.$row['id']]))
-					{
-						$deletableId = $row['id'];
-						$detetableNick = $row['nick'];
-						$sqlDeleteUser = "DELETE FROM Users WHERE id='$deletableId'";
-						delete_directory("./files/".$detetableNick);
-						if(mysqli_query($conn, $sqlDeleteUser))
-						{
-							echo $detetableNick." sėkmingai ištrintas!<br>";
-							// TODO: KAZKODEL NESIREFRESHINA??
-							echo '<meta http-equiv="refresh" content="0; />';
-						}
-						else
-						{
-							echo "KLAIDA trinant useri.<br>"; // niekada neturetu buti sitos klaidos
-						}
-					}
+
 					if(isset($_POST['view'.$row['id']]))
 					{
 						$_SESSION['viewingFiles'] = $row['nick'];
@@ -131,8 +115,45 @@ foreach(glob("backend/*.php") as $back)
 	}
 
 ?>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script>
+$(document).ready(function() {
+$(".button_1").click(function() {
+  var idid = this.id;
+  var nicknick = this.name;
 
+  var varData = 'id=' + idid + '&nick=' + nicknick;
+  $.ajax({
+    type: 'POST',
+    url: 'includes/userdelete',
+    data: varData,
+    success: function() {
+      swal({
+              title: "Are you sure?",
+              text: "Once deleted, you will not be able to recover this user!",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                swal("User has been deleted!", {
+                  icon: "success",
+                });
+                location.reload(true);
+              }
+            });
+    }
 
+  });
+});
+
+});
+</script>
 
 </body>
 
