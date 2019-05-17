@@ -1,24 +1,7 @@
 <?php
-session_start();
-require 'includes/mysql_connection.php';
+include 'includes/header.php';
 require 'includes/config.php';
-
-//Includins visus skriptus is backendo, nežinau ar funkcijas į vieną .php failą kraut ar į atskirus
-foreach(glob("backend/*.php") as $back)
-{
-    require $back;
-}
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title><?php echo $WebsiteTitle; ?></title>
-<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" /> 
-<link rel="stylesheet" href="css/styleNotes.css"> 
-
-</head>
 
 <body>
 <?php
@@ -26,15 +9,12 @@ foreach(glob("backend/*.php") as $back)
 	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
 	{
 		?>
-		<div class="background">
-			<div class="back">
-				<?php
-				//Mygtukas atgal
-				echo '<form action="/manager">';
-				echo '<input type="submit" value="Back" />';
-				echo '</form>';
-				?>
-			</div>
+		<div class="container">
+
+      <?php
+      include 'includes/navbar.php';
+      ?>
+
 			<div class="main">
 				<?php
 				$userId = $_SESSION['id'];
@@ -66,7 +46,7 @@ foreach(glob("backend/*.php") as $back)
 					{
 						echo "ERROR."; //niekada neturetu buti
 					}
-				} 
+				}
 				?>
 			</div>
 		</div>

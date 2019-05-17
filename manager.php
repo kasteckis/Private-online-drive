@@ -1,4 +1,5 @@
-<?php include 'includes/header.php';
+<?php
+include 'includes/header.php';
 require 'includes/config.php';
 ?>
 <body>

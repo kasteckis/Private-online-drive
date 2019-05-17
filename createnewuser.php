@@ -1,24 +1,7 @@
 <?php
-session_start();
-require 'includes/mysql_connection.php';
+include 'includes/header.php';
 require 'includes/config.php';
-
-//Includins visus skriptus is backendo, nežinau ar funkcijas į vieną .php failą kraut ar į atskirus
-foreach(glob("backend/*.php") as $back)
-{
-    require $back;
-}
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title><?php echo $WebsiteTitle; ?></title>
-<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" /> 
-<link rel="stylesheet" href="css/styleNewUser.css"> 
-
-</head>
 
 <body>
 <?php
@@ -26,15 +9,12 @@ foreach(glob("backend/*.php") as $back)
 	if($_SESSION['status'] == "admin")
 	{
 		?>
-		<div class="background">
-			<div class="back">
-				<?php
-				//Mygtukas atgal
-				echo '<form action="/usermanager">';
-				echo '<input type="submit" value="Back" />';
-				echo '</form>';
-				?>
-			</div>
+		<div class="container">
+
+      <?php
+      include 'includes/navbar.php';
+      ?>
+      
 			<div class="box">
 				<?php
 				echo "<h3>Create new user</h3>";
@@ -56,7 +36,7 @@ foreach(glob("backend/*.php") as $back)
 				{
 					//Validacija
 					$canICreateUser = true;
-					
+
 					$nick = mysqli_real_escape_string($conn, $_POST['nick']);
 					$status = mysqli_real_escape_string($conn, $_POST['role']);
 					$password = mysqli_real_escape_string($conn, $_POST['password']);

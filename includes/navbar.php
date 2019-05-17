@@ -9,10 +9,14 @@
 		<!-- <h4><?php //echo $welcome.", ".$_SESSION['nick']?>!</h4> -->
 
 		<div class="btn-place">
-			<div class="btn-logout">
+			<div class="btn-nav-right">
+				<form action="/settings">
+					<button class="btn-navbar" type="submit">Settings</button>
+				</form>
 				<form method='POST'>
 					<button class="btn-navbar" type='submit' name='logout'>Logout</button>
 				</form>
+
 			</div>
 
 		<?php
@@ -42,11 +46,12 @@
 
 
 				<ul class="link-list">
-				 <li>
-					 <form action="/settings">
-					 <button class="btn-navbar" type="submit">Settings</button>
-					 </form>
-				 </li>
+					<li>
+ 					 <form action="/manager">
+ 					 <button class="btn-navbar" type="submit">Home</button>
+ 					 </form>
+ 				 </li>
+
 				 <li>
 					 <form action="/notes">
 					 <button class="btn-navbar" type="submit">Notes</button>

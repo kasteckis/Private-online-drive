@@ -1,25 +1,8 @@
 <?php
-session_start();
-require 'includes/mysql_connection.php';
+include 'includes/header.php';
 require 'includes/config.php';
-
-//Includins visus skriptus is backendo, nežinau ar funkcijas į vieną .php failą kraut ar į atskirus
-foreach(glob("backend/*.php") as $back)
-{
-    require $back;
-}
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title><?php echo $WebsiteTitle; ?></title>
-<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
-<link rel="stylesheet" href="css/styleSettings.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-
-</head>
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"> -->
 
 <body>
 <?php
@@ -27,16 +10,12 @@ foreach(glob("backend/*.php") as $back)
 	if($_SESSION['status'] == "admin")
 	{
     ?>
-    <div class="background">
-			<div class="back">
-        <?php
-		//Mygtukas atgal
-		echo '<form action="/usermanager">';
-	    echo '<input type="submit" value="Back" />';
-		echo '</form><br><br>';
-    ?>
-    </div>
-    <?php
+    <div class="container">
+      <?php
+      include 'includes/navbar.php';
+
+
+      echo "<div class='main'>";
 		// apsaugos jeigu useris cia pateko be sesijos reiksmes
 		if($_SESSION['viewingFiles'] == null)
 		{
@@ -104,6 +83,7 @@ foreach(glob("backend/*.php") as $back)
 		echo "You are not authorised to view this page!<br>";
 	}
 ?>
+</div>
 </div>
 
 
