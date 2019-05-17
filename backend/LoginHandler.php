@@ -32,13 +32,15 @@
 		require 'includes/mysql_connection.php';
 		require 'includes/config.php';
 		require 'includes/messages.php';
+		require 'backend/LogsSystem.php';
+		
 		$userIP = $_SERVER['REMOTE_ADDR'];
 		$currentDate = date('Y-m-d H:i:s');
 		$isUserIPBanned = false;
 
 		$sqlCheckIfImNotBanned = "select * from BadLogins WHERE ip='$userIP'";
 		$resultsCheckIfImNotBanned = mysqli_query($conn, $sqlCheckIfImNotBanned);
-		if (mysqli_num_rows($resultsCheckIfImNotBanned) > 0) 
+		if (mysqli_num_rows($resultsCheckIfImNotBanned) > 0)
 		{
 			while($row = mysqli_fetch_assoc($resultsCheckIfImNotBanned))
 			{
@@ -90,14 +92,14 @@
 						// ---
 
 						if($a != null && $b != null)
-						{	
+						{
 							$userIP = $_SERVER['REMOTE_ADDR'];
 							$currentTime = date("Y-m-d H:i:s");
 							$tries = 1;
 							$sqlRead = "select * from BadLogins";
 							$doesTheIPExist = false;
 							$result = mysqli_query($conn, $sqlRead);
-							if (mysqli_num_rows($result) > 0) 
+							if (mysqli_num_rows($result) > 0)
 							{
 								while($row = mysqli_fetch_assoc($result))
 								{

@@ -9,7 +9,7 @@ function ResetPassword($emailAddress) { //comes from forgotPassword.php
   $token = random_bytes(32);
 
   //Url for validation
-  $url = "www.devbridge.tk/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+  $url = "www.devbridge.tk/index?action=createnewpassword&selector=" . $selector . "&validator=" . bin2hex($token);
 
   //Timer when the token expires in database
   $expires = date("U") + 1200;
@@ -58,8 +58,7 @@ function ResetPassword($emailAddress) { //comes from forgotPassword.php
 
   mail($to, $subject, $message, $headers);
 
-  header("Location: ../../forgotPassword.php?reset=success");
-
+  header("Location: ./index?action=forgotpassword&reset=success");
 }
 
 ?>
