@@ -42,11 +42,16 @@ require 'includes/config.php';
 	        echo "</select><br>";
 
 	        echo "<select name='suspended'>";
-	        echo "<option value='0'>Suspended</option>";
 	        if($row['suspended'] == "0")
+	        {
+	        	echo "<option value='0'>Not suspended</option>";
 	        	echo "<option value='1'>Suspended</option>";
+	        }
 	        else
+	        {
+	        	echo "<option value='0'>Not suspended</option>";
 	        	echo "<option value='1' selected>Suspended</option>";
+	        }
 	        echo "</select><br>";
 	        echo "<button name='submit' class='changebox-button'>Edit</button><br>";
 	        echo "</form>";
@@ -103,6 +108,7 @@ require 'includes/config.php';
 				$sqlUpdate = "UPDATE Users SET nick='$newNick', password='$hashedPassword', status='$newStatus', suspended='$newSuspension', email='$newEmail' WHERE id='$userID'";
 				if(mysqli_query($conn, $sqlUpdate))
 				{
+					rename("./files/".$oldNick, "./files/".$newNick);
 					echo "User has been succesfully edited!<br>";
 					UploadLog("User ".$newNick." was edited!");
 				}
