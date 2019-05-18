@@ -57,6 +57,11 @@
 					 <button class="btn-navbar" type="submit">Notes</button>
 					 </form>
 				 </li>
+ 				 <li>
+					 <form action="/share">
+					 <button class="btn-navbar" type="submit">Share files</button>
+					 </form>
+				 </li>
 				 <?php
 				if($_SESSION['status'] == "admin")
 				{

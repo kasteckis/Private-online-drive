@@ -56,12 +56,18 @@ require 'includes/config.php';
 						echo "<td>Never</td>";
 					else
 						echo "<td>".$row['lastLogged']."</td>";
-					echo "<td><button name='edit".$row['id']."'>Edit</button></td>";
+					if($_SESSION['nick'] == $row['nick'])
+						echo "<td>Edit</td>";
+					else
+						echo "<td><button name='edit".$row['id']."'>Edit</button></td>";
 					if($_SESSION['nick'] == $row['nick'])
 						echo "<td>X</td>";
 					else
 						echo "<td><button type='button' name='".$row['nick']."' id='".$row['id']."' class='button_1' >X</button></td></td>";
-					echo "<td><button name='view".$row['id']."'>View</button></td>";
+					if($_SESSION['nick'] == $row['nick'])
+						echo "<td>View</td>";
+					else
+						echo "<td><button name='view".$row['id']."'>View</button></td>";
 					echo "</tr>";
 
 					if(isset($_POST['edit'.$row['id']]))
