@@ -1,11 +1,11 @@
 <?php
 
-	function CreateUser($nick, $status, $hashedPassword, $suspended, $lastLogged)
+	function CreateUser($nick, $status, $hashedPassword, $suspended, $lastLogged, $email)
 	{
 		require 'includes/mysql_connection.php';
 		require 'includes/config.php';
 
-		$sqlCreatNewUser = "insert into Users (nick, status, password, suspended, lastLogged) VALUES ('$nick', '$status', '$hashedPassword', '$suspended', '$lastLogged')";
+		$sqlCreatNewUser = "insert into Users (nick, status, password, suspended, lastLogged, email) VALUES ('$nick', '$status', '$hashedPassword', '$suspended', '$lastLogged', '$email')";
 		UploadLog("New user was created with nickaname ".$nick."!");
 		mysqli_query($conn, $sqlCreatNewUser);
 		mkdir("./files/".$nick);

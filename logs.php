@@ -9,7 +9,7 @@ require 'includes/config.php';
 	if($_SESSION['status'] == "admin")
 	{
 		?>
-		<div class="container">
+		<div class="containers">
       <?php
       include 'includes/navbar.php';
       ?>
