@@ -1,5 +1,4 @@
-<?php
-include 'includes/header.php';
+<?php include 'includes/header.php';
 require 'includes/config.php';
 ?>
 <body>
@@ -24,10 +23,13 @@ require 'includes/config.php';
 		<?php
 			//Perskaitome katalogo turinį
 			$usersDirectory = "./files/".$_SESSION['nick'];
+			
+			
 			$fileList = scandir($usersDirectory);
-
-			//Spausdiname katalogo turinį kaip href
-			//TODO: Reiks nekvailai padaryt, kad sortintu pagal įkėlimo datą!
+			chdir($usersDirectory);
+			array_multisort(array_map('filemtime', ($fileList = glob("*.*"))), SORT_DESC, $fileList);
+			chdir("../..");
+			
 			$thereAreNoFiles = true;
 		?>
 		<div class="file-nav">
@@ -177,7 +179,6 @@ require 'includes/config.php';
           </div>
 
 					<?php
-
 						/*
 						//TODO: Automatiškai nesukuria vartotojui katalogo, kolkas jį manualiai reik sukurt, pagal vartotojo nick!
 
