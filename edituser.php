@@ -53,7 +53,7 @@ require 'includes/config.php';
 	        	echo "<option value='1' selected>Suspended</option>";
 	        }
 	        echo "</select><br>";
-	        echo "<button name='submit' class='changebox-button'>Edit</button><br>";
+	        echo "<button name='edit-user-submit' class='changebox-button'>Edit</button><br>";
 	        echo "</form>";
 	    }
 
@@ -62,7 +62,7 @@ require 'includes/config.php';
 		    echo "ERROR. User does not exist!<br>"; //klaida kurios neturetu buti niekada, bet del viso pikto
 		}
 
-		if(isset($_POST['submit']))
+		if(isset($_POST['edit-user-submit']))
 		{
 			// echo $userID."<br>";
 			// echo $_POST['nick']."<br>";
