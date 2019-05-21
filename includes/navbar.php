@@ -34,14 +34,14 @@
 				//Logika vykdoma po UPLOAD paspaudimo
 
 				//FAILAS issaugo files/nick kataloge!
-				// if (isset($_POST['submit']))
-				// {
-				// 	echo FileUpload(); //backend/FileUpload.php
-				// }
-    //     if (isset($_FILES['attachments']))
-    //     {
-    //       echo FileUpload();
-    //     }
+				if (isset($_POST['submit']))
+				{
+					echo FileUpload(); //backend/FileUpload.php
+				}
+        if (isset($_FILES['attachments']))
+        {
+          echo FileUpload();
+        }
 				?>
 
 
