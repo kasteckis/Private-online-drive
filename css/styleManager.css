@@ -132,6 +132,21 @@ ul.file-nav-list {
   width: 100%;
 }
 
+.btn-link{
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  color: #A8A8A8;
+  width: 100%;
+  padding: 0;
+  text-decoration: underline;
+  font-family: inherit;
+  font-size: inherit;
+  text-align:left;
+  text-decoration: none;
+}
+
 .file-nav-list a {
   padding-left: 10%;
 }
@@ -156,6 +171,7 @@ ul.file-nav-list {
 .file-nav-list a:link, .file-nav-list a:visited, .file-nav-list a:focus {
   color: #A8A8A8;
   background: #484848;
+
 }
 
 .file-nav-list a:hover {
@@ -167,6 +183,8 @@ ul.file-nav-list {
 .nav-checkbox {
   float: right;
 }
+
+
 
 /* Main display */
 .main-display {
