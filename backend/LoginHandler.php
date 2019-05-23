@@ -68,6 +68,11 @@
 		  		// output data of each row
 			    while($row = mysqli_fetch_assoc($getUserInformationResults))
 			    {
+			    	if($row['suspended'] == 1)
+			    	{
+			    		echo "<h1 class='login-error'><font color='red' size='5'><b>Your account is suspended by administrator!"."</b></font></h1><br>";
+			    		break;
+			    	}
 					if(password_verify($password, $row['password']))
 					{
 						$_SESSION['id'] = $row['id'];
@@ -144,7 +149,6 @@
 						}
 
 						// ---
-						UploadLog("Tried to connect to ".$username." account and failed!");
 						echo "<h1 class='login-error'>".$wrongPassword."</h1>";
 						//return "Blogas slaptažodis<br>";
 						return null;
