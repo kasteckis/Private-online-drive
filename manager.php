@@ -23,13 +23,13 @@ require 'includes/config.php';
 		<?php
 			//Perskaitome katalogo turinį
 			$usersDirectory = "./files/".$_SESSION['nick'];
-			
-			
+
+
 			$fileList = scandir($usersDirectory);
 			chdir($usersDirectory);
 			array_multisort(array_map('filemtime', ($fileList = glob("*.*"))), SORT_DESC, $fileList);
 			chdir("../..");
-			
+
 			$thereAreNoFiles = true;
 		?>
 		<div class="file-nav">
@@ -45,22 +45,25 @@ require 'includes/config.php';
 								$thereAreNoFiles = false;
 							}
 
+							echo "</ul>";
+							// files (".$row['tillWhen'].")
 
 							$yourId = $_SESSION['id'];
 							$currDate = date('Y-m-d H:i:s');
-							$sqlCheckIfAnyoneIsSharing = "SELECT * FROM SharedFiles 
+							$sqlCheckIfAnyoneIsSharing = "SELECT * FROM SharedFiles
 														  JOIN Users ON fileOwnerId=Users.id
 													 	  WHERE otherId='$yourId' and tillWhen>'$currDate'";
 
 							$resultsCheckIfAnyoneIsSharing = mysqli_query($conn, $sqlCheckIfAnyoneIsSharing);
 
-							if (mysqli_num_rows($resultsCheckIfAnyoneIsSharing) > 0) 
+							if (mysqli_num_rows($resultsCheckIfAnyoneIsSharing) > 0)
 							{
-								echo "<br><br><font color='red'>Users that are sharing files with you:</font><br>";
+								echo "<h2>Shared files</h2>";
+								echo "<ul class='file-nav-list'>";
 								echo "<form method='post'>";
-							    while($row = mysqli_fetch_assoc($resultsCheckIfAnyoneIsSharing)) 
+							    while($row = mysqli_fetch_assoc($resultsCheckIfAnyoneIsSharing))
 							    {
-							        echo "<button name='".$row['nick']."'>View</button> ".$row['nick']." files (".$row['tillWhen'].")<br>";
+							        echo "<li><a><button class='btn-link' name='".$row['nick']."'>".$row['nick']."	(".$row['tillWhen'].")</button></a></li>";
 							        if(isset($_POST[$row['nick']]))
 							        {
 							        	$_SESSION['viewingFiles'] = $row['nick'];
@@ -69,10 +72,11 @@ require 'includes/config.php';
 							        }
 							    }
 							    echo "</form>";
+									echo "</ul>";
 							}
 
 							?>
-				</ul>
+
 		</div>
 	</div>
 
