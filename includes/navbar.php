@@ -32,7 +32,6 @@
 			}
 		}
 				//Logika vykdoma po UPLOAD paspaudimo
-
 				//FAILAS issaugo files/nick kataloge!
 				if (isset($_POST['submit']))
 				{

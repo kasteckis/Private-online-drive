@@ -6,7 +6,7 @@ require 'includes/config.php';
 <body>
 <?php
 
-	if($_SESSION['status'] == "admin")
+	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
 	{
 		?>
 		<div class="containers">
@@ -24,28 +24,49 @@ require 'includes/config.php';
 						echo "<select name='user'>";
 						while($row = mysqli_fetch_assoc($resultsGetUserListWithoutAdmins)) 
 						{
+							if($row['id'] == $_SESSION['id']) // kad nerodytu saves liste
+								continue;
 							echo "<option value='".$row['id']."'>".$row['nick']."</option>";
 						}
 						echo "</select><br>";
 						echo "<input name='dateTillWhen' placeholder='Date till when' value='".date('Y-m-d H:i:s', strtotime('+1 hour'))."'></input><br>";
 
-						echo "<button name='submit'>Share files</button>";
+						echo "<button name='submitShare'>Share files</button>";
 						echo "</form>";
 
-						if(isset($_POST['submit']))
+						if(isset($_POST['submitShare']))
 						{
 							$currDate = date('Y-m-d H:i:s');
 							$tillWhenDate = mysqli_real_escape_string($conn, $_POST['dateTillWhen']);
 							$fileOwnerId = $_SESSION['id'];
 							$myId = $_POST['user'];
-							$sqlInsert = "INSERT INTO SharedFiles (whenCreated, tillWhen, fileOwnerId, otherId) VALUES ('$currDate', '$tillWhenDate', '$fileOwnerId', '$myId')";
-							if(mysqli_query($conn, $sqlInsert))
+
+							$canIInsert = true;
+
+							// VALIDATION ------ (prevents user from double,triple,... sharing files)
+
+							$sqlCheckIfImSharing = "SELECT * FROM SharedFiles WHERE otherId='$myId' AND fileOwnerId='$fileOwnerId' AND tillWhen>'$currDate'";
+							$resultsCheckIfImSharing = mysqli_query($conn, $sqlCheckIfImSharing);
+							if (mysqli_num_rows($resultsCheckIfImSharing) > 0) 
+								$canIInsert = false;
+
+							// ---------
+
+							if($canIInsert)
 							{
-								echo "You have succesfully shared your files!<br>";
+								$sqlInsert = "INSERT INTO SharedFiles (whenCreated, tillWhen, fileOwnerId, otherId) VALUES ('$currDate', '$tillWhenDate', '$fileOwnerId', '$myId')";
+								if(mysqli_query($conn, $sqlInsert))
+								{
+									echo "You have succesfully shared your files!<br>";
+								}
+								else
+								{
+									echo "Error!".mysqli_error($conn);
+								}
 							}
 							else
 							{
-								echo "Error!".mysqli_error($conn);
+								echo "<font color='red'>You are currently sharing your files with this user!</font><br>";
 							}
 						}
 

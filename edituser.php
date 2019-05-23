@@ -5,17 +5,14 @@ require 'includes/config.php';
 
 <body>
 <?php
-
 	if($_SESSION['status'] == "admin")
 	{
     ?>
     <div class="container">
       <?php
       include 'includes/navbar.php';
-
 		$sqlGetMember = "SELECT * FROM Users WHERE id=".$_SESSION['editableUser'];
 		$resultGetMember = mysqli_query($conn, $sqlGetMember);
-
 		$doesUserExist = false;
 		$userID = null;
 		$oldNick = null;
@@ -32,7 +29,6 @@ require 'includes/config.php';
 	        echo "<input name='nick' placeholder='nickname' value=".$row['nick']."></input><br>";
 	        echo "<input name='email' placeholder='Email' value=".$row['email']."></input><br>";
 	        echo "<input type='password' name='password' placeholder='password'></input> If not changed, password will stay the same<br>";
-
 	        echo "<select name='status'>";
 	        echo "<option value='user'>User</option>";
 	        if($row['status'] == "user")
@@ -40,7 +36,6 @@ require 'includes/config.php';
 	        else
 	        	echo "<option value='admin' selected>Admin</option>";
 	        echo "</select><br>";
-
 	        echo "<select name='suspended'>";
 	        if($row['suspended'] == "0")
 	        {
@@ -56,38 +51,29 @@ require 'includes/config.php';
 	        echo "<button name='edit-user-submit' class='changebox-button'>Edit</button><br>";
 	        echo "</form>";
 	    }
-
 		if(!$doesUserExist)
 		{
 		    echo "ERROR. User does not exist!<br>"; //klaida kurios neturetu buti niekada, bet del viso pikto
 		}
-
 		if(isset($_POST['edit-user-submit']))
 		{
 			// echo $userID."<br>";
 			// echo $_POST['nick']."<br>";
 			// echo $_POST['password']."<br>";
 			// echo $_POST['suspended']."<br>";
-
 			$newNick = mysqli_real_escape_string($conn, $_POST['nick']);
 			$newPassword = mysqli_real_escape_string($conn, $_POST['password']);
 			$newSuspension = mysqli_real_escape_string($conn, $_POST['suspended']);
 			$newStatus = mysqli_real_escape_string($conn, $_POST['status']);
 			$newEmail = mysqli_real_escape_string($conn, $_POST['email']);
-
 			$hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT); //encryptinimas
-
 			//VALIDACIJA
-
 			$validationAccepted = true;
-
-
 			// reiskia naudojam sena slaptazodi
 			if(strlen($newPassword) == 0)
 			{
 				$hashedPassword = $oldHashedPassword;
 			}
-
 			//Jeigu yra keiciamas userio nick, butina patikrinti ar kitokiu tokiu nera
 			if($oldNick != $newNick)
 			{
@@ -99,10 +85,7 @@ require 'includes/config.php';
 					$validationAccepted = false;
 				}
 			}
-
-
 			// ----- VALIDACIJOS PABAIGA
-
 			if($validationAccepted)
 			{
 				$sqlUpdate = "UPDATE Users SET nick='$newNick', password='$hashedPassword', status='$newStatus', suspended='$newSuspension', email='$newEmail' WHERE id='$userID'";
@@ -125,7 +108,6 @@ require 'includes/config.php';
 		echo '<meta http-equiv="refresh" content="0; url=./errorAuthorization.shtml" />';
 		echo "You are not authorised to view this page!<br>";
 	}
-
 ?>
 </div>
 

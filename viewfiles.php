@@ -7,7 +7,7 @@ require 'includes/config.php';
 <body>
 <?php
 
-	if($_SESSION['status'] == "admin")
+	if($_SESSION['status'] == "admin" || $_SESSION['specAccesToViewFile'] > date('Y-m-d H:i:s'))
 	{
     ?>
     <div class="container">
@@ -37,8 +37,9 @@ require 'includes/config.php';
 
         echo '<div class="file-list">';
           echo "<i class='far fa-file'></i>
-    			<a href='./files/".$_SESSION['viewingFiles']."/".$value."'>".$value."</a>
-          <input type='checkbox' class='list-check' name='selectedItemsToDelete[]' value='".$value."'>";
+    			<a href='./files/".$_SESSION['viewingFiles']."/".$value."'>".$value."</a>";
+    			if(!($_SESSION['specAccesToViewFile'] > date('Y-m-d H:i:s')))
+          echo "<input type='checkbox' class='list-check' name='selectedItemsToDelete[]' value='".$value."'>";
         echo '</div>';
 
 
@@ -49,7 +50,8 @@ require 'includes/config.php';
 
 		if(!$thereAreNoFiles)
 		{
-			echo "<button type='submit' class='changebox-button' name='delete'>Delete selected</button><br>";
+			if(!($_SESSION['specAccesToViewFile'] > date('Y-m-d H:i:s')))
+				echo "<button type='submit' class='changebox-button' name='delete'>Delete selected</button><br>";
 		}
 		echo "</form>";
 

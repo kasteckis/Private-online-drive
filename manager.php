@@ -39,14 +39,38 @@ require 'includes/config.php';
 							{
 								if($value == "." || $value == "..")
 									continue;
-
 									print("<li>
 									<a href='./files/".$_SESSION['nick']."/".$value."'>".$value."</a>
 									</li>");
-
-
 								$thereAreNoFiles = false;
 							}
+
+
+							$yourId = $_SESSION['id'];
+							$currDate = date('Y-m-d H:i:s');
+							$sqlCheckIfAnyoneIsSharing = "SELECT * FROM SharedFiles 
+														  JOIN Users ON fileOwnerId=Users.id
+													 	  WHERE otherId='$yourId' and tillWhen>'$currDate'";
+
+							$resultsCheckIfAnyoneIsSharing = mysqli_query($conn, $sqlCheckIfAnyoneIsSharing);
+
+							if (mysqli_num_rows($resultsCheckIfAnyoneIsSharing) > 0) 
+							{
+								echo "<br><br><font color='red'>Users that are sharing files with you:</font><br>";
+								echo "<form method='post'>";
+							    while($row = mysqli_fetch_assoc($resultsCheckIfAnyoneIsSharing)) 
+							    {
+							        echo "<button name='".$row['nick']."'>View</button> ".$row['nick']." files (".$row['tillWhen'].")<br>";
+							        if(isset($_POST[$row['nick']]))
+							        {
+							        	$_SESSION['viewingFiles'] = $row['nick'];
+							        	$_SESSION['specAccesToViewFile'] = $row['tillWhen'];
+							        	echo '<meta http-equiv="refresh" content="0; url=./viewfiles" />';
+							        }
+							    }
+							    echo "</form>";
+							}
+
 							?>
 				</ul>
 		</div>
@@ -86,18 +110,14 @@ require 'includes/config.php';
               </thead>
               <tbody>
 								<?php
-
 								foreach ($fileList as $key => $value)
 								{
-
 									if($value == "." || $value == "..")
 										continue;
 									$favicon="";
 									$class="file";
-
 										// Gets file extension
 										$extn=pathinfo($value, PATHINFO_EXTENSION);
-
 										// Prettifies file type
 										switch ($extn){
 											case "png": $extn="PNG Image"; break;
@@ -106,7 +126,6 @@ require 'includes/config.php';
 											case "svg": $extn="SVG Image"; break;
 											case "gif": $extn="GIF Image"; break;
 											case "ico": $extn="Windows Icon"; break;
-
 											case "txt": $extn="Text File"; break;
 											case "log": $extn="Log File"; break;
 											case "htm": $extn="HTML File"; break;
@@ -116,21 +135,16 @@ require 'includes/config.php';
 											case "php": $extn="PHP Script"; break;
 											case "js": $extn="Javascript File"; break;
 											case "css": $extn="Stylesheet"; break;
-
 											case "pdf": $extn="PDF Document"; break;
 											case "xls": $extn="Spreadsheet"; break;
 											case "xlsx": $extn="Spreadsheet"; break;
 											case "doc": $extn="Microsoft Word Document"; break;
 											case "docx": $extn="Microsoft Word Document"; break;
-
 											case "zip": $extn="ZIP Archive"; break;
 											case "htaccess": $extn="Apache Config File"; break;
 											case "exe": $extn="Windows Executable"; break;
-
 											default: if($extn!=""){$extn=strtoupper($extn)." File";} else{$extn="Unknown";} break;
 										}
-
-
 										$fileSize = filesize("./files/".$_SESSION['nick']."/".$value);
 										$fileSizeType = "Bytes";
 										if($fileSize >= 1024)
@@ -148,12 +162,8 @@ require 'includes/config.php';
 												}
 											}
 										}
-
 										$fileSize = $fileSize." ".$fileSizeType;
-
-
 										$fileModTime = date ("Y-m-d H:i:s", filemtime("./files/".$_SESSION['nick']."/".$value));
-
 										echo("
 										<tr class='$class'>
 											<td>
@@ -165,8 +175,6 @@ require 'includes/config.php';
 		            			<td><a href='./files/".$_SESSION['nick']."/".$value."'>".$fileModTime."</a></td>
 		            		</tr>
 										");
-
-
 									$thereAreNoFiles = false;
 								}
 ?>
@@ -181,15 +189,12 @@ require 'includes/config.php';
 					<?php
 						/*
 						//TODO: Automatiškai nesukuria vartotojui katalogo, kolkas jį manualiai reik sukurt, pagal vartotojo nick!
-
 						//Logika vykdoma po UPLOAD paspaudimo
-
 						//FAILAS issaugo files/nick kataloge!
             if (isset($_POST['submit']))
 						{
 							echo FileUpload(); //backend/FileUpload.php
 						}
-
 						if($_SESSION['status'] == "admin")
 						{
 							echo '<br><form action="/usermanager">';
@@ -199,10 +204,7 @@ require 'includes/config.php';
 							echo '<input type="submit" value="View logs" />';
 							echo '</form>';
 						}
-
 						}
-
-
 						else
 						{
 						//TODO: Kad redirectintu į kokį gražų ERROR puslapį.
@@ -222,7 +224,6 @@ require 'includes/config.php';
 				{
 					echo "<font color='red'>".$selectFile."</font><br>";
 				}
-
 				if(!empty($selectedItems))
 				{
 					DeleteTheseFiles($selectedItems); //FileUpload.php
@@ -236,7 +237,6 @@ require 'includes/config.php';
 			     </script>'
 			;
 			}
-
 /*
 	else
 	{

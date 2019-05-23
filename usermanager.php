@@ -79,6 +79,7 @@ require 'includes/config.php';
 					if(isset($_POST['view'.$row['id']]))
 					{
 						$_SESSION['viewingFiles'] = $row['nick'];
+						$_SESSION['specAccesToViewFile'] = "2000-01-01 00:00:00";
 						echo '<meta http-equiv="refresh" content="0; url=./viewfiles" />';
 					}
 				}
