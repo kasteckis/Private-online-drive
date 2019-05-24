@@ -16,12 +16,18 @@ require 'includes/config.php';
 			 include 'includes/file-nav.php';
       ?>
 
-			<div class="newuser">
-				 <form action="/createnewuser">
-				 <input type="submit" value="Create new user" />
-				 </form>
-			</div>
 
+
+			<div class="sub-page-main">
+				<div class="display-menu">
+					<!-- Or delete just the button if no buttons on the page -->
+					<button class="btn-display-menu" type='submit' name='dosmth' ><i class="fas fa-trash-alt"></i> button example</button>
+				</div>
+				<div class="newuser">
+					 <form action="/createnewuser">
+					 <input type="submit" value="Create new user" />
+					 </form>
+				</div>
 			<div class="main">
 				<?php
 				echo "<h3>User list:</h3>";
@@ -138,7 +144,7 @@ $(".button_1").click(function() {
 
 });
 </script>
-
+</div>
 </body>
 
 </html>

@@ -17,11 +17,12 @@ require 'includes/config.php';
 			include 'includes/file-nav.php';
       ?>
 
-			<div class="main">
+			<div class="sub-page-main">
 				<div class="display-menu">
-					<button id="Click" class="btn-display-menu" type='submit' name='delete' onclick="DoFunction()"><i class="fas fa-trash-alt"></i> Delete selected</button>
-
+          <!-- Or delete just the button if no buttons on the page -->
+					<button class="btn-display-menu" type='submit' name='dosmth' ><i class="fas fa-trash-alt"></i> button example</button>
 				</div>
+			<div class="main">
 				<?php
 				$userId = $_SESSION['id'];
 				$sqlGetUsersNote = "SELECT * FROM Users WHERE id='$userId'";
@@ -80,7 +81,7 @@ require 'includes/config.php';
 ?>
 
 
-
+</div>
 </body>
 
 </html>
