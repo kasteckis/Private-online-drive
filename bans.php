@@ -11,8 +11,17 @@ require 'includes/config.php';
 		?>
 		<div class="container">
       <?php
+			$page='bans';
       include 'includes/navbar.php';
+			include 'includes/file-nav.php';
 
+			?>
+			<div class="sub-page-main">
+				<div class="display-menu">
+          <!-- Or delete just the button if no buttons on the page -->
+					<button class="btn-display-menu" type='submit' name='dosmth' ><i class="fas fa-trash-alt"></i> button example</button>
+				</div>
+				<?php
       echo '<div class="main">';
 
 			    $sqlGetBans = "SELECT * FROM BadLogins ORDER BY lastLogin DESC";
@@ -63,7 +72,7 @@ require 'includes/config.php';
 
 
 				?>
-
+			</div>
 			</div>
 			<?php
 

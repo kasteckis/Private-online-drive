@@ -11,18 +11,25 @@ require 'includes/config.php';
 		?>
 		<div class="containers">
       <?php
+			$page='share';
       include 'includes/navbar.php';
+			include 'includes/file-nav.php';
       ?>
+			<div class="sub-page-main">
+				<div class="display-menu">
+          <!-- Or delete just the button if no buttons on the page -->
+					<button class="btn-display-menu" type='submit' name='dosmth' ><i class="fas fa-trash-alt"></i> button example</button>
+				</div>
 			<div class="main">
 				<?php
 					echo "Choose a user with who you want to share your files and specify date till when your directory will be available to him!<br>";
 					$sqlGetUserListWithoutAdmins = "SELECT * FROM Users WHERE status!='admin'";
 					$resultsGetUserListWithoutAdmins = mysqli_query($conn, $sqlGetUserListWithoutAdmins);
-					if (mysqli_num_rows($resultsGetUserListWithoutAdmins) > 0) 
+					if (mysqli_num_rows($resultsGetUserListWithoutAdmins) > 0)
 					{
 						echo "<form method='POST'>";
 						echo "<select name='user'>";
-						while($row = mysqli_fetch_assoc($resultsGetUserListWithoutAdmins)) 
+						while($row = mysqli_fetch_assoc($resultsGetUserListWithoutAdmins))
 						{
 							if($row['id'] == $_SESSION['id']) // kad nerodytu saves liste
 								continue;
@@ -47,7 +54,7 @@ require 'includes/config.php';
 
 							$sqlCheckIfImSharing = "SELECT * FROM SharedFiles WHERE otherId='$myId' AND fileOwnerId='$fileOwnerId' AND tillWhen>'$currDate'";
 							$resultsCheckIfImSharing = mysqli_query($conn, $sqlCheckIfImSharing);
-							if (mysqli_num_rows($resultsCheckIfImSharing) > 0) 
+							if (mysqli_num_rows($resultsCheckIfImSharing) > 0)
 								$canIInsert = false;
 
 							// ---------
@@ -72,26 +79,26 @@ require 'includes/config.php';
 
 						$currUserId = $_SESSION['id'];
 						$currDate = date('Y-m-d H:i:s');
-						$sqlGetUsersWithWhoYouAreSharingFiles = "SELECT nick, tillWhen, SharedFiles.id  
+						$sqlGetUsersWithWhoYouAreSharingFiles = "SELECT nick, tillWhen, SharedFiles.id
 																FROM SharedFiles
 																JOIN Users ON Users.id=SharedFiles.otherId
 																WHERE fileOwnerId='$currUserId' AND
 																tillWhen>'$currDate'
 																ORDER BY tillWhen";
 						$resultsGetUsersWithWhoYouAreSharingFiles = mysqli_query($conn, $sqlGetUsersWithWhoYouAreSharingFiles);
-						if (mysqli_num_rows($resultsGetUsersWithWhoYouAreSharingFiles) > 0) 
+						if (mysqli_num_rows($resultsGetUsersWithWhoYouAreSharingFiles) > 0)
 						{
 							echo "You are currently sharing files with:<br>";
 							echo "<form method='POST'>";
 							echo "<table>";
-							echo "<tr>"; 
+							echo "<tr>";
 							echo "<th>User</th>";
 							echo "<th>Till when</th>";
 							echo "<th>Delete</th>";
 							echo "</tr>";
-							while($row = mysqli_fetch_assoc($resultsGetUsersWithWhoYouAreSharingFiles)) 
+							while($row = mysqli_fetch_assoc($resultsGetUsersWithWhoYouAreSharingFiles))
 							{
-								echo "<tr>"; 
+								echo "<tr>";
 								echo "<td>".$row['nick']."</td>";
 								echo "<td>".$row['tillWhen']."</td>";
 								echo "<td><button name='del".$row['id']."'>X</button></td>";
@@ -118,13 +125,14 @@ require 'includes/config.php';
 						{
 							echo "You are not sharing your files with any user!<br>";
 						}
-					} 
-					else 
+					}
+					else
 					{
 						echo "There are no available users!<br>";
 					}
 				?>
 			</div>
+		</div>
 		</div>
 		<?php
 	}
