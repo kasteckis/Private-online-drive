@@ -8,6 +8,7 @@ require 'includes/config.php';
   //Ar sitas turi per visa puslapi eiti ar ne?
 	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
 	{
+		$page='manager';
     include 'includes/navbar.php';
   }
   else

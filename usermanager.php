@@ -11,16 +11,14 @@ require 'includes/config.php';
 		?>
 		<div class="container">
       <?php
+			$page='usermanager';
        include 'includes/navbar.php';
       ?>
 
 			<div class="newuser">
-				<?php
-				//Mygtukas sukurti useri jauna
-				echo '<form action="/createnewuser">';
-				echo '<input type="submit" value="Create new user" />';
-				echo '</form>';
-				?>
+				 <form action="/createnewuser">
+				 <input type="submit" value="Create new user" />
+				 </form>
 			</div>
 
 			<div class="main">

@@ -11,6 +11,7 @@ require 'includes/config.php';
 		?>
 		<div class="container">
       <?php
+			$page='bans';
       include 'includes/navbar.php';
 
       echo '<div class="main">';

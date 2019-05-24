@@ -10,6 +10,7 @@ require 'includes/config.php';
     ?>
     <div class="container">
       <?php
+			$page='usermanager';
       include 'includes/navbar.php';
 		$sqlGetMember = "SELECT * FROM Users WHERE id=".$_SESSION['editableUser'];
 		$resultGetMember = mysqli_query($conn, $sqlGetMember);

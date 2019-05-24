@@ -12,6 +12,7 @@ require 'includes/config.php';
 		<div class="container">
 
       <?php
+			$page='notes';
       include 'includes/navbar.php';
       ?>
 

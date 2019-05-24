@@ -12,9 +12,10 @@ require 'includes/config.php';
 		<div class="container">
 
       <?php
+			$page='usermanager';
       include 'includes/navbar.php';
       ?>
-      
+
 			<div class="box">
 				<?php
 				echo "<h3>Create new user</h3>";

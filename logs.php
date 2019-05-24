@@ -11,6 +11,7 @@ require 'includes/config.php';
 		?>
 		<div class="containers">
       <?php
+			$page='logs';
       include 'includes/navbar.php';
       ?>
 			<div class="main">
