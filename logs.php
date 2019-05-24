@@ -13,6 +13,7 @@ require 'includes/config.php';
       <?php
 			$page='logs';
       include 'includes/navbar.php';
+			include 'includes/file-nav.php';
       ?>
 			<div class="main">
 				<?php

@@ -13,6 +13,7 @@ require 'includes/config.php';
       <?php
 			$page='usermanager';
        include 'includes/navbar.php';
+			 include 'includes/file-nav.php';
       ?>
 
 			<div class="newuser">

@@ -13,6 +13,7 @@ require 'includes/config.php';
       <?php
 			$page='bans';
       include 'includes/navbar.php';
+			include 'includes/file-nav.php';
 
       echo '<div class="main">';
 

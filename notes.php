@@ -14,9 +14,14 @@ require 'includes/config.php';
       <?php
 			$page='notes';
       include 'includes/navbar.php';
+			include 'includes/file-nav.php';
       ?>
 
 			<div class="main">
+				<div class="display-menu">
+					<button id="Click" class="btn-display-menu" type='submit' name='delete' onclick="DoFunction()"><i class="fas fa-trash-alt"></i> Delete selected</button>
+
+				</div>
 				<?php
 				$userId = $_SESSION['id'];
 				$sqlGetUsersNote = "SELECT * FROM Users WHERE id='$userId'";
