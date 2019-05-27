@@ -33,5 +33,9 @@
 	{
 		$_SESSION['viewingFiles'] = null;
 	}
+	if(!isset($_SESSION['specAccesToViewFile']))
+	{
+		$_SESSION['specAccesToViewFile'] = "2000-01-01 00:00:00";
+	}
 
 ?>

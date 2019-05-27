@@ -1,24 +1,7 @@
 <?php
-session_start();
-require 'includes/mysql_connection.php';
+include 'includes/header.php';
 require 'includes/config.php';
-
-//Includins visus skriptus is backendo, nežinau ar funkcijas į vieną .php failą kraut ar į atskirus
-foreach(glob("backend/*.php") as $back)
-{
-    require $back;
-}
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title><?php echo $WebsiteTitle; ?></title>
-<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" /> 
-<link rel="stylesheet" href="css/styleNotes.css"> 
-
-</head>
 
 <body>
 <?php
@@ -26,13 +9,20 @@ foreach(glob("backend/*.php") as $back)
 	if($_SESSION['status'] == "admin")
 	{
 		?>
-		<div class="background">
-			<div class="back">
+		<div class="container">
+      <?php
+			$page='bans';
+      include 'includes/navbar.php';
+			include 'includes/file-nav.php';
+
+			?>
+			<div class="sub-page-main">
+				<div class="display-menu">
+          <!-- Or delete just the button if no buttons on the page -->
+					<!--<button class="btn-display-menu" type='submit' name='dosmth' ><i class="fas fa-trash-alt"></i> button example</button>-->
+				</div>
 				<?php
-				//Mygtukas atgal
-				echo '<form action="/manager">';
-				echo '<input type="submit" value="Back" />';
-				echo '</form>';
+      echo '<div class="main">';
 
 			    $sqlGetBans = "SELECT * FROM BadLogins ORDER BY lastLogin DESC";
 			    $resultsGetBans = mysqli_query($conn, $sqlGetBans);
@@ -55,7 +45,7 @@ foreach(glob("backend/*.php") as $back)
 				        echo "<td>".$row['tries']."</td>";
 				        echo "<td>".$row['bannedTill']."</td>";
 				        echo "<td>".$row['lastLogin']."</td>";
-				        echo "<td><button name=".$row['id'].">X</button></td>";
+				        echo "<td><button name=".$row['id']." class='butonas'>X</button></td>";
 				        echo "</tr>";
 
 				        if(isset($_POST[$row['id']]))
@@ -74,15 +64,15 @@ foreach(glob("backend/*.php") as $back)
 				    }
 				    echo "</table>";
 				    echo "</form>";
-				} 
-				else 
+				}
+				else
 				{
 				    echo "There are no banned IP's!<br>";
 				}
 
 
 				?>
-
+			</div>
 			</div>
 			<?php
 
@@ -96,7 +86,7 @@ foreach(glob("backend/*.php") as $back)
 ?>
 
 
-
+</div>
 </body>
 
 </html>

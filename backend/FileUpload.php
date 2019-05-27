@@ -27,10 +27,12 @@
 	{
 		//Logika vykdoma po UPLOAD paspaudimo
 		//FAILAS issaugo files/nick kataloge!
+
 		$msg = "";
 		$targetFile = "files/".$_SESSION['nick']."/" . basename($_FILES['attachments']['name'][0]);
-		if (file_exists($targetFile))
-				$msg = array("status" => 0, "msg" => "File already exists!");
+		if (file_exists($targetFile)) {
+			$msg = array("status" => 0, "msg" => "File already exists!");
+		}
 		else if (move_uploaded_file($_FILES['attachments']['tmp_name'][0], $targetFile))
 				$msg = array("status" => 1, "msg" => "File has been Uploaded", "path" => $targetFile);
 

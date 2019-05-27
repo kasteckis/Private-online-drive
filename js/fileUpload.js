@@ -1,3 +1,4 @@
+
 $(function () {
   var files = $("#files");
 
@@ -7,19 +8,32 @@ $(function () {
     dataType: 'json',
     autoUpload: false
   }).on('fileuploadadd', function (e, data) {
-/*    var fileTypeAllowed = /.\.(gif|jpg|png|jpeg)$/i;
+    var fileTypeNotAllowed = /.\.(html|php)$/i;
     var fileName = data.originalFiles[0]['name'];
     var fileSize = data.originalFiles[0]['size'];
-    if (!fileTypeAllowed.test(fileName))
-      $("#error").html("Only images are allowed");
-    else if (fileSize > 500000)
-      $("#error").html("Your file is too big!")
+    if (fileTypeNotAllowed.test(fileName))
+		{
+			document.getElementById('progressBar').style.display = "none";
+			document.getElementById('error').style.display = "none";
+			document.getElementById('cancel').style.display = "none";
+			document.getElementById('progress').style.display = "none";
+			document.getElementById('FileLabel').style.display = "none";
+			swal ( "Oops" ,  "File type is not supported" ,  "error" );
+		}
+    else if (fileSize > belekas)
+		{
+			swal ( "Oops" ,  "Your file is too big! Maximum size: 15 MB" ,  "error" );
+			document.getElementById('progressBar').style.display = "none";
+			document.getElementById('error').style.display = "none";
+			document.getElementById('cancel').style.display = "none";
+			document.getElementById('progress').style.display = "none";
+			document.getElementById('FileLabel').style.display = "none";
+		}
     else {
       $("#error").html("");
       data.submit();
-    } */
+    }
 
-    data.submit();
   }).on('fileuploaddone', function (e, data) {
     // on fileuploaddone...
 
@@ -30,18 +44,26 @@ $(function () {
       bar.value = progress;
       if (progress == 100)
       {
-        $("#error").html("Uploaded succesfully!");
-        // location.reload(true);
+				document.getElementById('cancel').style.display = "none";
+				swal("Great!", "Files Uploaded succesfully!", "success")
+				.then((value) => {
+				  location.reload(true);
+				});
       }
   });
 });
+
+			var fileLabelText = document.getElementById("FileLabel");
+
 
       function overrideDefault(event) {
         event.preventDefault();
         event.stopPropagation();
         document.getElementById('progressBar').style.display = "none";
         document.getElementById('error').style.display = "none";
+				document.getElementById('cancel').style.display = "none";
         document.getElementById('progress').style.display = "none";
+				document.getElementById('FileLabel').style.display = "none";
         // document.getElementById('img-upload').style.display = "none";
         $("#error").html("");
       }
@@ -62,12 +84,21 @@ $(function () {
         document.getElementById('progressBar').style.display = "inline";
         document.getElementById('error').style.display = "inline";
         document.getElementById('progress').style.display = "inline";
+				document.getElementById('cancel').style.display = "inline";
       }
+
+			document.getElementById("Click").onclick = function () {
+
+				};
+
+			function Check(event) {
+				swal("Great!", "Files Uploaded succesfully!", "success");
+			}
 
       function showFiles(files) {
         if (files.length > 1) {
-          fileLabelText.innerText = files.length + " files selected";
+          FileLabel.innerText = files.length + " files selected";
         } else {
-          fileLabelText.innerText = files[0].name;
+          FileLabel.innerText = files[0].name;
         }
       }

@@ -1,42 +1,29 @@
 <?php
-session_start();
-require 'includes/mysql_connection.php';
+include 'includes/header.php';
 require 'includes/config.php';
-
-//Includins visus skriptus is backendo, nežinau ar funkcijas į vieną .php failą kraut ar į atskirus
-foreach(glob("backend/*.php") as $back)
-{
-    require $back;
-}
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title><?php echo $WebsiteTitle; ?></title>
-<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
-<link rel="stylesheet" href="css/styleSettings.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-
-</head>
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"> -->
 
 <body>
 <?php
 
-	if($_SESSION['status'] == "admin")
+	if($_SESSION['status'] == "admin" || $_SESSION['specAccesToViewFile'] > date('Y-m-d H:i:s'))
 	{
     ?>
-    <div class="background">
-			<div class="back">
-        <?php
-		//Mygtukas atgal
-		echo '<form action="/usermanager">';
-	    echo '<input type="submit" value="Back" />';
-		echo '</form><br><br>';
-    ?>
-    </div>
-    <?php
+    <div class="container">
+      <?php
+			$page='usermanager';
+      include 'includes/navbar.php';
+			include 'includes/file-nav.php';
+
+			?>
+			<div class="sub-page-main">
+				<div class="display-menu">
+					<!-- Or delete just the button if no buttons on the page -->
+				</div>
+			<?php
+
+      echo "<div class='main'>";
 		// apsaugos jeigu useris cia pateko be sesijos reiksmes
 		if($_SESSION['viewingFiles'] == null)
 		{
@@ -47,7 +34,7 @@ foreach(glob("backend/*.php") as $back)
 		$usersDirectory = "./files/".$_SESSION['viewingFiles'];
 		$fileList = scandir($usersDirectory);
     echo "<h2>Viewing <b>".$_SESSION['viewingFiles']."</b> files!</h2>";
-    echo '<div class="changebox">';
+    echo '<div class="changebox1">';
 
 		echo "<form method='POST'>";
 		$thereAreNoFiles = true;
@@ -57,9 +44,11 @@ foreach(glob("backend/*.php") as $back)
 				continue;
 
         echo '<div class="file-list">';
+				if(!($_SESSION['specAccesToViewFile'] > date('Y-m-d H:i:s')))
+				echo "<input type='checkbox' class='list-check' name='selectedItemsToDelete[]' value='".$value."'>";
           echo "<i class='far fa-file'></i>
-    			<a href='./files/".$_SESSION['viewingFiles']."/".$value."'>".$value."</a>
-          <input type='checkbox' class='list-check' name='selectedItemsToDelete[]' value='".$value."'>";
+    			<a href='./files/".$_SESSION['viewingFiles']."/".$value."'>".$value."</a>";
+
         echo '</div>';
 
 
@@ -70,7 +59,8 @@ foreach(glob("backend/*.php") as $back)
 
 		if(!$thereAreNoFiles)
 		{
-			echo "<button type='submit' class='changebox-button' name='delete'>Delete selected</button><br>";
+			if(!($_SESSION['specAccesToViewFile'] > date('Y-m-d H:i:s')))
+				echo "<button class='butonas' style='margin-top:15px;' type='submit' class='changebox-button' name='delete'>Delete selected</button><br>";
 		}
 		echo "</form>";
 
@@ -104,6 +94,8 @@ foreach(glob("backend/*.php") as $back)
 		echo "You are not authorised to view this page!<br>";
 	}
 ?>
+</div>
+</div>
 </div>
 
 

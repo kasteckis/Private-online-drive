@@ -1,11 +1,11 @@
 <?php
 
-	function CreateUser($nick, $status, $hashedPassword, $suspended, $lastLogged)
+	function CreateUser($nick, $status, $hashedPassword, $suspended, $lastLogged, $email)
 	{
 		require 'includes/mysql_connection.php';
 		require 'includes/config.php';
 
-		$sqlCreatNewUser = "insert into Users (nick, status, password, suspended, lastLogged) VALUES ('$nick', '$status', '$hashedPassword', '$suspended', '$lastLogged')";
+		$sqlCreatNewUser = "insert into Users (nick, status, password, suspended, lastLogged, email) VALUES ('$nick', '$status', '$hashedPassword', '$suspended', '$lastLogged', '$email')";
 		UploadLog("New user was created with nickaname ".$nick."!");
 		mysqli_query($conn, $sqlCreatNewUser);
 		mkdir("./files/".$nick);
@@ -21,7 +21,7 @@
 
 		$sqlGetConflictedUsers = "SELECT * FROM Users WHERE nick='$nick'";
 		$resultsGetConflictedUsers = mysqli_query($conn, $sqlGetConflictedUsers);
-	    while($row = mysqli_fetch_assoc($resultsGetConflictedUsers)) 
+	    while($row = mysqli_fetch_assoc($resultsGetConflictedUsers))
 	    {
 	    	array_push($validationErrors, "Nickname already exists");
 	    }
@@ -42,9 +42,9 @@
 		return $validationErrors;
 	}
 
-	function delete_directory($dirname) 
+	function delete_directory($dirname)
 	{
-		$dir_Handle = false;
+		$dir_handle = false;
          if (is_dir($dirname))
            $dir_handle = opendir($dirname);
      if (!$dir_handle)

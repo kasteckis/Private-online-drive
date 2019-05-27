@@ -1,24 +1,7 @@
 <?php
-session_start();
-require 'includes/mysql_connection.php';
+include 'includes/header.php';
 require 'includes/config.php';
-
-//Includins visus skriptus is backendo, nežinau ar funkcijas į vieną .php failą kraut ar į atskirus
-foreach(glob("backend/*.php") as $back)
-{
-    require $back;
-}
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title><?php echo $WebsiteTitle; ?></title>
-<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" /> 
-<link rel="stylesheet" href="css/styleNotes.css"> 
-
-</head>
 
 <body>
 <?php
@@ -26,15 +9,19 @@ foreach(glob("backend/*.php") as $back)
 	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
 	{
 		?>
-		<div class="background">
-			<div class="back">
-				<?php
-				//Mygtukas atgal
-				echo '<form action="/manager">';
-				echo '<input type="submit" value="Back" />';
-				echo '</form>';
-				?>
-			</div>
+		<div class="container">
+
+      <?php
+			$page='notes';
+      include 'includes/navbar.php';
+			include 'includes/file-nav.php';
+      ?>
+
+			<div class="sub-page-main">
+				<div class="display-menu">
+          <!-- Or delete just the button if no buttons on the page -->
+					
+				</div>
 			<div class="main">
 				<?php
 				$userId = $_SESSION['id'];
@@ -48,7 +35,9 @@ foreach(glob("backend/*.php") as $back)
 					echo '<textarea rows="15" cols="50" name="note">';
 					echo $row['note'];
 					echo '</textarea>';
-					echo "<button name='update'>Update</button>";
+					echo "<button name='update'>Update</button><br><br>";
+					echo "<button name='save'>Save note in directory</button>";
+					echo "<input name='fileName' value='note".date("Y-m-d")."' placeholder='Note file name'></input>";
 					echo "</form>";
 					?>
 				</div>
@@ -66,7 +55,18 @@ foreach(glob("backend/*.php") as $back)
 					{
 						echo "ERROR."; //niekada neturetu buti
 					}
-				} 
+				}
+
+				if(isset($_POST['save']))
+				{
+					$fileName = mysqli_real_escape_string($conn, $_POST['fileName']);
+					$myfile = fopen("./files/".$_SESSION['nick']."/".$fileName.".txt", "w");
+					$txt = mysqli_real_escape_string($conn, $_POST['note']);
+					fwrite($myfile, $txt);
+					fclose($myfile);
+					echo "File was created in your directory with the name ".$fileName.".txt !<br>";
+
+				}
 				?>
 			</div>
 		</div>
@@ -81,7 +81,7 @@ foreach(glob("backend/*.php") as $back)
 ?>
 
 
-
+</div>
 </body>
 
 </html>

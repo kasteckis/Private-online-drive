@@ -1,41 +1,27 @@
 <?php
-session_start();
-require 'includes/mysql_connection.php';
+include 'includes/header.php';
 require 'includes/config.php';
-
-//Includins visus skriptus is backendo, nežinau ar funkcijas į vieną .php failą kraut ar į atskirus
-foreach(glob("backend/*.php") as $back)
-{
-    require $back;
-}
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title><?php echo $WebsiteTitle; ?></title>
-<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" /> 
-<link rel="stylesheet" href="css/styleSettings.css"> 
-
-</head>
 
 <body>
 <?php
 
 	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
 	{?>
-		<div class="background">
-			<div class="back">
-				<?php
-				//Mygtukas atgal
-				echo '<form action="/manager">'; 
-				echo '<input type="submit" value="Back" />';
-				echo '</form>'; 
-				?>
-			</div>
+		<div class="container">
 
-			<div class="changebox">
+      <?php
+			$page='settings';
+      include 'includes/navbar.php';
+			include 'includes/file-nav.php';
+      ?>
+
+			<div class="sub-page-main">
+				<div class="display-menu">
+					<!-- Or delete just the button if no buttons on the page -->
+					<!--<button class="btn-display-menu" type='submit' name='dosmth' ><i class="fas fa-trash-alt"></i> button example</button>-->
+				</div>
+			<div class="main">
 				<?php
 				echo "<h3>Change password:</h3>";
 				echo "<form method='POST'>";?>
@@ -48,14 +34,14 @@ foreach(glob("backend/*.php") as $back)
 					?>
 				</div>
 				<div class="inputs">
-				
+
 				<?php
 					$currentNick = $_SESSION['nick'];
 					$currentEmail = null;
 					$sqlGetEmail = "SELECT email FROM Users WHERE nick='$currentNick'";
 					$resultsGetEmail = mysqli_query($conn, $sqlGetEmail);
 
-					if (mysqli_num_rows($resultsGetEmail) > 0) 
+					if (mysqli_num_rows($resultsGetEmail) > 0)
 					{
 						while($row = mysqli_fetch_assoc($resultsGetEmail))
 						{
@@ -70,8 +56,8 @@ foreach(glob("backend/*.php") as $back)
 					echo "</form>";
 				?>
 				</div>
-			</div>
 		</div>
+	</div>
 
 		<?php
 		if(isset($_POST['submitChange']))
@@ -132,7 +118,7 @@ foreach(glob("backend/*.php") as $back)
 ?>
 
 
-
+</div>
 </body>
 
 </html>

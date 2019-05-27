@@ -1,43 +1,28 @@
 <?php
-session_start();
-require 'includes/mysql_connection.php';
+include 'includes/header.php';
 require 'includes/config.php';
-
-//Includins visus skriptus is backendo, nežinau ar funkcijas į vieną .php failą kraut ar į atskirus
-foreach(glob("backend/*.php") as $back)
-{
-    require $back;
-}
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title><?php echo $WebsiteTitle; ?></title>
-<link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
-<link rel="stylesheet" href="css/styleSettings.css">
-
-</head>
 
 <body>
 <?php
-
 	if($_SESSION['status'] == "admin")
 	{
     ?>
-    <div class="background">
-      <div class="back">
-        <?php
-		//Mygtukas atgal
-		echo '<form action="/usermanager">';
-	    echo '<input type="submit" value="Back" />';
-		echo '</form><br><br>';
-    echo '</div>';
+    <div class="container">
+      <?php
+			$page='usermanager';
+      include 'includes/navbar.php';
+			include 'includes/file-nav.php';
+
+			?>
+			<div class="sub-page-main">
+				<div class="display-menu">
+					<!-- Or delete just the button if no buttons on the page -->
+				</div>
+				<?php
 
 		$sqlGetMember = "SELECT * FROM Users WHERE id=".$_SESSION['editableUser'];
 		$resultGetMember = mysqli_query($conn, $sqlGetMember);
-
 		$doesUserExist = false;
 		$userID = null;
 		$oldNick = null;
@@ -54,7 +39,6 @@ foreach(glob("backend/*.php") as $back)
 	        echo "<input name='nick' placeholder='nickname' value=".$row['nick']."></input><br>";
 	        echo "<input name='email' placeholder='Email' value=".$row['email']."></input><br>";
 	        echo "<input type='password' name='password' placeholder='password'></input> If not changed, password will stay the same<br>";
-
 	        echo "<select name='status'>";
 	        echo "<option value='user'>User</option>";
 	        if($row['status'] == "user")
@@ -62,49 +46,44 @@ foreach(glob("backend/*.php") as $back)
 	        else
 	        	echo "<option value='admin' selected>Admin</option>";
 	        echo "</select><br>";
-
 	        echo "<select name='suspended'>";
-	        echo "<option value='0'>Suspended</option>";
 	        if($row['suspended'] == "0")
+	        {
+	        	echo "<option value='0'>Not suspended</option>";
 	        	echo "<option value='1'>Suspended</option>";
+	        }
 	        else
+	        {
+	        	echo "<option value='0'>Not suspended</option>";
 	        	echo "<option value='1' selected>Suspended</option>";
+	        }
 	        echo "</select><br>";
-	        echo "<button name='submit' class='changebox-button'>Edit</button><br>";
+	        echo "<button class='butonas' style='margin-top:15px;' name='edit-user-submit' >Edit</button><br>";
 	        echo "</form>";
 	    }
-
 		if(!$doesUserExist)
 		{
 		    echo "ERROR. User does not exist!<br>"; //klaida kurios neturetu buti niekada, bet del viso pikto
 		}
-
-		if(isset($_POST['submit']))
+		if(isset($_POST['edit-user-submit']))
 		{
 			// echo $userID."<br>";
 			// echo $_POST['nick']."<br>";
 			// echo $_POST['password']."<br>";
 			// echo $_POST['suspended']."<br>";
-
 			$newNick = mysqli_real_escape_string($conn, $_POST['nick']);
 			$newPassword = mysqli_real_escape_string($conn, $_POST['password']);
 			$newSuspension = mysqli_real_escape_string($conn, $_POST['suspended']);
 			$newStatus = mysqli_real_escape_string($conn, $_POST['status']);
 			$newEmail = mysqli_real_escape_string($conn, $_POST['email']);
-
 			$hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT); //encryptinimas
-
 			//VALIDACIJA
-
 			$validationAccepted = true;
-
-
 			// reiskia naudojam sena slaptazodi
 			if(strlen($newPassword) == 0)
 			{
 				$hashedPassword = $oldHashedPassword;
 			}
-
 			//Jeigu yra keiciamas userio nick, butina patikrinti ar kitokiu tokiu nera
 			if($oldNick != $newNick)
 			{
@@ -116,15 +95,13 @@ foreach(glob("backend/*.php") as $back)
 					$validationAccepted = false;
 				}
 			}
-
-
 			// ----- VALIDACIJOS PABAIGA
-
 			if($validationAccepted)
 			{
 				$sqlUpdate = "UPDATE Users SET nick='$newNick', password='$hashedPassword', status='$newStatus', suspended='$newSuspension', email='$newEmail' WHERE id='$userID'";
 				if(mysqli_query($conn, $sqlUpdate))
 				{
+					rename("./files/".$oldNick, "./files/".$newNick);
 					echo "User has been succesfully edited!<br>";
 					UploadLog("User ".$newNick." was edited!");
 				}
@@ -141,10 +118,9 @@ foreach(glob("backend/*.php") as $back)
 		echo '<meta http-equiv="refresh" content="0; url=./errorAuthorization.shtml" />';
 		echo "You are not authorised to view this page!<br>";
 	}
-
 ?>
 </div>
-
+</div>
 
 </body>
 
