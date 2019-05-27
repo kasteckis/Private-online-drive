@@ -1,10 +1,4 @@
-<style>
-	.login-error {
-		color:white;
-		margin-top: 3%;
-		text-align: center;
-	}
-</style>
+
 
 <?php
 
@@ -33,7 +27,7 @@
 		require 'includes/config.php';
 		require 'includes/messages.php';
 		require 'backend/LogsSystem.php';
-		
+
 		$userIP = $_SERVER['REMOTE_ADDR'];
 		$currentDate = date('Y-m-d H:i:s');
 		$isUserIPBanned = false;
