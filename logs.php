@@ -69,7 +69,7 @@ require 'includes/config.php';
 					}
 					echo "<td>".$row['ip']."</td>";
 					echo "<td>".$row['date']."</td>";
-					echo "<td><button name='delete".$row['id']."'>X</button></td>";
+					echo "<td><button class='butonas' name='delete".$row['id']."'>X</button></td>";
 					echo "</tr>";
 
 					if(isset($_POST['delete'.$row['id']]))

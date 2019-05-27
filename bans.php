@@ -45,7 +45,7 @@ require 'includes/config.php';
 				        echo "<td>".$row['tries']."</td>";
 				        echo "<td>".$row['bannedTill']."</td>";
 				        echo "<td>".$row['lastLogin']."</td>";
-				        echo "<td><button name=".$row['id'].">X</button></td>";
+				        echo "<td><button name=".$row['id']." class='butonas'>X</button></td>";
 				        echo "</tr>";
 
 				        if(isset($_POST[$row['id']]))
