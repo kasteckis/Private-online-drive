@@ -654,6 +654,18 @@ color: black;
   cursor: pointer;
 }
 
+.butonas1{
+  font-family: 'Muli', sans-serif;
+  background-color: #E8A87C;
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
 .login-error {
   color:white;
   margin-top: 3%;
