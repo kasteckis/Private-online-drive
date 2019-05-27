@@ -1,4 +1,10 @@
-
+<style>
+	.login-error {
+		color:white;
+		margin-top: 3%;
+		text-align: center;
+	}
+</style>
 
 <?php
 
@@ -27,7 +33,7 @@
 		require 'includes/config.php';
 		require 'includes/messages.php';
 		require 'backend/LogsSystem.php';
-
+		
 		$userIP = $_SERVER['REMOTE_ADDR'];
 		$currentDate = date('Y-m-d H:i:s');
 		$isUserIPBanned = false;
@@ -140,6 +146,7 @@
 								UploadLog($logText);
 							}
 							echo "<h1 class='login-error'><font color='red' size='5'><b>You weren't connected to the system. You used $tries of ".$MaximumTriesWhileLogging." attempts."."</b></font></h1><br>";
+							return null;
 						}
 
 						// ---
