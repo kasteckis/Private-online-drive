@@ -3,12 +3,13 @@
 
 use PHPUnit\Framework\TestCase;
 
-include '../backend/LoginHandler.php';
+include '../backend/PasswordReset/ResetPassword.php';
 
-class LoginHandlerTest extends TestCase{
+class FileUploadTest extends TestCase{
 
-  public function testIfLoggedOut() {
-        // $this->expectOutputString("Your account is suspended by administrator!");
+  public function testIfFileDeleted() {
+         $this->expectOutputString("File  was deleted!<br>");
+         ResetPassword("tidish@inbox.lt");
         // LoginMe("test123", "test123");
         // $this->assertEquals(LoginMe("test123", "test123"), "Your account is suspended by administrator!");
         // $this->assertTrue(Logout());

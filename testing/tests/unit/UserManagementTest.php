@@ -3,17 +3,17 @@
 
 use PHPUnit\Framework\TestCase;
 
-include '../backend/LoginHandler.php';
+include '../backend/UserManagement.php';
 
-class LoginHandlerTest extends TestCase{
+class UserManagementTest extends TestCase{
 
-  public function testIfLoggedOut() {
+  public function testIfDirectoryIsDeleted() {
         // $this->expectOutputString("Your account is suspended by administrator!");
         // LoginMe("test123", "test123");
         // $this->assertEquals(LoginMe("test123", "test123"), "Your account is suspended by administrator!");
-        // $this->assertTrue(Logout());
+        $this->assertTrue(delete_directory("TestUser"));
     }
 
-
+    
 
 }
