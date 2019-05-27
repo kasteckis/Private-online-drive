@@ -7,13 +7,15 @@ body {
   padding: 0;
   font-family: 'Muli', sans-serif;
   font-size: 100%;
-  background-color: #f4f4f4
+  height: 100%;
+  background-color: #f4f4f4;
+  overflow:hidden;
 }
 
 .container {
   width: 100%;
   margin: auto;
-  overflow: hidden;
+  height:100vh;
   background-color: #f4f4f4;
 }
 
@@ -22,7 +24,6 @@ body {
   width: 100%;
   position: relative;
   margin: auto;
-  overflow: hidden;
   height:3rem;
 }
 
@@ -38,9 +39,6 @@ body {
   display: inline-flex;
 }
 
-.padding-left{
-  padding-left:16%;
-}
 
 /* .greeting{
     background-color: #f4f4f4;
@@ -53,11 +51,11 @@ body {
 .navigation-container {
   width: 100%;
   position: relative;
-  overflow: hidden;
 }
 
 ul.link-list {
   margin: 0;
+  padding:0;
   list-style: none;
   text-align: center;
   position: relative;
@@ -129,7 +127,7 @@ ul.link-list {
 /* Sidebar navigation */
 .file-nav-container {
   width: 20%;
-  height: 100%;
+  height: 100vh;
   background-color: #484848;
   float: left;
   box-sizing: border-box;
@@ -220,6 +218,14 @@ ul.file-nav-list {
   float: right;
 }
 
+.scroll {
+  height:100%;
+  overflow-y: auto;
+}
+/* .scroll::-webkit-scrollbar { width: 0 !important }
+.scroll { overflow: -moz-scrollbars-none; }
+.scroll { -ms-overflow-style: none; } */
+
 .display-menu{
   background-color: rgb(49, 48, 38);
   height:2.5rem;
@@ -257,7 +263,6 @@ ul.file-nav-list {
   width: 0.1px;
   height: 0.1px;
   opacity: 0;
-  overflow: hidden;
   position: absolute;
   z-index: -1;
 }
@@ -280,7 +285,6 @@ ul.file-nav-list {
   width: 100%;
   text-align: center;
   border-radius: 8px;
-  overflow: hidden;
   transition: 0.5s;
   background-color: #f5f5f5;
   display: block;
@@ -549,9 +553,10 @@ table tr td:nth-of-type(2) a[href$=".URL"] {
 .main{
   width: 80%;
   margin: 0 auto;
-  /*border-style: none;*/
   padding: 20px;
 }
+
+
 
 .main h3{
   margin: 0;

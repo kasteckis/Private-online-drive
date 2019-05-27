@@ -12,6 +12,15 @@ require 'includes/config.php';
       <?php
 			$page='usermanager';
       include 'includes/navbar.php';
+			include 'includes/file-nav.php';
+
+			?>
+			<div class="sub-page-main">
+				<div class="display-menu">
+					<!-- Or delete just the button if no buttons on the page -->
+				</div>
+				<?php
+
 		$sqlGetMember = "SELECT * FROM Users WHERE id=".$_SESSION['editableUser'];
 		$resultGetMember = mysqli_query($conn, $sqlGetMember);
 		$doesUserExist = false;
@@ -111,7 +120,7 @@ require 'includes/config.php';
 	}
 ?>
 </div>
-
+</div>
 
 </body>
 
