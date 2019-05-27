@@ -27,7 +27,7 @@ require 'includes/config.php';
 		$usersDirectory = "./files/".$_SESSION['viewingFiles'];
 		$fileList = scandir($usersDirectory);
     echo "<h2>Viewing <b>".$_SESSION['viewingFiles']."</b> files!</h2>";
-    echo '<div class="changebox">';
+    echo '<div class="changebox1">';
 
 		echo "<form method='POST'>";
 		$thereAreNoFiles = true;
@@ -52,7 +52,7 @@ require 'includes/config.php';
 		if(!$thereAreNoFiles)
 		{
 			if(!($_SESSION['specAccesToViewFile'] > date('Y-m-d H:i:s')))
-				echo "<button type='submit' class='changebox-button' name='delete'>Delete selected</button><br>";
+				echo "<button class='butonas' style='margin-top:15px;' type='submit' class='changebox-button' name='delete'>Delete selected</button><br>";
 		}
 		echo "</form>";
 
