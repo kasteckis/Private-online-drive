@@ -32,13 +32,15 @@
 		require 'includes/mysql_connection.php';
 		require 'includes/config.php';
 		require 'includes/messages.php';
+		require 'backend/LogsSystem.php';
+		
 		$userIP = $_SERVER['REMOTE_ADDR'];
 		$currentDate = date('Y-m-d H:i:s');
 		$isUserIPBanned = false;
 
 		$sqlCheckIfImNotBanned = "select * from BadLogins WHERE ip='$userIP'";
 		$resultsCheckIfImNotBanned = mysqli_query($conn, $sqlCheckIfImNotBanned);
-		if (mysqli_num_rows($resultsCheckIfImNotBanned) > 0) 
+		if (mysqli_num_rows($resultsCheckIfImNotBanned) > 0)
 		{
 			while($row = mysqli_fetch_assoc($resultsCheckIfImNotBanned))
 			{
@@ -66,6 +68,11 @@
 		  		// output data of each row
 			    while($row = mysqli_fetch_assoc($getUserInformationResults))
 			    {
+			    	if($row['suspended'] == 1)
+			    	{
+			    		echo "<h1 class='login-error'><font color='red' size='5'><b>Your account is suspended by administrator!"."</b></font></h1><br>";
+			    		break;
+			    	}
 					if(password_verify($password, $row['password']))
 					{
 						$_SESSION['id'] = $row['id'];
@@ -90,14 +97,14 @@
 						// ---
 
 						if($a != null && $b != null)
-						{	
+						{
 							$userIP = $_SERVER['REMOTE_ADDR'];
 							$currentTime = date("Y-m-d H:i:s");
 							$tries = 1;
 							$sqlRead = "select * from BadLogins";
 							$doesTheIPExist = false;
 							$result = mysqli_query($conn, $sqlRead);
-							if (mysqli_num_rows($result) > 0) 
+							if (mysqli_num_rows($result) > 0)
 							{
 								while($row = mysqli_fetch_assoc($result))
 								{
@@ -139,10 +146,10 @@
 								UploadLog($logText);
 							}
 							echo "<h1 class='login-error'><font color='red' size='5'><b>You weren't connected to the system. You used $tries of ".$MaximumTriesWhileLogging." attempts."."</b></font></h1><br>";
+							return null;
 						}
 
 						// ---
-						UploadLog("Tried to connect to ".$username." account and failed!");
 						echo "<h1 class='login-error'>".$wrongPassword."</h1>";
 						//return "Blogas slaptažodis<br>";
 						return null;
