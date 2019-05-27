@@ -68,7 +68,7 @@ require 'includes/config.php';
 					if($_SESSION['nick'] == $row['nick'])
 						echo "<td>X</td>";
 					else
-						echo "<td><button class='butonas' type='button' name='".$row['nick']."' id='".$row['id']."' class='button_1' >X</button></td></td>";
+						echo "<td><button class='butonas1' type='button' name='".$row['nick']."' id='".$row['id']."' >X</button></td></td>";
 					if($_SESSION['nick'] == $row['nick'])
 						echo "<td>View</td>";
 					else
@@ -112,34 +112,38 @@ require 'includes/config.php';
   crossorigin="anonymous"></script>
 <script>
 $(document).ready(function() {
-$(".button_1").click(function() {
+$(".butonas1").click(function() {
   var idid = this.id;
   var nicknick = this.name;
 
   var varData = 'id=' + idid + '&nick=' + nicknick;
-  $.ajax({
-    type: 'POST',
-    url: 'includes/userdelete',
-    data: varData,
-    success: function() {
-      swal({
-              title: "Are you sure?",
-              text: "Once deleted, you will not be able to recover this user!",
-              icon: "warning",
-              buttons: true,
-              dangerMode: true,
-            })
-            .then((willDelete) => {
-              if (willDelete) {
-                swal("User has been deleted!", {
-                  icon: "success",
-                });
-                location.reload(true);
-              }
-            });
-    }
 
-  });
+	swal({
+					title: "Are you sure?",
+					text: "Once deleted, you will not be able to recover this user!",
+					icon: "warning",
+					buttons: true,
+					dangerMode: true,
+				})
+				.then((willDelete) => {
+					if (willDelete) {
+						swal("User has been deleted!", {
+							icon: "success",
+						});
+						$.ajax({
+							type: 'POST',
+							url: 'includes/userdelete',
+							data: varData,
+							success: function() {
+								console.log("deleted succesfully!");
+							}
+
+						});
+						location.reload(true);
+					}
+				});
+
+
 });
 
 });

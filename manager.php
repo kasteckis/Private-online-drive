@@ -172,6 +172,27 @@ require 'includes/config.php';
 					DeleteTheseFiles($selectedItems); //FileUpload.php
 					//echo '<meta http-equiv="refresh" content="0; />';
 				}
+				echo	'<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';
+
+				echo '<script type="text/javascript">',
+				     'swal({
+			               title: "Are you sure?",
+			               text: "Once deleted, you will not be able to recover this file!",
+			               icon: "warning",
+			               buttons: true,
+			               dangerMode: true,
+			             })
+			             .then((willDelete) => {
+			               if (willDelete) {
+			                 swal("Files have been deleted!", {
+			                   icon: "success",
+			                 });
+			               }
+			             });',
+
+				     '</script>'
+				;
+
 			}
 			if(isset($_POST['cancel']))
 			{

@@ -27,10 +27,7 @@
 	{
 		//Logika vykdoma po UPLOAD paspaudimo
 		//FAILAS issaugo files/nick kataloge!
-		echo '<script type="text/JavaScript">
-		swal ( "Oops" ,  "File type is not supported" ,  "error" );
-		</script>'
-		;
+
 		$msg = "";
 		$targetFile = "files/".$_SESSION['nick']."/" . basename($_FILES['attachments']['name'][0]);
 		if (file_exists($targetFile)) {
