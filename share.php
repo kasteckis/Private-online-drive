@@ -38,7 +38,7 @@ require 'includes/config.php';
 						echo "</select><br>";
 						echo "<input name='dateTillWhen' placeholder='Date till when' value='".date('Y-m-d H:i:s', strtotime('+1 hour'))."'></input><br>";
 
-						echo "<button name='submitShare'>Share files</button>";
+						echo "<button class='butonas' name='submitShare'>Share files</button>";
 						echo "</form>";
 
 						if(isset($_POST['submitShare']))
@@ -101,7 +101,7 @@ require 'includes/config.php';
 								echo "<tr>";
 								echo "<td>".$row['nick']."</td>";
 								echo "<td>".$row['tillWhen']."</td>";
-								echo "<td><button name='del".$row['id']."'>X</button></td>";
+								echo "<td><button class='butonas' name='del".$row['id']."'>X</button></td>";
 								echo "</tr>";
 
 								if(isset($_POST['del'.$row['id']]))

@@ -49,7 +49,7 @@ require 'includes/config.php';
 	        	echo "<option value='1' selected>Suspended</option>";
 	        }
 	        echo "</select><br>";
-	        echo "<button name='edit-user-submit' class='changebox-button'>Edit</button><br>";
+	        echo "<button class='butonas' style='margin-top:15px;' name='edit-user-submit' >Edit</button><br>";
 	        echo "</form>";
 	    }
 		if(!$doesUserExist)

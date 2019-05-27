@@ -7,6 +7,7 @@ body {
   padding: 0;
   font-family: 'Muli', sans-serif;
   font-size: 100%;
+  background-color: #f4f4f4
 }
 
 .container {
@@ -526,7 +527,7 @@ table tr td:nth-of-type(2) a[href$=".URL"] {
 
 .newuser{
   width: 30%;
-  margin-left: 37%;
+  margin-left: 35%;
 
 }
 
@@ -651,4 +652,15 @@ color: black;
   display: inline-block;
   font-size: 0.9rem;
   cursor: pointer;
+}
+
+.login-error {
+  color:white;
+  margin-top: 3%;
+  text-align: center;
+}
+
+.changebox{
+  margin-left: 200px;
+  margin-top: 100px;
 }

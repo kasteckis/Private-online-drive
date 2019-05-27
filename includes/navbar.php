@@ -2,7 +2,7 @@
 	<div class="navigation-container">
 
 	<div class="logo">
-		<a href="./manager"><img class="logo-img" src="../images/Logo_New.jpg" alt="Logo"></a> 
+		<a href="./manager"><img class="logo-img" src="../images/looogo.jpg" alt="Logo"></a> 
 		
 	</div>
 
