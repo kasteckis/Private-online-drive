@@ -21,12 +21,9 @@ require 'includes/config.php';
 			<div class="sub-page-main">
 				<div class="display-menu">
 					<!-- Or delete just the button if no buttons on the page -->
-					<!--<button class="btn-display-menu" type='submit' name='dosmth' ><i class="fas fa-trash-alt"></i> button example</button>-->
-				</div>
-				<div class="newuser">
-					 <form action="/createnewuser">
-					 <input type="submit" value="Create new user" />
-					 </form>
+					<form action="/createnewuser">
+						<button class="btn-display-menu" type='submit'><i class="fas fa-user-plus"></i> Create new user</button>
+					</form>
 				</div>
 			<div class="main">
 				<?php

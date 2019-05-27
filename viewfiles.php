@@ -14,7 +14,14 @@ require 'includes/config.php';
       <?php
 			$page='usermanager';
       include 'includes/navbar.php';
+			include 'includes/file-nav.php';
 
+			?>
+			<div class="sub-page-main">
+				<div class="display-menu">
+					<!-- Or delete just the button if no buttons on the page -->
+				</div>
+			<?php
 
       echo "<div class='main'>";
 		// apsaugos jeigu useris cia pateko be sesijos reiksmes
@@ -37,10 +44,11 @@ require 'includes/config.php';
 				continue;
 
         echo '<div class="file-list">';
+				if(!($_SESSION['specAccesToViewFile'] > date('Y-m-d H:i:s')))
+				echo "<input type='checkbox' class='list-check' name='selectedItemsToDelete[]' value='".$value."'>";
           echo "<i class='far fa-file'></i>
     			<a href='./files/".$_SESSION['viewingFiles']."/".$value."'>".$value."</a>";
-    			if(!($_SESSION['specAccesToViewFile'] > date('Y-m-d H:i:s')))
-          echo "<input type='checkbox' class='list-check' name='selectedItemsToDelete[]' value='".$value."'>";
+
         echo '</div>';
 
 
@@ -86,6 +94,7 @@ require 'includes/config.php';
 		echo "You are not authorised to view this page!<br>";
 	}
 ?>
+</div>
 </div>
 </div>
 

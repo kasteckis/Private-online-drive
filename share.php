@@ -9,7 +9,7 @@ require 'includes/config.php';
 	if($_SESSION['status'] == "admin" || $_SESSION['status'] == "user")
 	{
 		?>
-		<div class="containers">
+		<div class="container">
       <?php
 			$page='share';
       include 'includes/navbar.php';

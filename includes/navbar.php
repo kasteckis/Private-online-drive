@@ -2,8 +2,8 @@
 	<div class="navigation-container">
 
 	<div class="logo">
-		<a href="./manager"><img class="logo-img" src="../images/looogo.jpg" alt="Logo"></a> 
-		
+		<a href="./manager"><img class="logo-img" src="../images/looogo.jpg" alt="Logo"></a>
+
 	</div>
 
 	<!-- <div class="greeting"> -->
@@ -48,7 +48,7 @@
 				?>
 
 
-				<ul class="link-list padding-left">
+				<ul class="link-list">
 					<li>
 					 <a class="btn-navbar <?php if($page=='manager'){echo 'navbar-active';}?>" href="./manager">Home</a>
 				 </li>

@@ -19,17 +19,6 @@ foreach(glob("backend/*.php") as $back)
     <link rel="icon" type="image/png" href="../images/favicon-16x16.png" sizes="16x16" />
     <link rel="stylesheet" href="css/styleManager.css">
     <link rel="stylesheet" href="css/styleMediaQ.css">
-    <!-- Delete these stylesheets from here after migrating to stylemanager -->
-    <!-- usermananger -->
-    <link rel="stylesheet" href="css/styleUser.css">
-    <!-- logs -->
-    <link rel="stylesheet" href="css/styleLogs.css">
-    <!-- notes and bans -->
-    <link rel="stylesheet" href="css/styleNotes.css">
-    <!-- createnewuser -->
-    <link rel="stylesheet" href="css/styleNewUser.css">
-    <!-- edituser viewfiles settings-->
-    <link rel="stylesheet" href="css/styleSettings.css">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
