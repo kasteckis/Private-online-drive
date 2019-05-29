@@ -1,22 +1,25 @@
-# devbridge-project
+# Private Online Drive
 
-Developer team:
+This project will let you use your FTP server as a drive which lets you and whoever you desire to upload, download and delete files in any place of the world. You will be able to create any user, manage him, view his files. As a user, you will be able to share your files with any user in the system and more...
+
+# Developer team:
+
 Valentinas Kasteckis
+
 Kipras Mikiška
+
 Marius Gaigalas
+
 Mantas Demenius
 
-Projekto ideja: Google drive arba microsoft onedrive kopija, tik sukurtas TVS, asmeniniams tikslams.
+# How to install
 
+• Download all files from GitHub
 
-https://docs.google.com/document/d/1Ujij61YYIwm0dDhkEgLVqUTsWfDoXChcB9TAYCl3Sg8/edit?fbclid=IwAR3O1ku3REkq6YGqGESucW22PCXwVWXWxu_D22sq00001YsOQ3kvAw_sODY
+• Upload every file in your private FTP server except "INSERT THIS TO MYSQL.sql" and "testing" folder
 
-https://trello.com/b/vofeEYK9/private-online-drive
+• Upload "INSERT THIS TO MYSQL.sql" file into your MySql database
 
-Node.js naudojimo gidas
+• Go to your domain and log in by using the nickname "root" and password "password"
 
-npm install - Iraso visus failus kurie yra package.json, uztenka viena karta irasyti ir tada jau naujus failus ant virsaus uzrasot ir veikti turi. Jeigu atsiranda nauju dependencies tai galima is naujo ja paleisti ir turetu tik ta viena irasyti
-
-npm start - paleidzia node.js serveri, localhost norint pasijungti. Jeigu norima kad veiktu php failiukai taip pat reikia paleisti apache serveri ir ikelti projekta i htdocs, taciau nepamenu ar tik tiek uztenka.
-
-npm run build - sukuria build folderi kuris yra talpinamas i serveri jog butu atvaizduojama programa
+• Don't forget to change your password in the Settings!
