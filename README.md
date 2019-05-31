@@ -2,15 +2,15 @@
 
 This project will let you use your FTP server as a drive which lets you and whoever you desire to upload, download and delete files in any place of the world. You will be able to create any user, manage him, view his files. As a user, you will be able to share your files with any user in the system and more...
 
-# Developer team:
+# Developer team
 
-Valentinas Kasteckis
+Valentinas Kasteckis - Created login system, first file management system, administrator system which allows to create, suspend, delete, manage users and manipulate with their files, major part of validations, log system, notepad system, password/email change system, system which always checks if your login credentials are good, security from brute-force in login system, file sharing system between two users.
 
-Kipras Mikiška
+Marius Gaigalas - Created login system design, web logo, favicon, error and non-authorised pages, first header, design while creating, editing user, design at logs system, design while using the website on phone, banned IP's design, button design, and design bug fixes.
 
-Marius Gaigalas
+Mantas Demenius - Created layout design, drag&drop function, password reminder through email system, error and warning messages design, improved final layout design, final navigation bar, login system was improved using javascript in validation perspective.
 
-Mantas Demenius
+Kipras Mikiška - Created the first layout of the web, improved drag&drop with validations and enabled that you will be able to upload many files, auto-refresh system while using drag&drop.
 
 # How to install
 
