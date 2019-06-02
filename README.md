@@ -16,9 +16,11 @@ Kipras Mikiška - Created the first layout of the web, improved drag&drop with v
 
 • Download all files from GitHub
 
-• Upload every file in your private FTP server except "INSERT THIS TO MYSQL.sql" and "testing" folder
+• Upload every file in your private FTP web server except "INSERT THIS TO MYSQL.sql" and "testing" folder
 
 • Upload "INSERT THIS TO MYSQL.sql" file into your MySql database
+
+• Go to includes/mysql_connection.php and change your database information
 
 • Go to your domain and log in by using the nickname "root" and password "password"
 
