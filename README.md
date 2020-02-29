@@ -1,5 +1,6 @@
 # Private Online Drive
 
+![github-large](readme.gif)
 This project will let you use your FTP server as a drive which lets you and whoever you desire to upload, download and delete files in any place of the world. You will be able to create any user, manage him, view his files. As a user, you will be able to share your files with any user in the system and more...
 
 # Developer team
@@ -16,7 +17,7 @@ Kipras Mikiška - Created the first layout of the web, improved drag&drop with v
 
 • Download all files from GitHub
 
-• Upload every file in your private FTP web server except "INSERT THIS TO MYSQL.sql" and "testing" folder
+• Upload every file in your private FTP web server except "INSERT THIS TO MYSQL.sql" file
 
 • Upload "INSERT THIS TO MYSQL.sql" file into your MySql database
 
