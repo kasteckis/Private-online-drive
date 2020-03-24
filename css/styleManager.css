@@ -209,6 +209,7 @@ ul.file-nav-list {
   height: 100%;
   background-color: rgb(49, 48, 38);
   float: right;
+  overflow-y: auto;
 }
 
 .sub-page-main{

@@ -54,7 +54,7 @@ require 'includes/config.php';
 				        	if(mysqli_query($conn, $sqlDeleteThisBan))
 				        	{
 				        		echo "Succesfully unbanned ".$row['ip'];
-				        		header("Refresh:0");
+				        		//header("Refresh:0");
 				        	}
 				        	else
 				        	{
